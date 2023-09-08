@@ -301,6 +301,8 @@ enum GUICurrentType
 	GUI_TYPE_ITEMFX
 };
 
+void GenerateAlchemyTable(uint32 seed);
+
 // Generic GUI Stuff (repair/alchemy)
 class GenericGUIMenu
 {
@@ -418,7 +420,6 @@ public:
 	bool alchemyLearnRecipe(int type, bool increaseskill, bool notify = true);
 	bool isItemBaseIngredient(int type);
 	bool isItemSecondaryIngredient(int type);
-	void GenerateAlchemyTable();
 	void alchemyLearnRecipeOnLevelUp(int skill);
 
 	// tinkering menu foncs

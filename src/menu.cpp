@@ -10180,6 +10180,9 @@ void doNewGame(bool makeHighscore)
 			enchantedFeatherScrollsShuffled.push_back(shuffle[index]);
 			shuffle.erase(shuffle.begin() + index);
 		}
+
+		// Randomize alchemy
+		GenerateAlchemyTable(feather_rng.getU32());
 	}
 	/*for ( auto it = enchantedFeatherScrollsShuffled.begin(); it != enchantedFeatherScrollsShuffled.end(); ++it )
 	{

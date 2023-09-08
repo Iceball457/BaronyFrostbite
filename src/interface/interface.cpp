@@ -10,7 +10,7 @@
 -------------------------------------------------------------------------------*/
 
 #include <optional>
-
+#include <random>
 #include "../main.hpp"
 #include "../files.hpp"
 #include "../game.hpp"
@@ -6802,9 +6802,11 @@ std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> alchemyTable = {
 	{POTION_RESTOREMAGIC, {POTION_INVISIBILITY, POTION_SPEED}},
 };
 
-void GenerateAlchemyTable()
+void GenerateAlchemyTable(uint32 seed)
 {
 	std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> output;
+
+	std::mt19937 rng(seed);
 
 	const std::vector<ItemType> basic = {POTION_JUICE, POTION_BOOZE, POTION_ACID};
 	const std::vector<ItemType> primary = {POTION_POLYMORPH, POTION_STRENGTH, POTION_SICKNESS, POTION_CONFUSION, POTION_HEALING, POTION_CUREAILMENT, POTION_BLINDNESS, POTION_RESTOREMAGIC, POTION_INVISIBILITY, POTION_LEVITATION, POTION_SPEED, POTION_PARALYSIS};
@@ -6822,7 +6824,7 @@ void GenerateAlchemyTable()
 		}
 		if (!temp.empty())
 		{
-			int random = local_rng.rand() % temp.size();
+			int random = rng() % temp.size();
 			return temp[random];
 		}
 		// Handle the case where temp is empty (all elements were excluded)
