@@ -39,7 +39,7 @@ class Entity;
 
 // impulses (bound keystrokes, mousestrokes, and joystick/game controller strokes) //TODO: Player-by-player basis.
 extern Uint32 impulses[NUMIMPULSES];
-extern Uint32 joyimpulses[NUM_JOY_IMPULSES]; //Joystick/gamepad only impulses.
+extern Uint32 joyimpulses[NUM_JOY_IMPULSES]; // Joystick/gamepad only impulses.
 
 bool handleEvents(void);
 void startMessages();
@@ -49,7 +49,7 @@ typedef struct packetsend_t
 {
 	UDPsocket sock;
 	int channel;
-	UDPpacket* packet;
+	UDPpacket *packet;
 	int num;
 	int tries;
 	int hostnum;
@@ -65,7 +65,7 @@ extern int introstage;
 extern bool gamePaused;
 extern bool fadeout, fadefinished;
 extern int fadealpha;
-extern Entity* client_selected[MAXPLAYERS];
+extern Entity *client_selected[MAXPLAYERS];
 extern bool inrange[MAXPLAYERS];
 extern bool deleteallbuttons;
 extern Sint32 client_classes[MAXPLAYERS];
@@ -73,7 +73,7 @@ extern Uint32 client_keepalive[MAXPLAYERS];
 extern Uint16 portnumber;
 extern list_t messages;
 extern list_t command_history;
-extern node_t* chosen_command;
+extern node_t *chosen_command;
 extern bool command;
 extern bool noclip, godmode, buddhamode;
 extern bool everybodyfriendly;
@@ -112,23 +112,24 @@ extern bool secretlevel;
 extern bool darkmap;
 extern int shaking, bobbing;
 
-enum MessageType : Uint32 {
-	MESSAGE_COMBAT = 1u << 0, // damage received or given in combat
-	MESSAGE_STATUS = 1u << 1, // character status changes and passive effects
-	MESSAGE_INVENTORY = 1u << 2, // inventory and item appraisal
-	MESSAGE_EQUIPMENT = 1u << 3, // player equipment changes
-	MESSAGE_WORLD = 1u << 4, // diegetic messages, such as speech and text
-	MESSAGE_CHAT = 1u << 5, // multiplayer chat
-	MESSAGE_PROGRESSION = 1u << 6, // player character progression messages (ie level-ups)
-	MESSAGE_INTERACTION = 1u << 7, // player interactions with the world
-	MESSAGE_INSPECTION = 1u << 8, // player inspections of world objects
-	MESSAGE_HINT = 1u << 9, // special text cues and descriptive messages
-	MESSAGE_OBITUARY = 1u << 10, // character death announcement
-	MESSAGE_CHATTER = 1u << 11, // NPC chatter
-	MESSAGE_SPAM_MISC = 1u << 28, // misc spammy messages "dropped item" "it burns!" 
+enum MessageType : Uint32
+{
+	MESSAGE_COMBAT = 1u << 0,		 // damage received or given in combat
+	MESSAGE_STATUS = 1u << 1,		 // character status changes and passive effects
+	MESSAGE_INVENTORY = 1u << 2,	 // inventory and item appraisal
+	MESSAGE_EQUIPMENT = 1u << 3,	 // player equipment changes
+	MESSAGE_WORLD = 1u << 4,		 // diegetic messages, such as speech and text
+	MESSAGE_CHAT = 1u << 5,			 // multiplayer chat
+	MESSAGE_PROGRESSION = 1u << 6,	 // player character progression messages (ie level-ups)
+	MESSAGE_INTERACTION = 1u << 7,	 // player interactions with the world
+	MESSAGE_INSPECTION = 1u << 8,	 // player inspections of world objects
+	MESSAGE_HINT = 1u << 9,			 // special text cues and descriptive messages
+	MESSAGE_OBITUARY = 1u << 10,	 // character death announcement
+	MESSAGE_CHATTER = 1u << 11,		 // NPC chatter
+	MESSAGE_SPAM_MISC = 1u << 28,	 // misc spammy messages "dropped item" "it burns!"
 	MESSAGE_COMBAT_BASIC = 1u << 29, // basic combat 'the skeleton hits!' 'you hit the skeleton!'
-	MESSAGE_DEBUG = 1u << 30, // debug only messages
-	MESSAGE_MISC = 1u << 31, // miscellaneous messages
+	MESSAGE_DEBUG = 1u << 30,		 // debug only messages
+	MESSAGE_MISC = 1u << 31,		 // miscellaneous messages
 };
 extern Uint32 messagesEnabled;
 
@@ -178,8 +179,7 @@ static const std::vector<std::string> playerClassInternalNames = {
 	"class_machinist",
 	"class_punisher",
 	"class_shaman",
-	"class_hunter"
-};
+	"class_hunter"};
 
 static const int CLASS_SHAMAN_NUM_STARTING_SPELLS = 15;
 
@@ -200,11 +200,11 @@ enum PlayerRaces : int
 	RACE_IMP
 };
 
-bool achievementUnlocked(const char* achName);
-void steamAchievement(const char* achName);
-void steamUnsetAchievement(const char* achName);
-void steamAchievementClient(int player, const char* achName);
-void steamAchievementEntity(Entity* my, const char* achName); // give steam achievement to an entity, and check for valid player info.
+bool achievementUnlocked(const char *achName);
+void steamAchievement(const char *achName);
+void steamUnsetAchievement(const char *achName);
+void steamAchievementClient(int player, const char *achName);
+void steamAchievementEntity(Entity *my, const char *achName); // give steam achievement to an entity, and check for valid player info.
 void steamStatisticUpdate(int statisticNum, ESteamStatTypes type, int value);
 void steamStatisticUpdateClient(int player, int statisticNum, ESteamStatTypes type, int value);
 void steamIndicateStatisticProgress(int statisticNum, ESteamStatTypes type);
@@ -218,84 +218,84 @@ void handleButtons(void);
 void gameLogic(void);
 
 // behavior function prototypes:
-void actAnimator(Entity* my);
-void actRotate(Entity* my);
-void actLiquid(Entity* my);
-void actEmpty(Entity* my);
-void actFurniture(Entity* my);
-void actMCaxe(Entity* my);
-void actStatueAnimator(Entity* my);
-void actStatue(Entity* my);
-void actDoorFrame(Entity* my);
-void actDeathCam(Entity* my);
-void actPlayerLimb(Entity* my);
-void actTorch(Entity* my);
-void actCrystalShard(Entity* my);
-void actDoor(Entity* my);
-void actHudWeapon(Entity* my);
-void actHudArm(Entity* my);
-void actHudShield(Entity* my);
-void actHudAdditional(Entity* my);
-void actHudArrowModel(Entity* my);
-void actItem(Entity* my);
-void actGoldBag(Entity* my);
-void actGib(Entity* my);
-void actDamageGib(Entity* my);
-Entity* spawnGib(Entity* parentent, int customGibSprite = -1);
-Entity* spawnDamageGib(Entity* parentent, Sint32 dmgAmount, int gibDmgType);
-Entity* spawnGibClient(Sint16 x, Sint16 y, Sint16 z, Sint16 sprite);
-void serverSpawnGibForClient(Entity* gib);
-void actLadder(Entity* my);
-void actLadderUp(Entity* my);
-void actPortal(Entity* my);
-void actWinningPortal(Entity* my);
-void actFlame(Entity* my);
-void actCampfire(Entity* my);
-Entity* spawnFlame(Entity* parentent, Sint32 sprite);
-Entity* castMagic(Entity* parentent);
-void actSprite(Entity* my);
-void actSpriteNametag(Entity* my);
-void actSpriteWorldTooltip(Entity* my);
-void actSleepZ(Entity* my);
-Entity* spawnBang(Sint16 x, Sint16 y, Sint16 z);
-Entity* spawnExplosion(Sint16 x, Sint16 y, Sint16 z);
-Entity* spawnExplosionFromSprite(Uint16 sprite, Sint16 x, Sint16 y, Sint16 z);
-Entity* spawnPoof(Sint16 x, Sint16 y, Sint16 z, real_t scale, bool updateClients = false);
-Entity* spawnSleepZ(Sint16 x, Sint16 y, Sint16 z);
-Entity* spawnFloatingSpriteMisc(int sprite, Sint16 x, Sint16 y, Sint16 z);
-void actArrow(Entity* my);
-void actBoulder(Entity* my);
-void actBoulderTrap(Entity* my);
-void actBoulderTrapHole(Entity* my);
-void actBoulderTrapEast(Entity* my);
-void actBoulderTrapWest(Entity* my);
-void actBoulderTrapSouth(Entity* my);
-void actBoulderTrapNorth(Entity* my);
-void actHeadstone(Entity* my);
-void actThrown(Entity* my);
-void actBeartrap(Entity* my);
-void actBeartrapLaunched(Entity* my);
-void actBomb(Entity* my);
-void actDecoyBox(Entity* my);
-void actDecoyBoxCrank(Entity* my);
-void actSpearTrap(Entity* my);
-void actWallBuster(Entity* my);
-void actWallBuilder(Entity* my);
-void actPowerCrystalBase(Entity* my);
-void actPowerCrystal(Entity* my);
-void actPowerCrystalParticleIdle(Entity* my);
-void actPedestalBase(Entity* my);
-void actPedestalOrb(Entity* my);
-void actMidGamePortal(Entity* my);
-void actCustomPortal(Entity* my);
-void actTeleporter(Entity* my);
-void actMagicTrapCeiling(Entity* my);
-void actTeleportShrine(Entity* my);
-void actSpellShrine(Entity* my);
-void actExpansionEndGamePortal(Entity* my);
-void actSoundSource(Entity* my);
-void actLightSource(Entity* my);
-void actSignalTimer(Entity* my);
+void actAnimator(Entity *my);
+void actRotate(Entity *my);
+void actLiquid(Entity *my);
+void actEmpty(Entity *my);
+void actFurniture(Entity *my);
+void actMCaxe(Entity *my);
+void actStatueAnimator(Entity *my);
+void actStatue(Entity *my);
+void actDoorFrame(Entity *my);
+void actDeathCam(Entity *my);
+void actPlayerLimb(Entity *my);
+void actTorch(Entity *my);
+void actCrystalShard(Entity *my);
+void actDoor(Entity *my);
+void actHudWeapon(Entity *my);
+void actHudArm(Entity *my);
+void actHudShield(Entity *my);
+void actHudAdditional(Entity *my);
+void actHudArrowModel(Entity *my);
+void actItem(Entity *my);
+void actGoldBag(Entity *my);
+void actGib(Entity *my);
+void actDamageGib(Entity *my);
+Entity *spawnGib(Entity *parentent, int customGibSprite = -1);
+Entity *spawnDamageGib(Entity *parentent, Sint32 dmgAmount, int gibDmgType);
+Entity *spawnGibClient(Sint16 x, Sint16 y, Sint16 z, Sint16 sprite);
+void serverSpawnGibForClient(Entity *gib);
+void actLadder(Entity *my);
+void actLadderUp(Entity *my);
+void actPortal(Entity *my);
+void actWinningPortal(Entity *my);
+void actFlame(Entity *my);
+void actCampfire(Entity *my);
+Entity *spawnFlame(Entity *parentent, Sint32 sprite);
+Entity *castMagic(Entity *parentent);
+void actSprite(Entity *my);
+void actSpriteNametag(Entity *my);
+void actSpriteWorldTooltip(Entity *my);
+void actSleepZ(Entity *my);
+Entity *spawnBang(Sint16 x, Sint16 y, Sint16 z);
+Entity *spawnExplosion(Sint16 x, Sint16 y, Sint16 z);
+Entity *spawnExplosionFromSprite(Uint16 sprite, Sint16 x, Sint16 y, Sint16 z);
+Entity *spawnPoof(Sint16 x, Sint16 y, Sint16 z, real_t scale, bool updateClients = false);
+Entity *spawnSleepZ(Sint16 x, Sint16 y, Sint16 z);
+Entity *spawnFloatingSpriteMisc(int sprite, Sint16 x, Sint16 y, Sint16 z);
+void actArrow(Entity *my);
+void actBoulder(Entity *my);
+void actBoulderTrap(Entity *my);
+void actBoulderTrapHole(Entity *my);
+void actBoulderTrapEast(Entity *my);
+void actBoulderTrapWest(Entity *my);
+void actBoulderTrapSouth(Entity *my);
+void actBoulderTrapNorth(Entity *my);
+void actHeadstone(Entity *my);
+void actThrown(Entity *my);
+void actBeartrap(Entity *my);
+void actBeartrapLaunched(Entity *my);
+void actBomb(Entity *my);
+void actDecoyBox(Entity *my);
+void actDecoyBoxCrank(Entity *my);
+void actSpearTrap(Entity *my);
+void actWallBuster(Entity *my);
+void actWallBuilder(Entity *my);
+void actPowerCrystalBase(Entity *my);
+void actPowerCrystal(Entity *my);
+void actPowerCrystalParticleIdle(Entity *my);
+void actPedestalBase(Entity *my);
+void actPedestalOrb(Entity *my);
+void actMidGamePortal(Entity *my);
+void actCustomPortal(Entity *my);
+void actTeleporter(Entity *my);
+void actMagicTrapCeiling(Entity *my);
+void actTeleportShrine(Entity *my);
+void actSpellShrine(Entity *my);
+void actExpansionEndGamePortal(Entity *my);
+void actSoundSource(Entity *my);
+void actLightSource(Entity *my);
+void actSignalTimer(Entity *my);
 
 void startMessages();
 bool frameRateLimit(Uint32 maxFrameRate, bool resetAccumulator = true, bool sleep = false);
@@ -311,17 +311,17 @@ void drawAllPlayerCameras();
 
 // function prototypes for charclass.c:
 void initClass(int player);
-void initClassStats(const int classnum, void* myStats);
+void initClassStats(const int classnum, void *myStats);
 void initShapeshiftHotbar(int player);
 void deinitShapeshiftHotbar(int player);
-bool playerUnlockedShamanSpell(int player, Item* item);
+bool playerUnlockedShamanSpell(int player, Item *item);
 
 extern char last_ip[64];
 extern char last_port[64];
 
-//TODO: Maybe increase with level or something?
-//TODO: Pause health regen during combat?
-#define HEAL_TIME 600 //10 seconds. //Original time: 3600 (1 minute)
+// TODO: Maybe increase with level or something?
+// TODO: Pause health regen during combat?
+#define HEAL_TIME 600		 // 10 seconds. //Original time: 3600 (1 minute)
 #define MAGIC_REGEN_TIME 300 // 5 seconds
 
 #define DEFAULT_HP 30
@@ -340,14 +340,14 @@ static const int BASE_THROWN_DAMAGE = 6;
 static const int BASE_PLAYER_UNARMED_DAMAGE = 8;
 
 extern bool spawn_blood;
-extern bool capture_mouse; //Useful for debugging when the game refuses to release the mouse when it's crashed.
+extern bool capture_mouse; // Useful for debugging when the game refuses to release the mouse when it's crashed.
 
 #define LEVELSFILE "maps/levels.txt"
 #define SECRETLEVELSFILE "maps/secretlevels.txt"
 #define LENGTH_OF_LEVEL_REGION 5
 
 #define TICKS_PER_SECOND 50
-static const Uint8 TICKS_TO_PROCESS_FIRE = 30; // The amount of ticks needed until the 'BURNING' Status Effect is processed (char_fire % TICKS_TO_PROCESS_FIRE == 0)
+static const Uint8 TICKS_TO_PROCESS_FIRE = 30;							  // The amount of ticks needed until the 'BURNING' Status Effect is processed (char_fire % TICKS_TO_PROCESS_FIRE == 0)
 static const int EFFECT_WITHDRAWAL_BASE_TIME = TICKS_PER_SECOND * 60 * 8; // 8 minutes base withdrawal time.
 
 static const std::string PLAYERNAMES_MALE_FILE = "playernames-male.txt";
@@ -370,22 +370,23 @@ class TileEntityListHandler
 {
 private:
 	static const int kMaxMapDimension = 256;
+
 public:
 	list_t gridEntities[kMaxMapDimension][kMaxMapDimension];
 
 	void clearTile(int x, int y);
 	void emptyGridEntities();
-	list_t* getTileList(int x, int y);
-	node_t* addEntity(Entity& entity);
-	node_t* updateEntity(Entity& entity);
-	std::vector<list_t*> getEntitiesWithinRadius(int u, int v, int radius);
-	std::vector<list_t*> getEntitiesWithinRadiusAroundEntity(Entity* entity, int radius);
+	list_t *getTileList(int x, int y);
+	node_t *addEntity(Entity &entity);
+	node_t *updateEntity(Entity &entity);
+	std::vector<list_t *> getEntitiesWithinRadius(int u, int v, int radius);
+	std::vector<list_t *> getEntitiesWithinRadiusAroundEntity(Entity *entity, int radius);
 
 	TileEntityListHandler()
 	{
-		for ( int i = 0; i < kMaxMapDimension; ++i )
+		for (int i = 0; i < kMaxMapDimension; ++i)
 		{
-			for ( int j = 0; j < kMaxMapDimension; ++j )
+			for (int j = 0; j < kMaxMapDimension; ++j)
 			{
 				gridEntities[i][j].first = nullptr;
 				gridEntities[i][j].last = nullptr;
@@ -395,9 +396,9 @@ public:
 
 	~TileEntityListHandler()
 	{
-		for ( int i = 0; i < kMaxMapDimension; ++i )
+		for (int i = 0; i < kMaxMapDimension; ++i)
 		{
-			for ( int j = 0; j < kMaxMapDimension; ++j )
+			for (int j = 0; j < kMaxMapDimension; ++j)
 			{
 				clearTile(i, j);
 			}
@@ -483,8 +484,7 @@ public:
 	char debugOutput[1024];
 	char debugEventOutput[1024];
 
-	DebugStatsClass()
-	{};
+	DebugStatsClass(){};
 
 	void inline storeOldTimePoints()
 	{
@@ -518,15 +518,15 @@ public:
 extern ConsoleVariable<bool> cvar_enableKeepAlives;
 
 extern DebugStatsClass DebugStats;
-//extern ConsoleVariable<bool> cvar_useTimerInterpolation;
+// extern ConsoleVariable<bool> cvar_useTimerInterpolation;
 
 #include "draw.hpp"
 
 class TimerExperiments
 {
 public:
-    //static constexpr bool& bUseTimerInterpolation = *cvar_useTimerInterpolation;
-    static bool bUseTimerInterpolation;
+	// static constexpr bool& bUseTimerInterpolation = *cvar_useTimerInterpolation;
+	static bool bUseTimerInterpolation;
 	static bool bIsInit;
 	static real_t lerpFactor;
 	static int timeDivision;
@@ -541,7 +541,7 @@ public:
 
 		static time_point now() noexcept
 		{
-			return time_point{ duration{ SDL_GetTicks() } };
+			return time_point{duration{SDL_GetTicks()}};
 		}
 	};
 
@@ -569,30 +569,30 @@ public:
 
 	friend EntityStates operator+(EntityStates lhs, EntityStates rhs)
 	{
-		return{ lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, 
-			lhs.yaw + rhs.yaw, lhs.pitch + rhs.pitch, lhs.roll + rhs.roll };
+		return {lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z,
+				lhs.yaw + rhs.yaw, lhs.pitch + rhs.pitch, lhs.roll + rhs.roll};
 	}
 	friend EntityStates operator*(EntityStates lhs, double rhs)
 	{
-		return{ lhs.x * rhs, lhs.y * rhs, lhs.z * rhs,
-			lhs.yaw * rhs, lhs.pitch * rhs, lhs.roll * rhs };
+		return {lhs.x * rhs, lhs.y * rhs, lhs.z * rhs,
+				lhs.yaw * rhs, lhs.pitch * rhs, lhs.roll * rhs};
 	}
 	friend State operator+(State x, State y)
 	{
-		return{ x.acceleration + y.acceleration, x.velocity + y.velocity, x.position + y.position };
+		return {x.acceleration + y.acceleration, x.velocity + y.velocity, x.position + y.position};
 	}
 	friend State operator*(State x, double y)
 	{
-		return{ x.acceleration * y, x.velocity * y, x.position * y };
+		return {x.acceleration * y, x.velocity * y, x.position * y};
 	}
 
 	static void
-		integrate(State& state,
-			std::chrono::time_point<Clock, std::chrono::duration<double>>,
-			std::chrono::duration<double> dt);
+	integrate(State &state,
+			  std::chrono::time_point<Clock, std::chrono::duration<double>>,
+			  std::chrono::duration<double> dt);
 
 	static std::chrono::duration<long long, std::ratio<1, 60>> dt;
-	using duration = decltype(Clock::duration{} +dt);
+	using duration = decltype(Clock::duration{} + dt);
 	using time_point = std::chrono::time_point<Clock, duration>;
 
 	static time_point timepoint;
@@ -608,12 +608,12 @@ public:
 	static void reset();
 	static void updateClocks();
 	static real_t lerpAngle(real_t angle1, real_t angle2, real_t alpha);
-	static void renderCameras(view_t& camera, int player);
-	static void postRenderRestore(view_t& camera, int player);
-	static void updateEntityInterpolationPosition(Entity* entity);
+	static void renderCameras(view_t &camera, int player);
+	static void postRenderRestore(view_t &camera, int player);
+	static void updateEntityInterpolationPosition(Entity *entity);
 };
 
-void loadAchievementData(const char* path);
+void loadAchievementData(const char *path);
 void sortAchievementsForDisplay();
 
 real_t getFPSScale(real_t baseFPS);

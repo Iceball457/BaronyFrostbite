@@ -61,7 +61,8 @@ extern real_t uiscale_inventory;
 
 #include "../entity.hpp"
 
-enum DamageGib {
+enum DamageGib
+{
 	DMG_DEFAULT,
 	DMG_WEAKER,
 	DMG_WEAKEST,
@@ -84,9 +85,10 @@ public:
 	static bool bEnemyBarSimpleBlit;
 	static std::map<int, std::vector<int>> damageGibAnimCurves;
 	static void dumpCache();
-	static std::vector<std::pair<real_t, int>>widthHealthBreakpointsMonsters;
-	static std::vector<std::pair<real_t, int>>widthHealthBreakpointsFurniture;
-	enum HPBarType {
+	static std::vector<std::pair<real_t, int>> widthHealthBreakpointsMonsters;
+	static std::vector<std::pair<real_t, int>> widthHealthBreakpointsFurniture;
+	enum HPBarType
+	{
 		BAR_TYPE_CREATURE,
 		BAR_TYPE_FURNITURE
 	};
@@ -106,8 +108,9 @@ public:
 		real_t fadeIn = 100.0;
 		real_t skullOpacities[4];
 		real_t damageFrameOpacity = 100.0;
-		BarAnimator_t() { 
-			for ( int i = 0; i < 4; ++i )
+		BarAnimator_t()
+		{
+			for (int i = 0; i < 4; ++i)
 			{
 				skullOpacities[i] = 100.0;
 			}
@@ -133,12 +136,12 @@ public:
 		bool displayOnHUD = false;
 		bool expired = false;
 		real_t depletionAnimationPercent = 100.0;
-		EnemyHPDetails() {};
-		EnemyHPDetails(Uint32 uid, Sint32 HP, Sint32 maxHP, Sint32 oldHP, const char* name, bool isLowPriority)
+		EnemyHPDetails(){};
+		EnemyHPDetails(Uint32 uid, Sint32 HP, Sint32 maxHP, Sint32 oldHP, const char *name, bool isLowPriority)
 		{
-			if ( Entity* entity = uidToEntity(uid) )
+			if (Entity *entity = uidToEntity(uid))
 			{
-				if ( entity->behavior != &actMonster && entity->behavior != actPlayer )
+				if (entity->behavior != &actMonster && entity->behavior != actPlayer)
 				{
 					barType = BAR_TYPE_FURNITURE;
 				}
@@ -160,19 +163,19 @@ public:
 		real_t worldY = 0.0;
 		real_t worldZ = 0.0;
 		real_t screenDistance = 0.0;
-		TempTexture* worldTexture = nullptr;
-		SDL_Surface* worldSurfaceSprite = nullptr;
-		SDL_Surface* worldSurfaceSpriteStatusEffects = nullptr;
-		SDL_Surface* blitEnemyBarStatusEffects(const int player);
-		SDL_Surface* blitEnemyBar(const int player, SDL_Surface* statusEffectSprite);
+		TempTexture *worldTexture = nullptr;
+		SDL_Surface *worldSurfaceSprite = nullptr;
+		SDL_Surface *worldSurfaceSpriteStatusEffects = nullptr;
+		SDL_Surface *blitEnemyBarStatusEffects(const int player);
+		SDL_Surface *blitEnemyBar(const int player, SDL_Surface *statusEffectSprite);
 		void updateWorldCoordinates();
 	};
 
 	std::unordered_map<Uint32, EnemyHPDetails> HPBars;
-	void addEnemyToList(Sint32 HP, Sint32 maxHP, Sint32 oldHP, Uint32 uid, const char* name, bool isLowPriority, DamageGib gibDmgType);
+	void addEnemyToList(Sint32 HP, Sint32 maxHP, Sint32 oldHP, Uint32 uid, const char *name, bool isLowPriority, DamageGib gibDmgType);
 	void displayCurrentHPBar(const int player);
 	void cullExpiredHPBars();
-	EnemyHPDetails* getMostRecentHPBar(int index = 0);
+	EnemyHPDetails *getMostRecentHPBar(int index = 0);
 	Uint32 lastEnemyUid = 0;
 };
 extern EnemyHPDamageBarHandler enemyHPDamageBarHandler[MAXPLAYERS];
@@ -183,7 +186,7 @@ extern EnemyHPDamageBarHandler enemyHPDamageBarHandler[MAXPLAYERS];
 #define SHOPWINDOW_SIZEY 324
 #endif
 
-static const int GUI_MODE_NONE = -1; //GUI closed, ingame & playing.
+static const int GUI_MODE_NONE = -1; // GUI closed, ingame & playing.
 static const int GUI_MODE_INVENTORY = 0;
 static const int GUI_MODE_MAGIC = 1;
 static const int GUI_MODE_SHOP = 2;
@@ -204,43 +207,43 @@ void select_tinkering_slot(int player, int currentx, int currenty, int diffx, in
 void select_alchemy_slot(int player, int currentx, int currenty, int diffx, int diffy);
 void select_feather_slot(int player, int currentx, int currenty, int diffx, int diffy);
 
-extern Entity* openedChest[MAXPLAYERS]; //One for each client. //TODO: Clientside, [0] will always point to something other than NULL when a chest is open and it will be NULL when a chest is closed.
-extern list_t chestInv[MAXPLAYERS]; //This is just for the client, so that it can populate the chest inventory on its end.
+extern Entity *openedChest[MAXPLAYERS]; // One for each client. //TODO: Clientside, [0] will always point to something other than NULL when a chest is open and it will be NULL when a chest is closed.
+extern list_t chestInv[MAXPLAYERS];		// This is just for the client, so that it can populate the chest inventory on its end.
 
-//extern bool gui_clickdrag[MAXPLAYERS]; //True as long as an interface element is being dragged.
-//extern int dragoffset_x[MAXPLAYERS];
-//extern int dragoffset_y[MAXPLAYERS];
-//extern int buttonclick;
+// extern bool gui_clickdrag[MAXPLAYERS]; //True as long as an interface element is being dragged.
+// extern int dragoffset_x[MAXPLAYERS];
+// extern int dragoffset_y[MAXPLAYERS];
+// extern int buttonclick;
 
 // function prototypes
-void takeScreenshot(const char* output_path = nullptr);
+void takeScreenshot(const char *output_path = nullptr);
 bool loadInterfaceResources();
 void freeInterfaceResources();
-void clickDescription(const int player, Entity* entity);
-void consoleCommand(char const * const command);
+void clickDescription(const int player, Entity *entity);
+void consoleCommand(char const *const command);
 void drawMinimap(const int player, SDL_Rect rect, bool drawingSharedMap);
 void handleDamageIndicatorTicks();
 void drawStatus(const int player);
 void drawStatusNew(const int player);
-void saveCommand(char* content);
-int loadConfig(char* filename);
-int saveConfig(char const * const filename);
+void saveCommand(char *content);
+int loadConfig(char *filename);
+int saveConfig(char const *const filename);
 void defaultConfig();
 void updateChestInventory(const int player);
-Item* takeItemFromChest(int player, Item* item, int amount, Item* addToSpecificInventoryItem, bool forceNewStack, bool bDoPickupMessage = true);
+Item *takeItemFromChest(int player, Item *item, int amount, Item *addToSpecificInventoryItem, bool forceNewStack, bool bDoPickupMessage = true);
 void updateShopWindow(const int player);
-bool getShopFreeSlot(const int player, list_t* shopInventory, Item* itemToSell, int& xout, int& yout, Item*& itemToStackInto);
+bool getShopFreeSlot(const int player, list_t *shopInventory, Item *itemToSell, int &xout, int &yout, Item *&itemToStackInto);
 
-void updateEnemyBar(Entity* source, Entity* target, const char* name, Sint32 hp, Sint32 maxhp, 
-	bool lowPriorityTick, DamageGib gibType);
+void updateEnemyBar(Entity *source, Entity *target, const char *name, Sint32 hp, Sint32 maxhp,
+					bool lowPriorityTick, DamageGib gibType);
 
-bool autoAddHotbarFilter(const Item& item);
+bool autoAddHotbarFilter(const Item &item);
 void quickStackItems(const int player);
 void sortInventoryItemsOfType(const int player, int categoryInt, bool sortRightToLeft); // sort inventory items matching category. -1 is everything, -2 is only equipped items.
 void autosortInventory(const int player, bool sortPaperDoll = false);
 bool mouseInsidePlayerInventory(const int player);
 bool mouseInsidePlayerHotbar(const int player);
-bool playerLearnedSpellbook(const int player, Item* current_item);
+bool playerLearnedSpellbook(const int player, Item *current_item);
 
 /*
  * Used for two purposes:
@@ -249,45 +252,45 @@ bool playerLearnedSpellbook(const int player, Item* current_item);
  * This makes this variable super useful for gamepad support.
  */
 
-//Inventory GUI definitions.
+// Inventory GUI definitions.
 static const int INVENTORY_MODE_ITEM = 0;
 static const int INVENTORY_MODE_SPELL = 1;
 extern bool restrictPaperDollMovement;
 
-//Chest GUI definitions.
+// Chest GUI definitions.
 int numItemsInChest(const int player);
 
-//Magic GUI definitions.
-//extern SDL_Surface* magicspellList_bmp;
-//extern SDL_Surface* spell_list_titlebar_bmp;
-//extern SDL_Surface* spell_list_gui_slot_bmp;
-//extern SDL_Surface* spell_list_gui_slot_highlighted_bmp;
-//extern int spellscroll; //Same as itemscroll, but for the spell list GUI.
-//extern int magicspell_list_offset_x;
-//extern int magicspell_list_offset_y;
-//#define MAGICSPELL_LIST_X (((xres / 2) - (magicspellList_bmp->w / 2)) + magicspell_list_offset_x)
-//#define MAGICSPELL_LIST_Y (((yres / 2) - (magicspellList_bmp->h / 2)) + magicspell_list_offset_y)
-//extern bool dragging_magicspell_list_GUI; //The magic spell list GUI is being dragged.
+// Magic GUI definitions.
+// extern SDL_Surface* magicspellList_bmp;
+// extern SDL_Surface* spell_list_titlebar_bmp;
+// extern SDL_Surface* spell_list_gui_slot_bmp;
+// extern SDL_Surface* spell_list_gui_slot_highlighted_bmp;
+// extern int spellscroll; //Same as itemscroll, but for the spell list GUI.
+// extern int magicspell_list_offset_x;
+// extern int magicspell_list_offset_y;
+// #define MAGICSPELL_LIST_X (((xres / 2) - (magicspellList_bmp->w / 2)) + magicspell_list_offset_x)
+// #define MAGICSPELL_LIST_Y (((yres / 2) - (magicspellList_bmp->h / 2)) + magicspell_list_offset_y)
+// extern bool dragging_magicspell_list_GUI; //The magic spell list GUI is being dragged.
 /*
  * The state of the magic GUI.
  * 0 = spell list.
  * 1 = spell editor.
  */
 extern int magic_GUI_state;
-extern SDL_Rect magic_gui_pos; //The position of the magic GUI is stored here.
-extern SDL_Surface* sustained_spell_generic_icon; //The goto icon when no other is available.
+extern SDL_Rect magic_gui_pos;					  // The position of the magic GUI is stored here.
+extern SDL_Surface *sustained_spell_generic_icon; // The goto icon when no other is available.
 
 void renderMagicGUI(int winx, int winy, int winw, int winh);
 void updateMagicGUI();
 #define SUST_DIR_HORZ 0
 #define SUST_DIR_VERT 1
-#define SUST_SPELLS_DIRECTION SUST_DIR_VERT //0 = horizontal, 1 = vertical.
-//sust_spells_x & sust_spells_y define the top left corner of where the sustained spells icons start drawing.
+#define SUST_SPELLS_DIRECTION SUST_DIR_VERT // 0 = horizontal, 1 = vertical.
+// sust_spells_x & sust_spells_y define the top left corner of where the sustained spells icons start drawing.
 #define SUST_SPELLS_X 32
 #define SUST_SPELLS_Y 32
-#define SUST_SPELLS_RIGHT_ALIGN true //If true, overrides settings and makes the sustained spells draw alongside the right edge of the screen, vertically.
+#define SUST_SPELLS_RIGHT_ALIGN true // If true, overrides settings and makes the sustained spells draw alongside the right edge of the screen, vertically.
 
-void drawSustainedSpells(const int player); //Draws an icon for every sustained spell.
+void drawSustainedSpells(const int player); // Draws an icon for every sustained spell.
 
 enum GUICurrentType
 {
@@ -303,18 +306,19 @@ class GenericGUIMenu
 {
 	int gui_player = 0;
 	GUICurrentType guiType;
+
 public:
 	static const int kNumShownItems = 4;
 	bool guiActive;
 
 	// Alchemy
-	Item* basePotion;
-	Item* secondaryPotion;
-	Item* alembicItem;
+	Item *basePotion;
+	Item *secondaryPotion;
+	Item *alembicItem;
 	bool experimentingAlchemy;
-	
+
 	// Misc item/spell effects
-	Item* itemEffectScrollItem;
+	Item *itemEffectScrollItem;
 	bool itemEffectUsingSpell;
 	bool itemEffectUsingSpellbook;
 	int itemEffectItemType;
@@ -328,24 +332,24 @@ public:
 		TINKER_FILTER_SALVAGEABLE,
 		TINKER_FILTER_REPAIRABLE
 	};
-	Item* tinkeringKitItem;
+	Item *tinkeringKitItem;
 	list_t tinkeringTotalItems;
-	node_t* tinkeringTotalLastCraftableNode;
+	node_t *tinkeringTotalLastCraftableNode;
 	TinkeringFilter tinkeringFilter;
 	std::unordered_set<Uint32> tinkeringMetalScrap;
 	std::unordered_set<Uint32> tinkeringMagicScrap;
-	Item* tinkeringAutoSalvageKitItem;
-	Item* tinkeringAutoSalvageThisItem;
+	Item *tinkeringAutoSalvageKitItem;
+	Item *tinkeringAutoSalvageThisItem;
 	Uint32 tinkeringSfxLastTicks = 0;
 	bool tinkeringBulkSalvage = false;
 	Sint32 tinkeringBulkSalvageMetalScrap = 0;
 	Sint32 tinkeringBulkSalvageMagicScrap = 0;
 
 	// Scribing
-	Item* scribingToolItem;
+	Item *scribingToolItem;
 	list_t scribingTotalItems;
-	node_t* scribingTotalLastCraftableNode;
-	Item* scribingBlankScrollTarget;
+	node_t *scribingTotalLastCraftableNode;
+	Item *scribingBlankScrollTarget;
 	enum ScribingFilter
 	{
 		SCRIBING_FILTER_CRAFTABLE,
@@ -353,32 +357,31 @@ public:
 	};
 	ScribingFilter scribingFilter;
 
-	GenericGUIMenu() :
-		guiActive(false),
-		basePotion(nullptr),
-		secondaryPotion(nullptr),
-		alembicItem(nullptr),
-		experimentingAlchemy(false),
-		itemEffectScrollItem(nullptr),
-		itemEffectUsingSpell(false),
-		itemEffectUsingSpellbook(false),
-		itemEffectItemType(0),
-		itemEffectItemBeatitude(0),
-		tinkeringKitItem(nullptr),
-		tinkeringTotalLastCraftableNode(nullptr),
-		tinkeringFilter(TINKER_FILTER_CRAFTABLE),
-		tinkeringAutoSalvageKitItem(nullptr),
-		tinkeringAutoSalvageThisItem(nullptr),
-		scribingFilter(SCRIBING_FILTER_CRAFTABLE),
-		scribingToolItem(nullptr),
-		scribingTotalLastCraftableNode(nullptr),
-		scribingBlankScrollTarget(nullptr),
-		scribingLastUsageAmount(0),
-		scribingLastUsageDisplayTimer(0),
-		tinkerGUI(*this),
-		alchemyGUI(*this),
-		featherGUI(*this),
-		itemfxGUI(*this)
+	GenericGUIMenu() : guiActive(false),
+					   basePotion(nullptr),
+					   secondaryPotion(nullptr),
+					   alembicItem(nullptr),
+					   experimentingAlchemy(false),
+					   itemEffectScrollItem(nullptr),
+					   itemEffectUsingSpell(false),
+					   itemEffectUsingSpellbook(false),
+					   itemEffectItemType(0),
+					   itemEffectItemBeatitude(0),
+					   tinkeringKitItem(nullptr),
+					   tinkeringTotalLastCraftableNode(nullptr),
+					   tinkeringFilter(TINKER_FILTER_CRAFTABLE),
+					   tinkeringAutoSalvageKitItem(nullptr),
+					   tinkeringAutoSalvageThisItem(nullptr),
+					   scribingFilter(SCRIBING_FILTER_CRAFTABLE),
+					   scribingToolItem(nullptr),
+					   scribingTotalLastCraftableNode(nullptr),
+					   scribingBlankScrollTarget(nullptr),
+					   scribingLastUsageAmount(0),
+					   scribingLastUsageDisplayTimer(0),
+					   tinkerGUI(*this),
+					   alchemyGUI(*this),
+					   featherGUI(*this),
+					   itemfxGUI(*this)
 	{
 		tinkeringTotalItems.first = nullptr;
 		tinkeringTotalItems.last = nullptr;
@@ -387,142 +390,141 @@ public:
 	};
 
 	void setPlayer(const int p) { gui_player = p; }
-	const int getPlayer() { return gui_player;  }
+	const int getPlayer() { return gui_player; }
 	void closeGUI();
-	void openGUI(int type, Item* effectItem, int effectBeatitude, int effectItemType, int usingSpellID);
-	void openGUI(int type, bool experimenting, Item* itemOpenedWith);
-	void openGUI(int type, Item* itemOpenedWith);
+	void openGUI(int type, Item *effectItem, int effectBeatitude, int effectItemType, int usingSpellID);
+	void openGUI(int type, bool experimenting, Item *itemOpenedWith);
+	void openGUI(int type, Item *itemOpenedWith);
 	void updateGUI();
 	void rebuildGUIInventory();
-	bool shouldDisplayItemInGUI(Item* item);
-	bool executeOnItemClick(Item* item);
+	bool shouldDisplayItemInGUI(Item *item);
+	bool executeOnItemClick(Item *item);
 
 	// repair menu funcs
-	void repairItem(Item* item);
-	bool isItemRepairable(const Item* item, int repairScroll);
+	void repairItem(Item *item);
+	bool isItemRepairable(const Item *item, int repairScroll);
 
-	//remove curse
-	bool isItemRemoveCursable(const Item* item);
-	void uncurseItem(Item* item);
+	// remove curse
+	bool isItemRemoveCursable(const Item *item);
+	void uncurseItem(Item *item);
 
-	//identify
-	bool isItemIdentifiable(const Item* item);
-	void identifyItem(Item* item);
+	// identify
+	bool isItemIdentifiable(const Item *item);
+	void identifyItem(Item *item);
 
-	//alchemy menu funcs
-	bool isItemMixable(const Item* item);
+	// alchemy menu funcs
+	bool isItemMixable(const Item *item);
 	void alchemyCombinePotions();
 	bool alchemyLearnRecipe(int type, bool increaseskill, bool notify = true);
 	bool isItemBaseIngredient(int type);
 	bool isItemSecondaryIngredient(int type);
+	void GenerateAlchemyTable();
 	void alchemyLearnRecipeOnLevelUp(int skill);
 
 	// tinkering menu foncs
-	bool tinkeringSalvageItem(Item* item, bool outsideInventory, int player);
-	bool tinkeringCraftItem(Item* item);
+	bool tinkeringSalvageItem(Item *item, bool outsideInventory, int player);
+	bool tinkeringCraftItem(Item *item);
 	void tinkeringCreateCraftableItemList();
 	void tinkeringFreeLists();
-	bool isItemSalvageable(const Item* item, int player);
-	static bool tinkeringGetItemValue(const Item* item, int* metal, int* magic);
-	static bool tinkeringGetCraftingCost(const Item* item, int* metal, int* magic);
-	bool tinkeringPlayerCanAffordCraft(const Item* item);
-	Item* tinkeringCraftItemAndConsumeMaterials(const Item* item);
-	int tinkeringPlayerHasSkillLVLToCraft(const Item* item);
+	bool isItemSalvageable(const Item *item, int player);
+	static bool tinkeringGetItemValue(const Item *item, int *metal, int *magic);
+	static bool tinkeringGetCraftingCost(const Item *item, int *metal, int *magic);
+	bool tinkeringPlayerCanAffordCraft(const Item *item);
+	Item *tinkeringCraftItemAndConsumeMaterials(const Item *item);
+	int tinkeringPlayerHasSkillLVLToCraft(const Item *item);
 	bool tinkeringKitDegradeOnUse(int player);
-	Item* tinkeringKitFindInInventory();
+	Item *tinkeringKitFindInInventory();
 	bool tinkeringKitRollIfShouldBreak();
-	bool tinkeringGetRepairCost(Item* item, int* metal, int* magic);
-	bool tinkeringIsItemRepairable(Item* item, int player);
-	bool tinkeringIsItemUpgradeable(const Item* item);
-	bool tinkeringRepairItem(Item* item);
-	int tinkeringUpgradeMaxStatus(Item* item);
-	bool tinkeringConsumeMaterialsForRepair(Item* item, bool upgradingItem);
-	bool tinkeringPlayerCanAffordRepair(Item* item);
-	int tinkeringRepairGeneralItemSkillRequirement(Item* item);
+	bool tinkeringGetRepairCost(Item *item, int *metal, int *magic);
+	bool tinkeringIsItemRepairable(Item *item, int player);
+	bool tinkeringIsItemUpgradeable(const Item *item);
+	bool tinkeringRepairItem(Item *item);
+	int tinkeringUpgradeMaxStatus(Item *item);
+	bool tinkeringConsumeMaterialsForRepair(Item *item, bool upgradingItem);
+	bool tinkeringPlayerCanAffordRepair(Item *item);
+	int tinkeringRepairGeneralItemSkillRequirement(Item *item);
 	bool tinkeringPlayerHasMaterialsInventory(int metal, int magic);
 	Uint32 tinkeringRetrieveLeastScrapStack(int type);
 	int tinkeringCountScrapTotal(int type);
 
 	void scribingCreateCraftableItemList();
 	void scribingFreeLists();
-	int scribingToolDegradeOnUse(Item* itemUsedWith);
-	Item* scribingToolFindInInventory();
-	bool scribingWriteItem(Item* item);
+	int scribingToolDegradeOnUse(Item *itemUsedWith);
+	Item *scribingToolFindInInventory();
+	bool scribingWriteItem(Item *item);
 	int scribingLastUsageAmount;
 	int scribingLastUsageDisplayTimer;
-	void scribingGetChargeCost(Item* itemUsedWith, int& outChargeCostMin, int& outChargeCostMax);
+	void scribingGetChargeCost(Item *itemUsedWith, int &outChargeCostMin, int &outChargeCostMax);
 
 	inline bool isGUIOpen()
 	{
 		return guiActive;
 	};
-	inline bool isNodeTinkeringCraftableItem(node_t* node)
+	inline bool isNodeTinkeringCraftableItem(node_t *node)
 	{
-		if ( !node )
+		if (!node)
 		{
 			return false;
 		}
 		return (node->list == &tinkeringTotalItems);
 	};
-	inline bool isNodeScribingCraftableItem(node_t* node)
+	inline bool isNodeScribingCraftableItem(node_t *node)
 	{
-		if ( !node )
+		if (!node)
 		{
 			return false;
 		}
 		return (node->list == &scribingTotalItems);
 	};
-	inline bool isItemUsedForCurrentGUI(const Item& item)
+	inline bool isItemUsedForCurrentGUI(const Item &item)
 	{
-		if ( &item == scribingToolItem || &item == tinkeringKitItem || &item == alembicItem
-			|| &item == scribingBlankScrollTarget
-			|| &item == basePotion || &item == secondaryPotion || &item == itemEffectScrollItem )
+		if (&item == scribingToolItem || &item == tinkeringKitItem || &item == alembicItem || &item == scribingBlankScrollTarget || &item == basePotion || &item == secondaryPotion || &item == itemEffectScrollItem)
 		{
 			return true;
 		}
 		return false;
 	}
-	inline void clearCurrentGUIFromItem(const Item& item)
+	inline void clearCurrentGUIFromItem(const Item &item)
 	{
-		if ( &item == scribingToolItem )
+		if (&item == scribingToolItem)
 		{
 			scribingToolItem = nullptr;
 		}
-		if ( &item == scribingBlankScrollTarget )
+		if (&item == scribingBlankScrollTarget)
 		{
 			scribingBlankScrollTarget = nullptr;
 		}
-		if ( &item == tinkeringKitItem )
+		if (&item == tinkeringKitItem)
 		{
 			tinkeringKitItem = nullptr;
 		}
-		if ( &item == alembicItem )
+		if (&item == alembicItem)
 		{
 			alembicItem = nullptr;
 		}
-		if ( &item == basePotion )
+		if (&item == basePotion)
 		{
 			basePotion = nullptr;
 		}
-		if ( &item == secondaryPotion )
+		if (&item == secondaryPotion)
 		{
 			secondaryPotion = nullptr;
 		}
-		if ( &item == itemEffectScrollItem )
+		if (&item == itemEffectScrollItem)
 		{
 			itemEffectScrollItem = nullptr;
 		}
 	}
-	bool isNodeFromPlayerInventory(node_t* node);
+	bool isNodeFromPlayerInventory(node_t *node);
 
 	struct TinkerGUI_t
 	{
-		GenericGUIMenu& parentGUI;
-		TinkerGUI_t(GenericGUIMenu& g) :
-			parentGUI(g) 
-		{}
+		GenericGUIMenu &parentGUI;
+		TinkerGUI_t(GenericGUIMenu &g) : parentGUI(g)
+		{
+		}
 
-		Frame* tinkerFrame = nullptr;
+		Frame *tinkerFrame = nullptr;
 		real_t animx = 0.0;
 		bool isInteractable = true;
 		bool bOpen = false;
@@ -539,7 +541,7 @@ public:
 		std::string itemDesc = "";
 		int itemType = -1;
 		int itemRequirement = -1;
-		enum TinkerActions_t : int 
+		enum TinkerActions_t : int
 		{
 			TINKER_ACTION_NONE,
 			TINKER_ACTION_OK,
@@ -591,17 +593,17 @@ public:
 		int selectedTinkerSlotY = -1;
 		static const int MAX_TINKER_X;
 		static const int MAX_TINKER_Y;
-		std::unordered_map<int, Frame*> tinkerSlotFrames;
-		bool isTinkerConstructItemSelected(Item* item);
-		bool isSalvageOrRepairItemSelected(Item* item);
+		std::unordered_map<int, Frame *> tinkerSlotFrames;
+		bool isTinkerConstructItemSelected(Item *item);
+		bool isSalvageOrRepairItemSelected(Item *item);
 		void selectTinkerSlot(const int x, const int y);
 		const int getSelectedTinkerSlotX() const { return selectedTinkerSlotX; }
 		const int getSelectedTinkerSlotY() const { return selectedTinkerSlotY; }
-		Frame* getTinkerSlotFrame(int x, int y) const;
-		TinkerActions_t setItemDisplayNameAndPrice(Item* item, bool checkResultOnly = false);
-		bool warpMouseToSelectedTinkerItem(Item* snapToItem, Uint32 flags);
+		Frame *getTinkerSlotFrame(int x, int y) const;
+		TinkerActions_t setItemDisplayNameAndPrice(Item *item, bool checkResultOnly = false);
+		bool warpMouseToSelectedTinkerItem(Item *snapToItem, Uint32 flags);
 		void clearItemDisplayed();
-		void updateTinkerScrapHeld(void* metalHeldText, void* magicHeldText, int realMetalScrap, int realMagicScrap);
+		void updateTinkerScrapHeld(void *metalHeldText, void *magicHeldText, int realMetalScrap, int realMagicScrap);
 
 		static int heightOffsetWhenNotCompact;
 	};
@@ -609,12 +611,12 @@ public:
 
 	struct ItemEffectGUI_t
 	{
-		GenericGUIMenu& parentGUI;
-		ItemEffectGUI_t(GenericGUIMenu& g) :
-			parentGUI(g)
-		{}
+		GenericGUIMenu &parentGUI;
+		ItemEffectGUI_t(GenericGUIMenu &g) : parentGUI(g)
+		{
+		}
 
-		Frame* itemEffectFrame = nullptr;
+		Frame *itemEffectFrame = nullptr;
 		real_t animx = 0.0;
 		bool isInteractable = true;
 		bool bOpen = false;
@@ -634,7 +636,7 @@ public:
 		void closeItemEffectMenu();
 		void updateItemEffectMenu();
 		void createItemEffectMenu();
-		bool isItemSelectedToEffect(Item* item);
+		bool isItemSelectedToEffect(Item *item);
 		bool isItemEffectMenuActive() const;
 		bool ItemEffectHasBeenCreated() const;
 		std::string itemDesc = "";
@@ -670,7 +672,7 @@ public:
 		};
 		InvalidActionFeedback_t invalidActionType = INVALID_ACTION_NONE;
 
-		ItemEffectActions_t setItemDisplayNameAndPrice(Item* item, bool checkResultOnly = false);
+		ItemEffectActions_t setItemDisplayNameAndPrice(Item *item, bool checkResultOnly = false);
 		void clearItemDisplayed();
 
 		static int heightOffsetWhenNotCompact;
@@ -679,12 +681,12 @@ public:
 
 	struct FeatherGUI_t
 	{
-		GenericGUIMenu& parentGUI;
-		FeatherGUI_t(GenericGUIMenu& g) :
-			parentGUI(g)
-		{}
+		GenericGUIMenu &parentGUI;
+		FeatherGUI_t(GenericGUIMenu &g) : parentGUI(g)
+		{
+		}
 
-		Frame* featherFrame = nullptr;
+		Frame *featherFrame = nullptr;
 		real_t animx = 0.0;
 		bool isInteractable = true;
 		bool bOpen = false;
@@ -746,10 +748,10 @@ public:
 			Uint32 startTicks = 0;
 			Uint32 processedOnTick = 0;
 			std::string name = "";
-			DiscoveryAnim_t() :
-				startTicks(ticks),
-				processedOnTick(0)
-			{}
+			DiscoveryAnim_t() : startTicks(ticks),
+								processedOnTick(0)
+			{
+			}
 		};
 		std::unordered_map<std::string, DiscoveryAnim_t> labelDiscoveries;
 
@@ -765,25 +767,25 @@ public:
 		int selectedFeatherSlotY = -1;
 		static const int MAX_FEATHER_X;
 		static const int MAX_FEATHER_Y;
-		std::unordered_map<int, Frame*> featherSlotFrames;
+		std::unordered_map<int, Frame *> featherSlotFrames;
 		void selectFeatherSlot(const int x, const int y);
 		const int getSelectedFeatherSlotX() const { return selectedFeatherSlotX; }
 		const int getSelectedFeatherSlotY() const { return selectedFeatherSlotY; }
-		Frame* getFeatherSlotFrame(int x, int y) const;
-		FeatherActions_t setItemDisplayNameAndPrice(Item* item, bool checkResultOnly);
-		bool warpMouseToSelectedFeatherItem(Item* snapToItem, Uint32 flags);
-		bool isInscriptionDrawerItemSelected(Item* item);
-		bool isItemSelectedToRepairOrInscribe(Item* item);
+		Frame *getFeatherSlotFrame(int x, int y) const;
+		FeatherActions_t setItemDisplayNameAndPrice(Item *item, bool checkResultOnly);
+		bool warpMouseToSelectedFeatherItem(Item *snapToItem, Uint32 flags);
+		bool isInscriptionDrawerItemSelected(Item *item);
+		bool isItemSelectedToRepairOrInscribe(Item *item);
 		bool isInscriptionDrawerOpen() const;
 		bool isInscribeOrRepairActive() const;
 		void clearItemDisplayed();
 		static int heightOffsetWhenNotCompact;
 		void scrollToSlot(int x, int y, bool instantly);
 		bool isSlotVisible(int x, int y) const;
-		bool isItemVisible(Item* item) const;
+		bool isItemVisible(Item *item) const;
 		const int kNumInscriptionsToDisplayVertical = 5;
 		int getNumInscriptionsToDisplayVertical() const;
-		void updateFeatherCharge(void* featherChargeText, void* featherChangeChargeText, int currentCharge);
+		void updateFeatherCharge(void *featherChargeText, void *featherChangeChargeText, int currentCharge);
 		enum SortTypes_t : int
 		{
 			SORT_SCROLL_DEFAULT,
@@ -797,15 +799,15 @@ public:
 		std::vector<std::pair<std::string, std::pair<int, bool>>> sortedScrolls;
 		bool scrollListRequiresSorting = false;
 		void changeSortingType(SortTypes_t newType);
-		bool scrollSortFunc(const std::pair<std::string, std::pair<int, bool>>& lhs,
-			const std::pair<std::string, std::pair<int, bool>>& rhs);
+		bool scrollSortFunc(const std::pair<std::string, std::pair<int, bool>> &lhs,
+							const std::pair<std::string, std::pair<int, bool>> &rhs);
 	};
 	FeatherGUI_t featherGUI;
 
 	struct AlchemyGUI_t
 	{
-		GenericGUIMenu& parentGUI;
-		Frame* recipesFrame = nullptr;
+		GenericGUIMenu &parentGUI;
+		Frame *recipesFrame = nullptr;
 		static const int ALCH_SLOT_SECONDARY_POTION_X = -1;
 		static const int ALCH_SLOT_BASE_POTION_X = -2;
 		static const int ALCH_SLOT_RESULT_POTION_X = -3;
@@ -813,7 +815,7 @@ public:
 		static const int ALCH_SLOT_RECIPE_PREVIEW_POTION2_X = -5;
 		struct AlchemyRecipes_t
 		{
-			AlchemyGUI_t& alchemy;
+			AlchemyGUI_t &alchemy;
 
 			bool justifyLeft = true;
 			real_t animx = 0.0;
@@ -834,7 +836,7 @@ public:
 			void updateRecipePanel();
 			void scrollToSlot(int x, int y, bool instantly);
 			bool isSlotVisible(int x, int y) const;
-			bool isItemVisible(Item* item) const;
+			bool isItemVisible(Item *item) const;
 
 			int activateRecipeIndex = -1;
 
@@ -890,18 +892,17 @@ public:
 				}
 			};
 			std::vector<RecipeEntry_t> recipeList;
-			std::unordered_map<int, Frame::image_t*> stones;
+			std::unordered_map<int, Frame::image_t *> stones;
 
-			AlchemyRecipes_t(AlchemyGUI_t& a) :
-				alchemy(a) 
-			{}
+			AlchemyRecipes_t(AlchemyGUI_t &a) : alchemy(a)
+			{
+			}
 		} recipes;
 
 		Item alchemyResultPotion;
 		Item emptyBottleCount;
-		AlchemyGUI_t(GenericGUIMenu& g) :
-			parentGUI(g),
-			recipes(*this)
+		AlchemyGUI_t(GenericGUIMenu &g) : parentGUI(g),
+										  recipes(*this)
 		{
 			alchemyResultPotion.appearance = 0;
 			alchemyResultPotion.type = POTION_EMPTY;
@@ -958,7 +959,7 @@ public:
 		};
 		std::vector<std::pair<Uint32, AlchNotification_t>> notifications;
 		AlchemyView_t currentView = ALCHEMY_VIEW_BREW;
-		Frame* alchFrame = nullptr;
+		Frame *alchFrame = nullptr;
 		real_t animx = 0.0;
 		real_t animTooltip = 0.0;
 		Uint32 animTooltipTicks = 0;
@@ -994,8 +995,8 @@ public:
 		void updateAlchemyMenu();
 		void createAlchemyMenu();
 		bool alchemyGUIHasBeenCreated() const;
-		//bool isConstructMenuActive() const;
-		//bool isSalvageOrRepairMenuActive() const;
+		// bool isConstructMenuActive() const;
+		// bool isSalvageOrRepairMenuActive() const;
 		std::string itemDesc = "";
 		int itemType = -1;
 		bool itemRequiresTitleReflow = true;
@@ -1004,15 +1005,15 @@ public:
 		int selectedAlchemySlotY = -1;
 		static const int MAX_ALCH_X;
 		static const int MAX_ALCH_Y;
-		std::unordered_map<int, Frame*> alchemySlotFrames;
-		//bool isTinkerConstructItemSelected(Item* item);
-		//bool isSalvageOrRepairItemSelected(Item* item);
+		std::unordered_map<int, Frame *> alchemySlotFrames;
+		// bool isTinkerConstructItemSelected(Item* item);
+		// bool isSalvageOrRepairItemSelected(Item* item);
 		void selectAlchemySlot(const int x, const int y);
 		const int getSelectedAlchemySlotX() const { return selectedAlchemySlotX; }
 		const int getSelectedAlchemySlotY() const { return selectedAlchemySlotY; }
-		Frame* getAlchemySlotFrame(int x, int y) const;
-		void setItemDisplayNameAndPrice(Item* item, bool isTooltipForResultPotion, bool isTooltipForRecipe);
-		bool warpMouseToSelectedAlchemyItem(Item* snapToItem, Uint32 flags);
+		Frame *getAlchemySlotFrame(int x, int y) const;
+		void setItemDisplayNameAndPrice(Item *item, bool isTooltipForResultPotion, bool isTooltipForRecipe);
+		bool warpMouseToSelectedAlchemyItem(Item *snapToItem, Uint32 flags);
 		void clearItemDisplayed();
 		static int heightOffsetWhenNotCompact;
 	};
@@ -1029,25 +1030,25 @@ void updateCharacterSheet(const int player);
 void drawPartySheet(const int player);
 void drawSkillsSheet(const int player);
 
-//Right sidebar defines.
-//#define RIGHTSIDEBAR_X (xres - rightsidebar_titlebar_img->w)
-//#define RIGHTSIDEBAR_Y 0
-//Note: Just using the spell versions of these for now.
-//extern SDL_Surface* rightsidebar_titlebar_img;
-//extern SDL_Surface* rightsidebar_slot_img;
-//extern SDL_Surface* rightsidebar_slot_highlighted_img;
-//extern SDL_Surface* rightsidebar_slot_grayedout_img;
-//extern int rightsidebar_height;
+// Right sidebar defines.
+// #define RIGHTSIDEBAR_X (xres - rightsidebar_titlebar_img->w)
+// #define RIGHTSIDEBAR_Y 0
+// Note: Just using the spell versions of these for now.
+// extern SDL_Surface* rightsidebar_titlebar_img;
+// extern SDL_Surface* rightsidebar_slot_img;
+// extern SDL_Surface* rightsidebar_slot_highlighted_img;
+// extern SDL_Surface* rightsidebar_slot_grayedout_img;
+// extern int rightsidebar_height;
 
-void updateRightSidebar(); //Updates the sidebar on the right side of the screen, the one containing spells, skills, etc.
+void updateRightSidebar(); // Updates the sidebar on the right side of the screen, the one containing spells, skills, etc.
 
 //------book_t Defines-----
-//extern SDL_Surface* bookgui_img;
-//extern SDL_Surface *nextpage_img;
-//extern SDL_Surface *previouspage_img;
-//extern SDL_Surface *bookclose_img;
-//extern SDL_Surface* book_highlighted_left_img; //Draw this when the mouse is over the left half of the book.
-//extern SDL_Surface* book_highlighted_right_img; //Draw this when the mouse is over the right half of the book.
+// extern SDL_Surface* bookgui_img;
+// extern SDL_Surface *nextpage_img;
+// extern SDL_Surface *previouspage_img;
+// extern SDL_Surface *bookclose_img;
+// extern SDL_Surface* book_highlighted_left_img; //Draw this when the mouse is over the left half of the book.
+// extern SDL_Surface* book_highlighted_right_img; //Draw this when the mouse is over the right half of the book.
 class BookParser_t;
 
 //------Hotbar Defines-----
@@ -1055,31 +1056,30 @@ class BookParser_t;
  * The hotbar itself is an array.
  * NOTE: If the status bar width is changed, you need to change the slot image too. Make sure the status bar width stays divisible by 10.
  */
-//extern SDL_Surface* hotbar_img; //A 64x64 slot.
-//extern SDL_Surface* hotbar_spell_img; //Drawn when a spell is in the hotbar. TODO: Replace with unique images for every spell. (Or draw this by default if none found?)
+// extern SDL_Surface* hotbar_img; //A 64x64 slot.
+// extern SDL_Surface* hotbar_spell_img; //Drawn when a spell is in the hotbar. TODO: Replace with unique images for every spell. (Or draw this by default if none found?)
 
-//NOTE: Each hotbar slot is "constructed" in loadInterfaceResources() in interface.c. If you add anything, make sure to initialize it there.
+// NOTE: Each hotbar slot is "constructed" in loadInterfaceResources() in interface.c. If you add anything, make sure to initialize it there.
 typedef struct hotbar_slot_t
 {
 	/*
-	* This is an item's ID. It just resolves to NULL if an item is no longer valid.
-	*/
+	 * This is an item's ID. It just resolves to NULL if an item is no longer valid.
+	 */
 	Uint32 item = 0;
 	Item lastItem;
 	int lastCategory = -1;
-	bool matchesExactLastItem(int player, Item* item);
+	bool matchesExactLastItem(int player, Item *item);
 	void resetLastItem();
 	hotbar_slot_t()
 	{
 		resetLastItem();
 	}
-	void storeLastItem(Item* item);
+	void storeLastItem(Item *item);
 } hotbar_slot_t;
-
 
 // Returns a pointer to a hotbar slot if the mouse is over a hotbar slot
 // Used for such things as dragging and dropping items. Uses realtime (mousex/mousey) coords as may be dragging
-hotbar_slot_t* getCurrentHotbarUnderMouse(int player, int* outSlotNum = nullptr);
+hotbar_slot_t *getCurrentHotbarUnderMouse(int player, int *outSlotNum = nullptr);
 
 bool warpMouseToSelectedHotbarSlot(const int player);
 
@@ -1105,9 +1105,9 @@ extern bool hide_playertags;
 
 extern bool show_skill_values;
 
-const char* getInputName(Uint32 scancode);
-Sint8* inputPressed(Uint32 scancode);
-Sint8* inputPressedForPlayer(int player, Uint32 scancode);
+const char *getInputName(Uint32 scancode);
+Sint8 *inputPressed(Uint32 scancode);
+Sint8 *inputPressedForPlayer(int player, Uint32 scancode);
 
 enum CloseGUIShootmode : int
 {
@@ -1127,7 +1127,7 @@ static const int SCANCODE_UNASSIGNED_BINDING = 399;
 
 const bool hotbarGamepadControlEnabled(const int player);
 
-void printStatBonus(TTF_Font* outputFont, Sint32 stat, Sint32 statWithModifiers, int x, int y);
+void printStatBonus(TTF_Font *outputFont, Sint32 stat, Sint32 statWithModifiers, int x, int y);
 struct AttackHoverText_t
 {
 	enum HoverTypes
@@ -1157,8 +1157,8 @@ struct AttackHoverText_t
 	Sint32 equipmentAndEffectBonus = 0;
 	int proficiency = -1;
 };
-void attackHoverText(const int player, AttackHoverText_t& output);
-Sint32 displayAttackPower(const int player, AttackHoverText_t& output);
+void attackHoverText(const int player, AttackHoverText_t &output);
+Sint32 displayAttackPower(const int player, AttackHoverText_t &output);
 
 class MinimapPing
 {
@@ -1174,29 +1174,26 @@ public:
 		PING_DEATH_MARKER
 	};
 	PingType pingType = PING_DEFAULT;
-	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y) :
-		tickStart(tickStart),
-		player(player),
-		x(x),
-		y(y),
-		radiusPing(false),
-		pingType(PING_DEFAULT) {}
+	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y) : tickStart(tickStart),
+																	player(player),
+																	x(x),
+																	y(y),
+																	radiusPing(false),
+																	pingType(PING_DEFAULT) {}
 
-	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y, bool radiusPing) :
-		tickStart(tickStart),
-		player(player),
-		x(x),
-		y(y),
-		radiusPing(radiusPing),
-		pingType(PING_DEFAULT) {}
+	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y, bool radiusPing) : tickStart(tickStart),
+																					 player(player),
+																					 x(x),
+																					 y(y),
+																					 radiusPing(radiusPing),
+																					 pingType(PING_DEFAULT) {}
 
-	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y, bool radiusPing, PingType pingType) :
-		tickStart(tickStart),
-		player(player),
-		x(x),
-		y(y),
-		radiusPing(radiusPing),
-		pingType(pingType) {}
+	MinimapPing(Uint32 tickStart, Uint8 player, Uint8 x, Uint8 y, bool radiusPing, PingType pingType) : tickStart(tickStart),
+																										player(player),
+																										x(x),
+																										y(y),
+																										radiusPing(radiusPing),
+																										pingType(pingType) {}
 };
 
 extern std::vector<MinimapPing> minimapPings[MAXPLAYERS];
@@ -1204,51 +1201,50 @@ void minimapPingAdd(const int srcPlayer, const int destPlayer, MinimapPing newPi
 extern int minimapPingGimpTimer[MAXPLAYERS];
 extern SDL_Rect minimaps[MAXPLAYERS];
 
-extern std::vector<std::pair<SDL_Surface**, std::string>> systemResourceImages;
+extern std::vector<std::pair<SDL_Surface **, std::string>> systemResourceImages;
 
 class FollowerRadialMenu
 {
 public:
-	Entity* followerToCommand;
-	Entity* recentEntity;
-	Entity* entityToInteractWith;
-	int menuX; // starting mouse coordinates that are the center of the circle.
-	int menuY; // starting mouse coordinates that are the center of the circle.
-	int optionSelected; // current moused over option.
-	int optionPrevious; // previously selected option.
-	bool selectMoveTo; // player is choosing a point or target to interact with.
-	int moveToX; // x position for follower to move to.
-	int moveToY; // y position for follower to move to.
-	bool menuToggleClick; // user pressed menu key but did not select option before letting go. keeps the menu open without input.
-	bool holdWheel; // user pressed quick menu for last follower.
-	char interactText[128]; // user moused over object while selecting interact object.
+	Entity *followerToCommand;
+	Entity *recentEntity;
+	Entity *entityToInteractWith;
+	int menuX;						 // starting mouse coordinates that are the center of the circle.
+	int menuY;						 // starting mouse coordinates that are the center of the circle.
+	int optionSelected;				 // current moused over option.
+	int optionPrevious;				 // previously selected option.
+	bool selectMoveTo;				 // player is choosing a point or target to interact with.
+	int moveToX;					 // x position for follower to move to.
+	int moveToY;					 // y position for follower to move to.
+	bool menuToggleClick;			 // user pressed menu key but did not select option before letting go. keeps the menu open without input.
+	bool holdWheel;					 // user pressed quick menu for last follower.
+	char interactText[128];			 // user moused over object while selecting interact object.
 	bool accessedMenuFromPartySheet; // right click from party sheet will warp mouse back after a selection.
-	int partySheetMouseX; // store mouse x cooord for accessedMenuFromPartySheet warp.
-	int partySheetMouseY; // store mouse y cooord for accessedMenuFromPartySheet warp.
-	int sidebarScrollIndex; // entries scrolled in the sidebar list if overflowed with followers.
+	int partySheetMouseX;			 // store mouse x cooord for accessedMenuFromPartySheet warp.
+	int partySheetMouseY;			 // store mouse y cooord for accessedMenuFromPartySheet warp.
+	int sidebarScrollIndex;			 // entries scrolled in the sidebar list if overflowed with followers.
 	int maxMonstersToDraw;
 	int gui_player = 0;
-	Frame* followerFrame;
+	Frame *followerFrame;
 
-	FollowerRadialMenu() :
-		followerFrame(nullptr),
-		followerToCommand(nullptr),
-		recentEntity(nullptr),
-		entityToInteractWith(nullptr),
-		menuX(-1),
-		menuY(-1),
-		optionSelected(-1),
-		optionPrevious(-1),
-		selectMoveTo(false),
-		moveToX(-1),
-		moveToY(-1),
-		menuToggleClick(false),
-		holdWheel(false),
-		accessedMenuFromPartySheet(false),
-		partySheetMouseX(-1),
-		partySheetMouseY(-1),
-		sidebarScrollIndex(0),
-		maxMonstersToDraw(5)
+	FollowerRadialMenu() : followerFrame(nullptr),
+						   followerToCommand(nullptr),
+						   recentEntity(nullptr),
+						   entityToInteractWith(nullptr),
+						   menuX(-1),
+						   menuY(-1),
+						   optionSelected(-1),
+						   optionPrevious(-1),
+						   selectMoveTo(false),
+						   moveToX(-1),
+						   moveToY(-1),
+						   menuToggleClick(false),
+						   holdWheel(false),
+						   accessedMenuFromPartySheet(false),
+						   partySheetMouseX(-1),
+						   partySheetMouseY(-1),
+						   sidebarScrollIndex(0),
+						   maxMonstersToDraw(5)
 	{
 		memset(interactText, 0, 128);
 	}
@@ -1314,15 +1310,15 @@ public:
 	void selectNextFollower();
 	int numMonstersToDrawInParty();
 	void updateScrollPartySheet();
-	bool allowedInteractEntity(Entity& selectedEntity, bool updateInteractText = true);
-	int optionDisabledForCreature(int playerSkillLVL, int monsterType, int option, Entity* follower);
+	bool allowedInteractEntity(Entity &selectedEntity, bool updateInteractText = true);
+	int optionDisabledForCreature(int playerSkillLVL, int monsterType, int option, Entity *follower);
 	bool allowedClassToggle(int monsterType);
 	bool allowedItemPickupToggle(int monsterType);
 	static bool allowedInteractFood(int monsterType);
 	static bool allowedInteractWorld(int monsterType);
 	bool allowedInteractItems(int monsterType);
 	bool attackCommandOnly(int monsterType);
-	void monsterGyroBotConvertCommand(int* option);
+	void monsterGyroBotConvertCommand(int *option);
 	bool monsterGyroBotOnlyCommand(int option);
 	bool monsterGyroBotDisallowedCommands(int option);
 	bool isTinkeringFollower(int type);
@@ -1331,9 +1327,10 @@ public:
 };
 extern FollowerRadialMenu FollowerMenu[MAXPLAYERS];
 
-std::string getItemSpritePath(const int player, Item& item);
+std::string getItemSpritePath(const int player, Item &item);
 
-enum ItemContextMenuPrompts {
+enum ItemContextMenuPrompts
+{
 	PROMPT_EQUIP,
 	PROMPT_UNEQUIP,
 	PROMPT_SPELL_EQUIP,
@@ -1360,8 +1357,8 @@ enum ItemContextMenuPrompts {
 	PROMPT_CLEAR_HOTBAR_SLOT
 };
 
-std::vector<ItemContextMenuPrompts> getContextMenuOptionsForItem(const int player, Item* item);
-std::vector<ItemContextMenuPrompts> getContextTooltipOptionsForItem(const int player, Item* item, int useDropdownMenu, bool hotbarItem);
-const char* getContextMenuLangEntry(const int player, const ItemContextMenuPrompts prompt, Item& item);
+std::vector<ItemContextMenuPrompts> getContextMenuOptionsForItem(const int player, Item *item);
+std::vector<ItemContextMenuPrompts> getContextTooltipOptionsForItem(const int player, Item *item, int useDropdownMenu, bool hotbarItem);
+const char *getContextMenuLangEntry(const int player, const ItemContextMenuPrompts prompt, Item &item);
 std::string getContextMenuOptionBindingName(const int player, const ItemContextMenuPrompts prompt);
 void cleanupMinimapTextures();

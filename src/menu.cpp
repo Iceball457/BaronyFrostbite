@@ -54,18 +54,18 @@
 #include "ui/Image.hpp"
 
 #ifdef STEAMWORKS
-//Helper func. //TODO: Bugger.
-void* cpp_SteamMatchmaking_GetLobbyOwner(void* steamIDLobby)
+// Helper func. //TODO: Bugger.
+void *cpp_SteamMatchmaking_GetLobbyOwner(void *steamIDLobby)
 {
-	CSteamID* id = new CSteamID();
-	*id = SteamMatchmaking()->GetLobbyOwner(*static_cast<CSteamID*>(steamIDLobby));
-	return id; //Still don't like this method.
+	CSteamID *id = new CSteamID();
+	*id = SteamMatchmaking()->GetLobbyOwner(*static_cast<CSteamID *>(steamIDLobby));
+	return id; // Still don't like this method.
 }
 // get player names in a lobby
-void* cpp_SteamMatchmaking_GetLobbyMember(void* steamIDLobby, int index)
+void *cpp_SteamMatchmaking_GetLobbyMember(void *steamIDLobby, int index)
 {
-	CSteamID* id = new CSteamID();
-	*id = SteamMatchmaking()->GetLobbyMemberByIndex(*static_cast<CSteamID*>(currentLobby), index);
+	CSteamID *id = new CSteamID();
+	*id = SteamMatchmaking()->GetLobbyMemberByIndex(*static_cast<CSteamID *>(currentLobby), index);
 	return id;
 }
 uint64 SteamAPICall_NumPlayersOnline = 0;
@@ -78,9 +78,9 @@ bool lobby_window = false;
 bool settings_window = false;
 int connect_window = 0;
 int charcreation_step = 0;
-int loadGameSaveShowRectangle = 0; // stores the current amount of savegames available, to use when drawing load game window boxes.
-int singleplayerSavegameFreeSlot = -1; // used on multiplayer/single player select window to store if savefile exists. 
-int multiplayerSavegameFreeSlot = -1; // used on multiplayer/single player select window to store if savefile exists.
+int loadGameSaveShowRectangle = 0;	   // stores the current amount of savegames available, to use when drawing load game window boxes.
+int singleplayerSavegameFreeSlot = -1; // used on multiplayer/single player select window to store if savefile exists.
+int multiplayerSavegameFreeSlot = -1;  // used on multiplayer/single player select window to store if savefile exists.
 int raceSelect = 0;
 Uint32 lobbyWindowSvFlags = 0;
 /*
@@ -95,13 +95,13 @@ Uint32 lobbyWindowSvFlags = 0;
  *		- 6 = Misc settings
  */
 int settings_tab = 0;
-button_t* button_video_tab = nullptr;
-button_t* button_audio_tab = nullptr;
-button_t* button_keyboard_tab = nullptr;
-button_t* button_mouse_tab = nullptr;
-button_t* button_gamepad_bindings_tab = nullptr;
-button_t* button_gamepad_settings_tab = nullptr;
-button_t* button_misc_tab = nullptr;
+button_t *button_video_tab = nullptr;
+button_t *button_audio_tab = nullptr;
+button_t *button_keyboard_tab = nullptr;
+button_t *button_mouse_tab = nullptr;
+button_t *button_gamepad_bindings_tab = nullptr;
+button_t *button_gamepad_settings_tab = nullptr;
+button_t *button_misc_tab = nullptr;
 
 int score_window = 0;
 int score_window_to_delete = 0;
@@ -124,17 +124,17 @@ int gamemods_uploadStatus = 0;
 char gamemods_uploadTitle[32] = "Title";
 char gamemods_uploadDescription[32] = "Description";
 int gamemods_currentEditField = 0;
-bool gamemods_workshopSetPropertyReturn[3] = { false, false, false };
+bool gamemods_workshopSetPropertyReturn[3] = {false, false, false};
 int gamemods_subscribedItemsStatus = 0;
 char gamemods_newBlankDirectory[32] = "";
 char gamemods_newBlankDirectoryOldName[32] = "";
 int gamemods_newBlankDirectoryStatus = 0;
-//int gamemods_numCurrentModsLoaded = -1;
+// int gamemods_numCurrentModsLoaded = -1;
 const int gamemods_maxTags = 10;
 std::vector<std::pair<std::string, std::string>> gamemods_mountedFilepaths;
 std::list<std::string> gamemods_localModFoldernames;
-//bool gamemods_modelsListRequiresReload = false;
-//bool gamemods_soundListRequiresReload = false;
+// bool gamemods_modelsListRequiresReload = false;
+// bool gamemods_soundListRequiresReload = false;
 bool gamemods_modelsListLastStartedUnmodded = false; // if starting regular game that had to reset model list, use this to reinit custom models.
 bool gamemods_soundsListLastStartedUnmodded = false; // if starting regular game that had to reset sounds list, use this to reinit custom sounds.
 bool gamemods_tileListRequireReloadUnmodded = false;
@@ -163,7 +163,6 @@ bool serialEnterWindow = false;
 char serialInputText[64] = "";
 int serialVerifyWindow = 0;
 #endif // STEAMWORKS
-
 
 bool scoreDisplayMultiplayer = false;
 int settings_xres, settings_yres;
@@ -203,12 +202,12 @@ bool spawn_blood = true;
 int multiplayerselect = SINGLE;
 int menuselect = 0;
 bool settings_auto_hotbar_new_items = true;
-bool settings_auto_hotbar_categories[NUM_HOTBAR_CATEGORIES] = { true, true, true, true,
-																true, true, true, true,
-																true, true, true, true };
-int settings_autosort_inventory_categories[NUM_AUTOSORT_CATEGORIES] = {	0, 0, 0, 0,
-																		0, 0, 0, 0,
-																		0, 0, 0, 0 };
+bool settings_auto_hotbar_categories[NUM_HOTBAR_CATEGORIES] = {true, true, true, true,
+															   true, true, true, true,
+															   true, true, true, true};
+int settings_autosort_inventory_categories[NUM_AUTOSORT_CATEGORIES] = {0, 0, 0, 0,
+																	   0, 0, 0, 0,
+																	   0, 0, 0, 0};
 bool settings_hotbar_numkey_quick_add = false;
 bool settings_disable_messages = true;
 bool settings_right_click_protect = false;
@@ -230,7 +229,7 @@ bool settings_disableMultithreadedSteamNetworking = true;
 bool settings_disableFPSLimitOnNetworkMessages = false;
 Sint32 oslidery = 0;
 
-//Gamepad settings.
+// Gamepad settings.
 bool settings_gamepad_leftx_invert = false;
 bool settings_gamepad_lefty_invert = false;
 bool settings_gamepad_rightx_invert = false;
@@ -271,30 +270,30 @@ int thirdEndNumLines = 6;
 int fourthendmoviestage = 0;
 int fourthendmovietime = 0;
 int fourthEndNumLines = 13;
-bool losingConnection[MAXPLAYERS] = { false };
+bool losingConnection[MAXPLAYERS] = {false};
 bool subtitleVisible = false;
 int subtitleCurrent = 0;
 
 // new text crawls...
-int DLCendmoviealpha[8][30] = { 0 };
-int DLCendmovieStageAndTime[8][2] = { 0 };
+int DLCendmoviealpha[8][30] = {0};
+int DLCendmovieStageAndTime[8][2] = {0};
 
-int DLCendmovieNumLines[8] = 
-{
-	7,	// MOVIE_MIDGAME_HERX_MONSTERS,
-	8,	// MOVIE_MIDGAME_BAPHOMET_MONSTERS,
-	8,	// MOVIE_MIDGAME_BAPHOMET_HUMAN_AUTOMATON,
-	5,	// MOVIE_CLASSIC_WIN_MONSTERS,
-	7,	// MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS,
-	13,	// MOVIE_WIN_AUTOMATON,
-	13,	// MOVIE_WIN_DEMONS_UNDEAD,
-	13	// MOVIE_WIN_BEASTS
+int DLCendmovieNumLines[8] =
+	{
+		7,	// MOVIE_MIDGAME_HERX_MONSTERS,
+		8,	// MOVIE_MIDGAME_BAPHOMET_MONSTERS,
+		8,	// MOVIE_MIDGAME_BAPHOMET_HUMAN_AUTOMATON,
+		5,	// MOVIE_CLASSIC_WIN_MONSTERS,
+		7,	// MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS,
+		13, // MOVIE_WIN_AUTOMATON,
+		13, // MOVIE_WIN_DEMONS_UNDEAD,
+		13	// MOVIE_WIN_BEASTS
 };
 char epilogueHostName[128] = "";
 int epilogueHostRace = 0;
 int epilogueMultiplayerType = SINGLE;
 
-//Confirm resolution window stuff.
+// Confirm resolution window stuff.
 bool resolutionChanged = false;
 bool confirmResolutionWindow = false;
 int resolutionConfirmationTimer = 0;
@@ -304,28 +303,28 @@ Sint32 oldFullscreen;
 bool oldBorderless = false;
 real_t oldGamma;
 bool oldVerticalSync = false;
-button_t* revertResolutionButton = nullptr;
+button_t *revertResolutionButton = nullptr;
 
-void buttonCloseSettingsSubwindow(button_t* my);
+void buttonCloseSettingsSubwindow(button_t *my);
 
-button_t* getSettingsTabButton()
+button_t *getSettingsTabButton()
 {
-	switch ( settings_tab )
+	switch (settings_tab)
 	{
-		case SETTINGS_VIDEO_TAB:
-			return button_video_tab;
-		case SETTINGS_AUDIO_TAB:
-			return button_audio_tab;
-		case SETTINGS_KEYBOARD_TAB:
-			return button_keyboard_tab;
-		case SETTINGS_MOUSE_TAB:
-			return button_mouse_tab;
-		case SETTINGS_GAMEPAD_BINDINGS_TAB:
-			return button_gamepad_bindings_tab;
-		case SETTINGS_GAMEPAD_SETTINGS_TAB:
-			return button_gamepad_settings_tab;
-		case SETTINGS_MISC_TAB:
-			return button_misc_tab;
+	case SETTINGS_VIDEO_TAB:
+		return button_video_tab;
+	case SETTINGS_AUDIO_TAB:
+		return button_audio_tab;
+	case SETTINGS_KEYBOARD_TAB:
+		return button_keyboard_tab;
+	case SETTINGS_MOUSE_TAB:
+		return button_mouse_tab;
+	case SETTINGS_GAMEPAD_BINDINGS_TAB:
+		return button_gamepad_bindings_tab;
+	case SETTINGS_GAMEPAD_SETTINGS_TAB:
+		return button_gamepad_settings_tab;
+	case SETTINGS_MISC_TAB:
+		return button_misc_tab;
 	}
 
 	return nullptr;
@@ -333,25 +332,25 @@ button_t* getSettingsTabButton()
 
 void changeSettingsTab(int option)
 {
-	if ( getSettingsTabButton() )
+	if (getSettingsTabButton())
 	{
 		getSettingsTabButton()->outline = false;
 	}
 
 	settings_tab = option;
 
-	if ( settings_tab < 0 )
+	if (settings_tab < 0)
 	{
 		settings_tab = NUM_SETTINGS_TABS - 1;
 	}
-	if ( settings_tab >= NUM_SETTINGS_TABS )
+	if (settings_tab >= NUM_SETTINGS_TABS)
 	{
 		settings_tab = 0;
 	}
 
-	if ( getSettingsTabButton() )
+	if (getSettingsTabButton())
 	{
-		button_t* button = getSettingsTabButton();
+		button_t *button = getSettingsTabButton();
 		button->outline = true;
 		int x = button->x + (button->sizex / 2);
 		int y = button->y + (button->sizey / 2);
@@ -389,13 +388,13 @@ void initMenuOptions()
 #endif
 }
 
-void getPrevMenuOption(int& currentMenuOption)
+void getPrevMenuOption(int &currentMenuOption)
 {
-	for ( auto it = menuOptions.begin(); it != menuOptions.end(); )
+	for (auto it = menuOptions.begin(); it != menuOptions.end();)
 	{
-		if ( (*it).second == currentMenuOption )
+		if ((*it).second == currentMenuOption)
 		{
-			if ( it == menuOptions.begin() )
+			if (it == menuOptions.begin())
 			{
 				currentMenuOption = menuOptions.back().second;
 				return;
@@ -410,14 +409,14 @@ void getPrevMenuOption(int& currentMenuOption)
 	currentMenuOption = menuOptions.at(0).second; // default value.
 }
 
-void getNextMenuOption(int& currentMenuOption)
+void getNextMenuOption(int &currentMenuOption)
 {
-	for ( auto it = menuOptions.begin(); it != menuOptions.end(); )
+	for (auto it = menuOptions.begin(); it != menuOptions.end();)
 	{
-		if ( (*it).second == currentMenuOption )
+		if ((*it).second == currentMenuOption)
 		{
 			++it;
-			if ( it == menuOptions.end() )
+			if (it == menuOptions.end())
 			{
 				currentMenuOption = menuOptions.at(0).second;
 				return;
@@ -433,15 +432,15 @@ void getNextMenuOption(int& currentMenuOption)
 
 void navigateMainMenuItems(bool mode)
 {
-	if ( menuOptions.empty() )
+	if (menuOptions.empty())
 	{
 		return;
 	}
 
 	int numInGameMenuOptions = 4 + (multiplayer != CLIENT);
-	if ( !mode && gameModeManager.getMode() == GameModeManager_t::GAME_MODE_TUTORIAL )
+	if (!mode && gameModeManager.getMode() == GameModeManager_t::GAME_MODE_TUTORIAL)
 	{
-		if ( !strcmp(map.name, "Tutorial Hub") )
+		if (!strcmp(map.name, "Tutorial Hub"))
 		{
 			numInGameMenuOptions = 4;
 		}
@@ -454,27 +453,27 @@ void navigateMainMenuItems(bool mode)
 	int warpx, warpy;
 	if (menuselect == 0)
 	{
-		//No menu item selected.
-		if ( keystatus[SDLK_UP] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_UP) && rebindaction == -1) )
+		// No menu item selected.
+		if (keystatus[SDLK_UP] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_UP) && rebindaction == -1))
 		{
 			keystatus[SDLK_UP] = 0;
-			if ( rebindaction == -1 )
+			if (rebindaction == -1)
 			{
 				inputs.controllerClearInput(clientnum, INJOY_DPAD_UP);
 			}
 			inputs.hideMouseCursors();
 			menuselect = menuOptions.at(0).second;
-			//Warp cursor to menu item, for gamepad convenience.
+			// Warp cursor to menu item, for gamepad convenience.
 			warpx = 50 + 18;
-			warpy = (yres / 4) + 80 + (18 / 2); //I am a wizard. I hate magic numbers.
-			//SDL_WarpMouseInWindow(screen, warpx, warpy);
+			warpy = (yres / 4) + 80 + (18 / 2); // I am a wizard. I hate magic numbers.
+			// SDL_WarpMouseInWindow(screen, warpx, warpy);
 			Uint32 flags = (Inputs::SET_MOUSE | Inputs::SET_CONTROLLER);
 			inputs.warpMouse(clientnum, warpx, warpy, flags);
 		}
-		else if ( keystatus[SDLK_DOWN] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_DOWN) && rebindaction == -1) )
+		else if (keystatus[SDLK_DOWN] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_DOWN) && rebindaction == -1))
 		{
 			keystatus[SDLK_DOWN] = 0;
-			if ( rebindaction == -1 )
+			if (rebindaction == -1)
 			{
 				inputs.controllerClearInput(clientnum, INJOY_DPAD_DOWN);
 			}
@@ -482,29 +481,29 @@ void navigateMainMenuItems(bool mode)
 			menuselect = menuOptions.at(0).second;
 			warpx = 50 + 18;
 			warpy = (yres / 4) + 80 + (18 / 2);
-			//SDL_WarpMouseInWindow(screen, warpx, warpy);
+			// SDL_WarpMouseInWindow(screen, warpx, warpy);
 			Uint32 flags = (Inputs::SET_MOUSE | Inputs::SET_CONTROLLER);
 			inputs.warpMouse(clientnum, warpx, warpy, flags);
 		}
 	}
 	else
 	{
-		if ( keystatus[SDLK_UP] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_UP) && rebindaction == -1) )
+		if (keystatus[SDLK_UP] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_UP) && rebindaction == -1))
 		{
 			keystatus[SDLK_UP] = 0;
-			if ( rebindaction == -1 )
+			if (rebindaction == -1)
 			{
 				inputs.controllerClearInput(clientnum, INJOY_DPAD_UP);
 			}
 			inputs.hideMouseCursors();
-			if ( mode )
+			if (mode)
 			{
 				getPrevMenuOption(menuselect);
 			}
 			else
 			{
 				menuselect--;
-				if ( menuselect == 0 )
+				if (menuselect == 0)
 				{
 					menuselect = numInGameMenuOptions;
 				}
@@ -512,54 +511,54 @@ void navigateMainMenuItems(bool mode)
 
 			warpx = 50 + 18;
 			warpy = (((yres / 4) + 80 + (18 / 2)) + ((menuselect - 1) * 24));
-			//SDL_WarpMouseInWindow(screen, warpx, warpy);
+			// SDL_WarpMouseInWindow(screen, warpx, warpy);
 			Uint32 flags = (Inputs::SET_MOUSE | Inputs::SET_CONTROLLER);
 			inputs.warpMouse(clientnum, warpx, warpy, flags);
 		}
-		else if (keystatus[SDLK_DOWN] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_DOWN) && rebindaction == -1) )
+		else if (keystatus[SDLK_DOWN] || (inputs.bControllerInputPressed(clientnum, INJOY_DPAD_DOWN) && rebindaction == -1))
 		{
 			keystatus[SDLK_DOWN] = 0;
-			if ( rebindaction == -1 )
+			if (rebindaction == -1)
 			{
 				inputs.controllerClearInput(clientnum, INJOY_DPAD_DOWN);
 			}
 			inputs.hideMouseCursors();
-			if ( mode )
+			if (mode)
 			{
 				getNextMenuOption(menuselect);
 			}
 			else
 			{
 				menuselect++;
-				if ( menuselect > numInGameMenuOptions )
+				if (menuselect > numInGameMenuOptions)
 				{
 					menuselect = 1;
 				}
 			}
 			warpx = 50 + 18;
 			warpy = (((yres / 4) + 80 + (18 / 2)) + ((menuselect - 1) * 24));
-			//SDL_WarpMouseInWindow(screen, warpx, warpy);
+			// SDL_WarpMouseInWindow(screen, warpx, warpy);
 			Uint32 flags = (Inputs::SET_MOUSE | Inputs::SET_CONTROLLER);
 			inputs.warpMouse(clientnum, warpx, warpy, flags);
 		}
 	}
 }
 
-void inline printJoybindingNames(const SDL_Rect& currentPos, int c, bool &rebindingaction)
+void inline printJoybindingNames(const SDL_Rect &currentPos, int c, bool &rebindingaction)
 {
 	Sint32 omousex = inputs.getMouse(clientnum, Inputs::MouseInputs::OX);
 	Sint32 omousey = inputs.getMouse(clientnum, Inputs::MouseInputs::OY);
 	ttfPrintText(ttf8, currentPos.x, currentPos.y, Language::get(1948 + c));
-	if ( inputs.bMouseLeft(clientnum) && !rebindingaction )
+	if (inputs.bMouseLeft(clientnum) && !rebindingaction)
 	{
-		if ( omousex >= currentPos.x && omousex < subx2 - 24 )
+		if (omousex >= currentPos.x && omousex < subx2 - 24)
 		{
-			if ( omousey >= currentPos.y && omousey < currentPos.y + 12 )
+			if (omousey >= currentPos.y && omousey < currentPos.y + 12)
 			{
 				inputs.mouseClearLeft(clientnum);
-				if ( settings_joyimpulses[c] != UNBOUND_JOYBINDING )
+				if (settings_joyimpulses[c] != UNBOUND_JOYBINDING)
 				{
-					settings_joyimpulses[c] = UNBOUND_JOYBINDING; //Unbind the joybinding if clicked on.
+					settings_joyimpulses[c] = UNBOUND_JOYBINDING; // Unbind the joybinding if clicked on.
 				}
 				else
 				{
@@ -571,13 +570,13 @@ void inline printJoybindingNames(const SDL_Rect& currentPos, int c, bool &rebind
 		}
 	}
 
-	if ( c != rebindaction )
+	if (c != rebindaction)
 	{
-		if ( !strcmp(getInputName(settings_joyimpulses[c]), "Unassigned key" ))
+		if (!strcmp(getInputName(settings_joyimpulses[c]), "Unassigned key"))
 		{
 			ttfPrintTextColor(ttf8, currentPos.x + 232, currentPos.y, uint32ColorBaronyBlue, true, getInputName(settings_joyimpulses[c]));
 		}
-		else if ( !strcmp(getInputName(settings_joyimpulses[c]), "Unknown key") || !strcmp(getInputName(settings_joyimpulses[c]), "Unknown trigger") )
+		else if (!strcmp(getInputName(settings_joyimpulses[c]), "Unknown key") || !strcmp(getInputName(settings_joyimpulses[c]), "Unknown trigger"))
 		{
 			ttfPrintTextColor(ttf8, currentPos.x + 232, currentPos.y, uint32ColorRed, true, getInputName(settings_joyimpulses[c]));
 		}
@@ -596,68 +595,68 @@ bool isAchievementUnlockedForClassUnlock(PlayerRaces race)
 {
 #ifdef STEAMWORKS
 	bool unlocked = false;
-	if ( enabledDLCPack1 && race == RACE_SKELETON && SteamUserStats()->GetAchievement("BARONY_ACH_BONY_BARON", &unlocked) )
+	if (enabledDLCPack1 && race == RACE_SKELETON && SteamUserStats()->GetAchievement("BARONY_ACH_BONY_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack1 && race == RACE_VAMPIRE && SteamUserStats()->GetAchievement("BARONY_ACH_BUCKTOOTH_BARON", &unlocked) )
+	else if (enabledDLCPack1 && race == RACE_VAMPIRE && SteamUserStats()->GetAchievement("BARONY_ACH_BUCKTOOTH_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack1 && race == RACE_SUCCUBUS && SteamUserStats()->GetAchievement("BARONY_ACH_BOMBSHELL_BARON", &unlocked) )
+	else if (enabledDLCPack1 && race == RACE_SUCCUBUS && SteamUserStats()->GetAchievement("BARONY_ACH_BOMBSHELL_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack1 && race == RACE_GOATMAN && SteamUserStats()->GetAchievement("BARONY_ACH_BLEATING_BARON", &unlocked) )
+	else if (enabledDLCPack1 && race == RACE_GOATMAN && SteamUserStats()->GetAchievement("BARONY_ACH_BLEATING_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack2 && race == RACE_AUTOMATON && SteamUserStats()->GetAchievement("BARONY_ACH_BOILERPLATE_BARON", &unlocked) )
+	else if (enabledDLCPack2 && race == RACE_AUTOMATON && SteamUserStats()->GetAchievement("BARONY_ACH_BOILERPLATE_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack2 && race == RACE_INCUBUS && SteamUserStats()->GetAchievement("BARONY_ACH_BAD_BOY_BARON", &unlocked) )
+	else if (enabledDLCPack2 && race == RACE_INCUBUS && SteamUserStats()->GetAchievement("BARONY_ACH_BAD_BOY_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack2 && race == RACE_GOBLIN && SteamUserStats()->GetAchievement("BARONY_ACH_BAYOU_BARON", &unlocked) )
+	else if (enabledDLCPack2 && race == RACE_GOBLIN && SteamUserStats()->GetAchievement("BARONY_ACH_BAYOU_BARON", &unlocked))
 	{
 		return unlocked;
 	}
-	else if ( enabledDLCPack2 && race == RACE_INSECTOID && SteamUserStats()->GetAchievement("BARONY_ACH_BUGGAR_BARON", &unlocked) )
+	else if (enabledDLCPack2 && race == RACE_INSECTOID && SteamUserStats()->GetAchievement("BARONY_ACH_BUGGAR_BARON", &unlocked))
 	{
 		return unlocked;
 	}
 #elif (defined USE_EOS || defined LOCAL_ACHIEVEMENTS)
-	if ( enabledDLCPack1 && race == RACE_SKELETON && achievementUnlocked("BARONY_ACH_BONY_BARON") )
+	if (enabledDLCPack1 && race == RACE_SKELETON && achievementUnlocked("BARONY_ACH_BONY_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack1 && race == RACE_VAMPIRE && achievementUnlocked("BARONY_ACH_BUCKTOOTH_BARON") )
+	else if (enabledDLCPack1 && race == RACE_VAMPIRE && achievementUnlocked("BARONY_ACH_BUCKTOOTH_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack1 && race == RACE_SUCCUBUS && achievementUnlocked("BARONY_ACH_BOMBSHELL_BARON") )
+	else if (enabledDLCPack1 && race == RACE_SUCCUBUS && achievementUnlocked("BARONY_ACH_BOMBSHELL_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack1 && race == RACE_GOATMAN && achievementUnlocked("BARONY_ACH_BLEATING_BARON") )
+	else if (enabledDLCPack1 && race == RACE_GOATMAN && achievementUnlocked("BARONY_ACH_BLEATING_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack2 && race == RACE_AUTOMATON && achievementUnlocked("BARONY_ACH_BOILERPLATE_BARON") )
+	else if (enabledDLCPack2 && race == RACE_AUTOMATON && achievementUnlocked("BARONY_ACH_BOILERPLATE_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack2 && race == RACE_INCUBUS && achievementUnlocked("BARONY_ACH_BAD_BOY_BARON") )
+	else if (enabledDLCPack2 && race == RACE_INCUBUS && achievementUnlocked("BARONY_ACH_BAD_BOY_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack2 && race == RACE_GOBLIN && achievementUnlocked("BARONY_ACH_BAYOU_BARON") )
+	else if (enabledDLCPack2 && race == RACE_GOBLIN && achievementUnlocked("BARONY_ACH_BAYOU_BARON"))
 	{
 		return true;
 	}
-	else if ( enabledDLCPack2 && race == RACE_INSECTOID && achievementUnlocked("BARONY_ACH_BUGGAR_BARON") )
+	else if (enabledDLCPack2 && race == RACE_INSECTOID && achievementUnlocked("BARONY_ACH_BUGGAR_BARON"))
 	{
 		return true;
 	}
@@ -667,129 +666,129 @@ bool isAchievementUnlockedForClassUnlock(PlayerRaces race)
 	return false;
 }
 
-int isCharacterValidFromDLC(Stat& myStats, int characterClass)
+int isCharacterValidFromDLC(Stat &myStats, int characterClass)
 {
-	switch ( characterClass )
+	switch (characterClass)
 	{
-		case CLASS_CONJURER:
-		case CLASS_ACCURSED:
-		case CLASS_MESMER:
-		case CLASS_BREWER:
-			if ( !enabledDLCPack1 )
-			{
-				return INVALID_REQUIREDLC1;
-			}
-			break;
-		case CLASS_MACHINIST:
-		case CLASS_PUNISHER:
-		case CLASS_SHAMAN:
-		case CLASS_HUNTER:
-			if ( !enabledDLCPack2 )
-			{
-				return INVALID_REQUIREDLC2;
-			}
-			break;
-		default:
-			break;
+	case CLASS_CONJURER:
+	case CLASS_ACCURSED:
+	case CLASS_MESMER:
+	case CLASS_BREWER:
+		if (!enabledDLCPack1)
+		{
+			return INVALID_REQUIREDLC1;
+		}
+		break;
+	case CLASS_MACHINIST:
+	case CLASS_PUNISHER:
+	case CLASS_SHAMAN:
+	case CLASS_HUNTER:
+		if (!enabledDLCPack2)
+		{
+			return INVALID_REQUIREDLC2;
+		}
+		break;
+	default:
+		break;
 	}
 
-	switch ( myStats.playerRace )
+	switch (myStats.playerRace)
 	{
-		case RACE_SKELETON:
-		case RACE_VAMPIRE:
-		case RACE_SUCCUBUS:
-		case RACE_GOATMAN:
-			if ( !enabledDLCPack1 )
-			{
-				return INVALID_REQUIREDLC1;
-			}
-			break;
-		case RACE_AUTOMATON:
-		case RACE_INCUBUS:
-		case RACE_GOBLIN:
-		case RACE_INSECTOID:
-			if ( !enabledDLCPack2 )
-			{
-				return INVALID_REQUIREDLC2;
-			}
-			break;
-		default:
-			break;
+	case RACE_SKELETON:
+	case RACE_VAMPIRE:
+	case RACE_SUCCUBUS:
+	case RACE_GOATMAN:
+		if (!enabledDLCPack1)
+		{
+			return INVALID_REQUIREDLC1;
+		}
+		break;
+	case RACE_AUTOMATON:
+	case RACE_INCUBUS:
+	case RACE_GOBLIN:
+	case RACE_INSECTOID:
+		if (!enabledDLCPack2)
+		{
+			return INVALID_REQUIREDLC2;
+		}
+		break;
+	default:
+		break;
 	}
 
-	if ( myStats.playerRace == RACE_HUMAN )
+	if (myStats.playerRace == RACE_HUMAN)
 	{
 		return VALID_OK_CHARACTER;
 	}
-	else if ( myStats.playerRace > RACE_HUMAN && myStats.appearance == 1 )
+	else if (myStats.playerRace > RACE_HUMAN && myStats.appearance == 1)
 	{
 		return VALID_OK_CHARACTER; // aesthetic only option.
 	}
-	if ( characterClass <= CLASS_MONK )
+	if (characterClass <= CLASS_MONK)
 	{
 		return VALID_OK_CHARACTER;
 	}
 
-	switch ( characterClass )
+	switch (characterClass)
 	{
-		case CLASS_CONJURER:
-			if ( myStats.playerRace == RACE_SKELETON )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_SKELETON) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_ACCURSED:
-			if ( myStats.playerRace == RACE_VAMPIRE )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_VAMPIRE) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_MESMER:
-			if ( myStats.playerRace == RACE_SUCCUBUS )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_SUCCUBUS) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_BREWER:
-			if ( myStats.playerRace == RACE_GOATMAN )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_GOATMAN) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_MACHINIST:
-			if ( myStats.playerRace == RACE_AUTOMATON )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_AUTOMATON) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_PUNISHER:
-			if ( myStats.playerRace == RACE_INCUBUS )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_INCUBUS) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_SHAMAN:
-			if ( myStats.playerRace == RACE_GOBLIN )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_GOBLIN) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		case CLASS_HUNTER:
-			if ( myStats.playerRace == RACE_INSECTOID )
-			{
-				return VALID_OK_CHARACTER;
-			}
-			return isAchievementUnlockedForClassUnlock(RACE_INSECTOID) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
-			break;
-		default:
-			break;
+	case CLASS_CONJURER:
+		if (myStats.playerRace == RACE_SKELETON)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_SKELETON) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_ACCURSED:
+		if (myStats.playerRace == RACE_VAMPIRE)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_VAMPIRE) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_MESMER:
+		if (myStats.playerRace == RACE_SUCCUBUS)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_SUCCUBUS) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_BREWER:
+		if (myStats.playerRace == RACE_GOATMAN)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_GOATMAN) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_MACHINIST:
+		if (myStats.playerRace == RACE_AUTOMATON)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_AUTOMATON) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_PUNISHER:
+		if (myStats.playerRace == RACE_INCUBUS)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_INCUBUS) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_SHAMAN:
+		if (myStats.playerRace == RACE_GOBLIN)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_GOBLIN) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	case CLASS_HUNTER:
+		if (myStats.playerRace == RACE_INSECTOID)
+		{
+			return VALID_OK_CHARACTER;
+		}
+		return isAchievementUnlockedForClassUnlock(RACE_INSECTOID) ? VALID_OK_CHARACTER : INVALID_REQUIRE_ACHIEVEMENT;
+		break;
+	default:
+		break;
 	}
 
 	return INVALID_CHARACTER;
@@ -800,7 +799,7 @@ void inline pauseMenuOnInputPressed()
 	inputs.mouseClearLeft(clientnum);
 	keystatus[SDLK_RETURN] = 0;
 	playSound(139, 64);
-	if ( rebindaction == -1 )
+	if (rebindaction == -1)
 	{
 		inputs.controllerClearInput(clientnum, INJOY_MENU_NEXT);
 	}
@@ -823,12 +822,12 @@ void handleInGamePauseMenu()
 	int numOption = 1;
 
 	text.y = yres / 4 + 80;
-	if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1309)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(Language::get(1309)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// resume game
 		menuselect = 1;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(1309));
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 			pauseGame(1, MAXPLAYERS);
@@ -847,14 +846,14 @@ void handleInGamePauseMenu()
 #endif
 	text.y += 24;
 	++numOption;
-	if ( achievementsMenu )
+	if (achievementsMenu)
 	{
-		if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(3971)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+		if (((omousex >= text.x && omousex < text.x + strlen(Language::get(3971)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 		{
 			// settings menu
 			menuselect = numOption;
 			ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(3971));
-			if ( inputIsPressed )
+			if (inputIsPressed)
 			{
 				pauseMenuOnInputPressed();
 				openAchievementsWindow();
@@ -868,12 +867,12 @@ void handleInGamePauseMenu()
 		++numOption;
 	}
 
-	if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// settings menu
 		menuselect = numOption;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(1306));
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 			openSettingsWindow();
@@ -883,20 +882,18 @@ void handleInGamePauseMenu()
 	{
 		ttfPrintText(ttf16, text.x, text.y, Language::get(1306));
 	}
-	const char* endgameText = NULL;
-	const char* quitgameText = Language::get(1313);
+	const char *endgameText = NULL;
+	const char *quitgameText = Language::get(1313);
 	bool singleplayerAliveEndGameAndSave = false;
 	bool singleplayerBossLevelDisableSaveOnExit = false;
 	bool multiplayerAliveEndGameAndSave = false;
-	if ( multiplayer == SINGLE )
+	if (multiplayer == SINGLE)
 	{
-		if ( stats[clientnum] && stats[clientnum]->HP > 0 )
+		if (stats[clientnum] && stats[clientnum]->HP > 0)
 		{
 			endgameText = Language::get(3919);
 			singleplayerAliveEndGameAndSave = true;
-			if ( !strncmp(map.name, "Boss", 4)
-				|| !strncmp(map.name, "Hell Boss", 9)
-				|| !strncmp(map.name, "Sanctum", 7) )
+			if (!strncmp(map.name, "Boss", 4) || !strncmp(map.name, "Hell Boss", 9) || !strncmp(map.name, "Sanctum", 7))
 			{
 				// boss floor, no save scumming easily!
 				singleplayerAliveEndGameAndSave = false;
@@ -912,13 +909,13 @@ void handleInGamePauseMenu()
 			singleplayerAliveEndGameAndSave = false;
 		}
 	}
-	else if ( multiplayer == SERVER )
+	else if (multiplayer == SERVER)
 	{
 		endgameText = Language::get(1310);
 		quitgameText = Language::get(3987);
-		for ( int i = 0; i < MAXPLAYERS; ++i )
+		for (int i = 0; i < MAXPLAYERS; ++i)
 		{
-			if ( !client_disconnected[i] && stats[i] && stats[i]->HP > 0 )
+			if (!client_disconnected[i] && stats[i] && stats[i]->HP > 0)
 			{
 				multiplayerAliveEndGameAndSave = true;
 				quitgameText = Language::get(1313);
@@ -934,24 +931,24 @@ void handleInGamePauseMenu()
 
 	text.y += 24;
 	++numOption;
-	if ( ((omousex >= text.x && omousex < text.x + strlen(endgameText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(endgameText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// end game / return to main menu
 		menuselect = numOption;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, endgameText);
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 
 			// create confirmation window
 			subwindow = 1;
-			if ( multiplayer == SINGLE )
+			if (multiplayer == SINGLE)
 			{
 				subx1 = xres / 2 - 144;
 				subx2 = xres / 2 + 144;
 				suby1 = yres / 2 - 64;
 				suby2 = yres / 2 + 64;
-				if ( singleplayerAliveEndGameAndSave )
+				if (singleplayerAliveEndGameAndSave)
 				{
 					strcpy(subtext, Language::get(3920));
 					subx1 = xres / 2 - 188;
@@ -960,7 +957,7 @@ void handleInGamePauseMenu()
 					suby2 = yres / 2 + 64;
 
 					// add a cancel button
-					button_t* button = newButton();
+					button_t *button = newButton();
 					strcpy(button->label, Language::get(1316));
 					button->x = subx2 - strlen(Language::get(1316)) * 12 - 16;
 					button->y = suby2 - 28;
@@ -974,7 +971,7 @@ void handleInGamePauseMenu()
 				{
 					subx1 = xres / 2 - 188;
 					subx2 = xres / 2 + 188;
-					if ( singleplayerBossLevelDisableSaveOnExit )
+					if (singleplayerBossLevelDisableSaveOnExit)
 					{
 						strcpy(subtext, Language::get(3990));
 					}
@@ -988,9 +985,9 @@ void handleInGamePauseMenu()
 			{
 				subx1 = xres / 2 - 224;
 				subx2 = xres / 2 + 224;
-				if ( multiplayer == SERVER )
+				if (multiplayer == SERVER)
 				{
-					if ( multiplayerAliveEndGameAndSave )
+					if (multiplayerAliveEndGameAndSave)
 					{
 						suby1 = yres / 2 - 100;
 						suby2 = yres / 2 + 100;
@@ -1003,7 +1000,7 @@ void handleInGamePauseMenu()
 						strcpy(subtext, Language::get(3986));
 					}
 				}
-				else if ( multiplayer == CLIENT )
+				else if (multiplayer == CLIENT)
 				{
 					suby1 = yres / 2 - 112;
 					suby2 = yres / 2 + 112;
@@ -1012,7 +1009,7 @@ void handleInGamePauseMenu()
 			}
 
 			// close button
-			button_t* button = newButton();
+			button_t *button = newButton();
 			strcpy(button->label, "x");
 			button->x = subx2 - 20;
 			button->y = suby1;
@@ -1031,9 +1028,9 @@ void handleInGamePauseMenu()
 			button->y = suby2 - 28;
 			button->sizex = strlen(Language::get(1314)) * 12 + 8;
 			button->sizey = 20;
-			if ( multiplayer == SINGLE )
+			if (multiplayer == SINGLE)
 			{
-				if ( singleplayerAliveEndGameAndSave )
+				if (singleplayerAliveEndGameAndSave)
 				{
 					button->action = &buttonCloseAndEndGameConfirm;
 				}
@@ -1051,7 +1048,7 @@ void handleInGamePauseMenu()
 			button->key = SDLK_RETURN;
 			button->joykey = joyimpulses[INJOY_MENU_NEXT];
 
-			if ( multiplayer == SINGLE && singleplayerAliveEndGameAndSave )
+			if (multiplayer == SINGLE && singleplayerAliveEndGameAndSave)
 			{
 				// noop - button created earlier.
 			}
@@ -1075,16 +1072,16 @@ void handleInGamePauseMenu()
 		ttfPrintText(ttf16, text.x, text.y, endgameText);
 	}
 
-	if ( multiplayer != CLIENT )
+	if (multiplayer != CLIENT)
 	{
 		text.y += 24;
 		++numOption;
-		if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1312)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+		if (((omousex >= text.x && omousex < text.x + strlen(Language::get(1312)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 		{
-			//restart game
+			// restart game
 			menuselect = numOption;
 			ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(1312));
-			if ( inputIsPressed )
+			if (inputIsPressed)
 			{
 				pauseMenuOnInputPressed();
 
@@ -1097,7 +1094,7 @@ void handleInGamePauseMenu()
 				strcpy(subtext, Language::get(1130));
 
 				// close button
-				button_t* button = newButton();
+				button_t *button = newButton();
 				strcpy(button->label, "x");
 				button->x = subx2 - 20;
 				button->y = suby1;
@@ -1116,7 +1113,7 @@ void handleInGamePauseMenu()
 				button->y = suby2 - 28;
 				button->sizex = strlen(Language::get(1314)) * 12 + 8;
 				button->sizey = 20;
-				if ( multiplayer == SINGLE )
+				if (multiplayer == SINGLE)
 				{
 					button->action = &buttonStartSingleplayer;
 				}
@@ -1146,15 +1143,15 @@ void handleInGamePauseMenu()
 			ttfPrintText(ttf16, text.x, text.y, Language::get(1312));
 		}
 	}
-	
+
 	text.y += 24;
 	++numOption;
-	if ( ((omousex >= text.x && omousex < text.x + strlen(quitgameText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(quitgameText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		menuselect = numOption;
 		// save & quit
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, quitgameText);
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 
@@ -1165,11 +1162,11 @@ void handleInGamePauseMenu()
 			suby1 = yres / 2 - 64;
 			suby2 = yres / 2 + 64;
 			strcpy(subtext, Language::get(1131));
-			if ( multiplayer == SINGLE )
+			if (multiplayer == SINGLE)
 			{
-				if ( !singleplayerAliveEndGameAndSave )
+				if (!singleplayerAliveEndGameAndSave)
 				{
-					if ( singleplayerBossLevelDisableSaveOnExit )
+					if (singleplayerBossLevelDisableSaveOnExit)
 					{
 						strcpy(subtext, Language::get(3991));
 					}
@@ -1179,9 +1176,9 @@ void handleInGamePauseMenu()
 					}
 				}
 			}
-			else if ( multiplayer == SERVER )
+			else if (multiplayer == SERVER)
 			{
-				if ( !multiplayerAliveEndGameAndSave )
+				if (!multiplayerAliveEndGameAndSave)
 				{
 					subx1 = xres / 2 - 224;
 					subx2 = xres / 2 + 224;
@@ -1192,7 +1189,7 @@ void handleInGamePauseMenu()
 			}
 
 			// yes button
-			button_t* button = newButton();
+			button_t *button = newButton();
 			strcpy(button->label, Language::get(1314));
 			button->x = subx1 + 8;
 			button->y = suby2 - 28;
@@ -1202,7 +1199,7 @@ void handleInGamePauseMenu()
 			button->visible = 1;
 			button->focused = 1;
 			button->key = SDLK_RETURN;
-			button->joykey = joyimpulses[INJOY_MENU_NEXT]; //TODO: Select which button to activate via dpad.
+			button->joykey = joyimpulses[INJOY_MENU_NEXT]; // TODO: Select which button to activate via dpad.
 
 			// no button
 			// button = newButton();
@@ -1261,7 +1258,7 @@ void handleTutorialPauseMenu()
 	text.w = 18;
 
 	bool mapIsTutorialHub = false;
-	if ( !strcmp(map.name, "Tutorial Hub") )
+	if (!strcmp(map.name, "Tutorial Hub"))
 	{
 		mapIsTutorialHub = true;
 	}
@@ -1275,12 +1272,12 @@ void handleTutorialPauseMenu()
 #endif
 
 	text.y = yres / 4 + 80;
-	if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1309)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(Language::get(1309)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// resume game
 		menuselect = numOption;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(1309));
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 			pauseGame(1, MAXPLAYERS);
@@ -1292,8 +1289,8 @@ void handleTutorialPauseMenu()
 	}
 
 	//++numOption;
-	//text.y += 24;
-	//if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	// text.y += 24;
+	// if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
 	//{
 	//	// settings menu
 	//	menuselect = numOption;
@@ -1304,21 +1301,21 @@ void handleTutorialPauseMenu()
 	//		gameModeManager.Tutorial.Menu.open();
 	//	}
 	//}
-	//else
+	// else
 	//{
 	//	ttfPrintText(ttf16, text.x, text.y, Language::get(1306));
 	//}
 
-	if ( achievementsMenu )
+	if (achievementsMenu)
 	{
 		++numOption;
 		text.y += 24;
-		if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(3971)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+		if (((omousex >= text.x && omousex < text.x + strlen(Language::get(3971)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 		{
 			// achievements menu
 			menuselect = numOption;
 			ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(3971));
-			if ( inputIsPressed )
+			if (inputIsPressed)
 			{
 				pauseMenuOnInputPressed();
 				openAchievementsWindow();
@@ -1332,12 +1329,12 @@ void handleTutorialPauseMenu()
 
 	++numOption;
 	text.y += 24;
-	if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(Language::get(1306)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// settings menu
 		menuselect = numOption;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(1306));
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 			openSettingsWindow();
@@ -1350,18 +1347,18 @@ void handleTutorialPauseMenu()
 
 	++numOption;
 	text.y += 24;
-	const char* returnToHubOptionText = Language::get(3958);
-	if ( mapIsTutorialHub )
+	const char *returnToHubOptionText = Language::get(3958);
+	if (mapIsTutorialHub)
 	{
 		returnToHubOptionText = Language::get(3969);
 	}
 
-	if ( ((omousex >= text.x && omousex < text.x + strlen(returnToHubOptionText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= text.x && omousex < text.x + strlen(returnToHubOptionText) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		// return to hub
 		menuselect = numOption;
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, returnToHubOptionText);
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 
@@ -1372,7 +1369,7 @@ void handleTutorialPauseMenu()
 			suby1 = yres / 2 - 48;
 			suby2 = yres / 2 + 48;
 
-			if ( mapIsTutorialHub )
+			if (mapIsTutorialHub)
 			{
 				strcpy(subtext, Language::get(3970));
 			}
@@ -1382,7 +1379,7 @@ void handleTutorialPauseMenu()
 			}
 
 			// add a cancel button
-			button_t* button = newButton();
+			button_t *button = newButton();
 			strcpy(button->label, Language::get(1316));
 			button->x = subx2 - strlen(Language::get(1316)) * 12 - 16;
 			button->y = suby2 - 28;
@@ -1424,16 +1421,16 @@ void handleTutorialPauseMenu()
 		ttfPrintText(ttf16, text.x, text.y, returnToHubOptionText);
 	}
 
-	if ( !mapIsTutorialHub )
+	if (!mapIsTutorialHub)
 	{
 		++numOption;
 		text.y += 24;
-		if ( ((omousex >= text.x && omousex < text.x + strlen(Language::get(3957)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+		if (((omousex >= text.x && omousex < text.x + strlen(Language::get(3957)) * text.w && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 		{
-			//restart game
+			// restart game
 			menuselect = numOption;
 			ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(3957));
-			if ( inputIsPressed )
+			if (inputIsPressed)
 			{
 				pauseMenuOnInputPressed();
 
@@ -1446,7 +1443,7 @@ void handleTutorialPauseMenu()
 				strcpy(subtext, Language::get(3956));
 
 				// add a cancel button
-				button_t* button = newButton();
+				button_t *button = newButton();
 				strcpy(button->label, Language::get(1316));
 				button->x = subx2 - strlen(Language::get(1316)) * 12 - 16;
 				button->y = suby2 - 28;
@@ -1492,12 +1489,12 @@ void handleTutorialPauseMenu()
 	text.y += 24;
 	++numOption;
 
-	if ( ((omousex >= 50 && omousex < 50 + strlen(Language::get(3959)) * 18 && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1 )
+	if (((omousex >= 50 && omousex < 50 + strlen(Language::get(3959)) * 18 && omousey >= text.y && omousey < text.y + text.h) || (menuselect == numOption)) && subwindow == 0 && introstage == 1)
 	{
 		menuselect = numOption;
 		// return to main menu
 		ttfPrintTextFormattedColor(ttf16, text.x, text.y, colorGray, Language::get(3959));
-		if ( inputIsPressed )
+		if (inputIsPressed)
 		{
 			pauseMenuOnInputPressed();
 
@@ -1510,7 +1507,7 @@ void handleTutorialPauseMenu()
 			strcpy(subtext, Language::get(3961));
 
 			// yes button
-			button_t* button = newButton();
+			button_t *button = newButton();
 			strcpy(button->label, Language::get(1314));
 			button->x = subx1 + 8;
 			button->y = suby2 - 28;
@@ -1520,7 +1517,7 @@ void handleTutorialPauseMenu()
 			button->visible = 1;
 			button->focused = 1;
 			button->key = SDLK_RETURN;
-			button->joykey = joyimpulses[INJOY_MENU_NEXT]; //TODO: Select which button to activate via dpad.
+			button->joykey = joyimpulses[INJOY_MENU_NEXT]; // TODO: Select which button to activate via dpad.
 
 			// cancel button
 			button = newButton();
@@ -7879,7 +7876,7 @@ static void handleMainMenu(bool mode)
 				}
 			}
 		}
-#endif //STEAMWORKS
+#endif // STEAMWORKS
 
 		if ( gamemods_window == 6 ) //TODO: NX PORT: Does this need any changes for the switch? Even if only to entirely disable the feature?
 		{
@@ -9407,41 +9404,48 @@ static void handleMainMenu(bool mode)
 #endif
 }
 
-void doQuitGame() {
+void doQuitGame()
+{
 	introstage = 0;
 	mainloop = 0;
 }
 
-void doNewGame(bool makeHighscore) {
+void doNewGame(bool makeHighscore)
+{
 	bool bWasOnMainMenu = intro;
 	introstage = 1;
 	fadefinished = false;
 	fadeout = false;
 	gamePaused = false;
 	multiplayerselect = SINGLE;
-	intro = true; //Fix items auto-adding to the hotbar on game restart.
+	intro = true; // Fix items auto-adding to the hotbar on game restart.
 
-    for ( int i = 0; i < MAXPLAYERS; ++i )
-    {
-        Input::inputs[i].refresh();
-    }
-
-	if ( gameModeManager.getMode() == GameModeManager_t::GAME_MODE_DEFAULT )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
-		if ( makeHighscore )
+		Input::inputs[i].refresh();
+	}
+
+	if (gameModeManager.getMode() == GameModeManager_t::GAME_MODE_DEFAULT)
+	{
+		if (makeHighscore)
 		{
 			// restarting game, make a highscore
-            if (splitscreen) {
-                for (int c = 0; c < MAXPLAYERS; ++c) {
-                    if (!client_disconnected[c]) {
-                        saveScore(c);
-                    }
-                }
-            } else {
-                saveScore(clientnum);
-            }
-            saveAllScores(SCORESFILE);
-            saveAllScores(SCORESFILE_MULTIPLAYER);
+			if (splitscreen)
+			{
+				for (int c = 0; c < MAXPLAYERS; ++c)
+				{
+					if (!client_disconnected[c])
+					{
+						saveScore(c);
+					}
+				}
+			}
+			else
+			{
+				saveScore(clientnum);
+			}
+			saveAllScores(SCORESFILE);
+			saveAllScores(SCORESFILE_MULTIPLAYER);
 			deleteSaveGame(multiplayer);
 			loadingsavegame = 0;
 		}
@@ -9458,15 +9462,15 @@ void doNewGame(bool makeHighscore) {
 	loading = true;
 	darkmap = false;
 
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
-	    client_keepalive[i] = ticks; // this way nobody times out when we reset ticks!
+		client_keepalive[i] = ticks; // this way nobody times out when we reset ticks!
 		players[i]->init();
 		players[i]->hud.reset();
 		players[i]->hud.followerBars.clear();
 		players[i]->hud.playerBars.clear();
 		deinitShapeshiftHotbar(i);
-		for ( int c = 0; c < NUM_HOTBAR_ALTERNATES; ++c )
+		for (int c = 0; c < NUM_HOTBAR_ALTERNATES; ++c)
 		{
 			players[i]->hotbar.hotbarShapeshiftInit[c] = false;
 		}
@@ -9484,40 +9488,40 @@ void doNewGame(bool makeHighscore) {
 	completionTime = 0;
 
 	setDefaultPlayerConducts(); // penniless, foodless etc.
-	if ( startfloor != 0 )
+	if (startfloor != 0)
 	{
 		conductGameChallenges[CONDUCT_CHEATS_ENABLED] = 1;
 	}
 
-	if ( Mods::numCurrentModsLoaded <= 0 )
+	if (Mods::numCurrentModsLoaded <= 0)
 	{
 		Mods::disableSteamAchievements = false;
 	}
 
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
 		minimapPings[i].clear(); // clear minimap pings
-        auto& camera = players[i]->camera();
-        camera.globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_STOPPED;
-        camera.luminance = defaultLuminance;
+		auto &camera = players[i]->camera();
+		camera.globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_STOPPED;
+		camera.luminance = defaultLuminance;
 	}
 	gameplayCustomManager.readFromFile();
 	textSourceScript.scriptVariables.clear();
 
-	if ( multiplayer == CLIENT )
+	if (multiplayer == CLIENT)
 	{
-		if ( bWasOnMainMenu )
+		if (bWasOnMainMenu)
 		{
 			gameModeManager.currentSession.saveServerFlags();
 		}
 		svFlags = lobbyWindowSvFlags;
 	}
-	else if ( !loadingsavegame && bWasOnMainMenu )
+	else if (!loadingsavegame && bWasOnMainMenu)
 	{
 		gameModeManager.currentSession.saveServerFlags();
 	}
 
-	if ( gameModeManager.getMode() == GameModeManager_t::GAME_MODE_TUTORIAL )
+	if (gameModeManager.getMode() == GameModeManager_t::GAME_MODE_TUTORIAL)
 	{
 		svFlags &= ~(SV_FLAG_HARDCORE);
 		svFlags &= ~(SV_FLAG_CHEATS);
@@ -9529,51 +9533,51 @@ void doNewGame(bool makeHighscore) {
 		svFlags |= SV_FLAG_MINOTAURS;
 		svFlags |= SV_FLAG_TRAPS;
 
-		if ( gameModeManager.Tutorial.dungeonLevel >= 0 )
+		if (gameModeManager.Tutorial.dungeonLevel >= 0)
 		{
 			currentlevel = gameModeManager.Tutorial.dungeonLevel;
 			gameModeManager.Tutorial.dungeonLevel = -1;
 		}
 	}
-    
-    // very important: set this AFTER svFlags is configured
-    keepInventoryGlobal = svFlags & SV_FLAG_KEEPINVENTORY;
 
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	// very important: set this AFTER svFlags is configured
+	keepInventoryGlobal = svFlags & SV_FLAG_KEEPINVENTORY;
+
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
 		// clear follower menu entities.
 		FollowerMenu[i].closeFollowerMenuGUI(true);
 	}
-	for ( int c = 0; c < NUMMONSTERS; c++ )
+	for (int c = 0; c < NUMMONSTERS; c++)
 	{
 		kills[c] = 0;
 	}
 
-	for ( int c = 0; c < MAXPLAYERS; ++c )
+	for (int c = 0; c < MAXPLAYERS; ++c)
 	{
-		if ( players[c]->isLocalPlayer() )
+		if (players[c]->isLocalPlayer())
 		{
-			if ( openedChest[c] )
+			if (openedChest[c])
 			{
 				openedChest[c]->closeChest();
 			}
 		}
-		else if ( c > 0 && !client_disconnected[c] )
+		else if (c > 0 && !client_disconnected[c])
 		{
-			if ( openedChest[c] )
+			if (openedChest[c])
 			{
 				openedChest[c]->closeChestServer();
 			}
 		}
 
-		if ( players[c]->isLocalPlayer() )
+		if (players[c]->isLocalPlayer())
 		{
 #ifndef NINTENDO
-			if ( inputs.hasController(c) )
+			if (inputs.hasController(c))
 			{
 				players[c]->hotbar.useHotbarFaceMenu = playerSettings[c].gamepad_facehotbar;
 			}
-			else if ( inputs.bPlayerUsingKeyboardControl(c) )
+			else if (inputs.bPlayerUsingKeyboardControl(c))
 			{
 				players[c]->hotbar.useHotbarFaceMenu = false;
 			}
@@ -9596,21 +9600,21 @@ void doNewGame(bool makeHighscore) {
 	skipLevelsOnLoad = 0;
 
 #ifdef STEAMWORKS
-	if ( !directConnect )
+	if (!directConnect)
 	{
-		if ( currentLobby )
+		if (currentLobby)
 		{
 			// once the game is started, the lobby is no longer needed.
 			// when all steam users have left the lobby,
 			// the lobby is destroyed automatically on the backend.
 
-			SteamMatchmaking()->LeaveLobby(*static_cast<CSteamID*>(currentLobby));
-			cpp_Free_CSteamID(currentLobby); //TODO: Bugger this.
+			SteamMatchmaking()->LeaveLobby(*static_cast<CSteamID *>(currentLobby));
+			cpp_Free_CSteamID(currentLobby); // TODO: Bugger this.
 			currentLobby = NULL;
 		}
 	}
 #elif defined USE_EOS
-	if ( !directConnect )
+	if (!directConnect)
 	{
 		/*if ( EOS.CurrentLobbyData.currentLobbyIsValid() )
 		{
@@ -9620,69 +9624,77 @@ void doNewGame(bool makeHighscore) {
 #endif
 
 	SaveGameInfo saveGameInfo;
-	if (loadingsavegame) {
+	if (loadingsavegame)
+	{
 		saveGameInfo = getSaveGameInfo(multiplayer == SINGLE);
 	}
 
 	// load dungeon
-	if ( multiplayer != CLIENT )
+	if (multiplayer != CLIENT)
 	{
 		// stop all sounds
 #ifdef USE_FMOD
-		if ( sound_group )
+		if (sound_group)
 		{
 			sound_group->stop();
 		}
-		if ( soundAmbient_group )
+		if (soundAmbient_group)
 		{
 			soundAmbient_group->stop();
 		}
-		if ( soundEnvironment_group )
+		if (soundEnvironment_group)
 		{
 			soundEnvironment_group->stop();
 		}
-		if ( soundNotification_group )
+		if (soundNotification_group)
 		{
 			soundNotification_group->stop();
 		}
 #elif defined USE_OPENAL
-		if ( sound_group )
+		if (sound_group)
 		{
 			OPENAL_ChannelGroup_Stop(sound_group);
 		}
-		if ( soundAmbient_group )
+		if (soundAmbient_group)
 		{
 			OPENAL_ChannelGroup_Stop(soundAmbient_group);
 		}
-		if ( soundEnvironment_group )
+		if (soundEnvironment_group)
 		{
 			OPENAL_ChannelGroup_Stop(soundEnvironment_group);
 		}
 #endif
 
-        if ( !loadingsavegame )
-        {
+		if (!loadingsavegame)
+		{
 			mapseed = 0;
 		}
 
 		// reset class loadout
-		if (loadingsavegame) {
+		if (loadingsavegame)
+		{
 			Uint32 oldSvFlags = gameModeManager.currentSession.serverFlags;
 			bool bOldSvFlags = gameModeManager.currentSession.bHasSavedServerFlags;
-			for (int c = 0; c < MAXPLAYERS; ++c) {
-				if (!client_disconnected[c]) {
+			for (int c = 0; c < MAXPLAYERS; ++c)
+			{
+				if (!client_disconnected[c])
+				{
 					stats[c]->clearStats();
 					loadGame(c, saveGameInfo);
 				}
 			}
-			if ( bOldSvFlags )
+			if (bOldSvFlags)
 			{
 				// restore flags as we saved them in the lobby before this game started
 				gameModeManager.currentSession.serverFlags = oldSvFlags;
 			}
-		} else {
-			for (int c = 0; c < MAXPLAYERS; ++c) {
-				if (!client_disconnected[c]) {
+		}
+		else
+		{
+			for (int c = 0; c < MAXPLAYERS; ++c)
+			{
+				if (!client_disconnected[c])
+				{
 					stats[c]->clearStats();
 					initClass(c);
 				}
@@ -9690,7 +9702,7 @@ void doNewGame(bool makeHighscore) {
 		}
 
 		// hack to fix these things from breaking everything...
-		for ( int i = 0; i < MAXPLAYERS; ++i )
+		for (int i = 0; i < MAXPLAYERS; ++i)
 		{
 			players[i]->hud.arm = nullptr;
 			players[i]->hud.weapon = nullptr;
@@ -9701,24 +9713,24 @@ void doNewGame(bool makeHighscore) {
 			FollowerMenu[i].entityToInteractWith = nullptr;
 		}
 
-		for ( int i = 0; i < MAXPLAYERS; ++i )
+		for (int i = 0; i < MAXPLAYERS; ++i)
 		{
 			players[i]->hud.resetBars(); // reset XP/HP/MP bars
-			if ( !loadingsavegame && players[i]->isLocalPlayer() && !client_disconnected[i] )
+			if (!loadingsavegame && players[i]->isLocalPlayer() && !client_disconnected[i])
 			{
 				ClassHotbarConfig_t::assignHotbarSlots(i); // assign custom hotbar configuration
 			}
 		}
 
-		for ( node_t* node = map.entities->first; node != nullptr; node = node->next )
+		for (node_t *node = map.entities->first; node != nullptr; node = node->next)
 		{
-			Entity* entity = (Entity*)node->element;
+			Entity *entity = (Entity *)node->element;
 			entity->flags[NOUPDATE] = true;
 		}
 		lastEntityUIDs = entity_uids;
 		numplayers = 0;
 		int checkMapHash = -1;
-		if ( loadingmap == false )
+		if (loadingmap == false)
 		{
 			physfsLoadMapFile(currentlevel, mapseed, false, &checkMapHash);
 			if (!verifyMapHash(map.filename, checkMapHash))
@@ -9729,7 +9741,7 @@ void doNewGame(bool makeHighscore) {
 		}
 		else
 		{
-			if ( genmap == false )
+			if (genmap == false)
 			{
 				std::string fullMapName = physfsFormatMapName(maptoload);
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures, &checkMapHash);
@@ -9746,30 +9758,30 @@ void doNewGame(bool makeHighscore) {
 		}
 		assignActions(&map);
 		generatePathMaps();
-        clearChunks();
-        createChunks();
+		clearChunks();
+		createChunks();
 
 		achievementObserver.updateData();
 
-		if ( loadingsavegame )
+		if (loadingsavegame)
 		{
-			for ( int c = 0; c < MAXPLAYERS; c++ )
+			for (int c = 0; c < MAXPLAYERS; c++)
 			{
-				if ( players[c] && players[c]->entity && !client_disconnected[c] )
+				if (players[c] && players[c]->entity && !client_disconnected[c])
 				{
-					if ( stats[c] && stats[c]->EFFECTS[EFF_POLYMORPH] && stats[c]->playerPolymorphStorage != NOTHING )
+					if (stats[c] && stats[c]->EFFECTS[EFF_POLYMORPH] && stats[c]->playerPolymorphStorage != NOTHING)
 					{
 						players[c]->entity->effectPolymorph = stats[c]->playerPolymorphStorage;
 						serverUpdateEntitySkill(players[c]->entity, 50); // update visual polymorph effect for clients.
 						serverUpdateEffects(c);
 					}
-					if ( stats[c] && stats[c]->EFFECTS[EFF_SHAPESHIFT] && stats[c]->playerShapeshiftStorage != NOTHING )
+					if (stats[c] && stats[c]->EFFECTS[EFF_SHAPESHIFT] && stats[c]->playerShapeshiftStorage != NOTHING)
 					{
 						players[c]->entity->effectShapeshift = stats[c]->playerShapeshiftStorage;
 						serverUpdateEntitySkill(players[c]->entity, 53); // update visual shapeshift effect for clients.
 						serverUpdateEffects(c);
 					}
-					if ( stats[c] && stats[c]->EFFECTS[EFF_VAMPIRICAURA] && stats[c]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2 )
+					if (stats[c] && stats[c]->EFFECTS[EFF_VAMPIRICAURA] && stats[c]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2)
 					{
 						players[c]->entity->playerVampireCurse = 1;
 						serverUpdateEntitySkill(players[c]->entity, 51); // update curse progression
@@ -9777,78 +9789,76 @@ void doNewGame(bool makeHighscore) {
 				}
 			}
 
-			list_t* followers = loadGameFollowers(saveGameInfo);
-			if ( followers )
+			list_t *followers = loadGameFollowers(saveGameInfo);
+			if (followers)
 			{
 				int c;
-				for ( c = 0; c < MAXPLAYERS; c++ )
+				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					node_t* tempNode = list_Node(followers, c);
-					if ( tempNode )
+					node_t *tempNode = list_Node(followers, c);
+					if (tempNode)
 					{
-						list_t* tempFollowers = (list_t*)tempNode->element;
+						list_t *tempFollowers = (list_t *)tempNode->element;
 						if (players[c] && players[c]->entity && !client_disconnected[c])
 						{
-							node_t* node;
-							node_t* gyrobotNode = nullptr;
-							Entity* gyrobotEntity = nullptr;
-							std::vector<node_t*> allyRobotNodes;
-							for ( node = tempFollowers->first; node != NULL; node = node->next )
+							node_t *node;
+							node_t *gyrobotNode = nullptr;
+							Entity *gyrobotEntity = nullptr;
+							std::vector<node_t *> allyRobotNodes;
+							for (node = tempFollowers->first; node != NULL; node = node->next)
 							{
-								Stat* tempStats = (Stat*)node->element;
-								if ( tempStats && tempStats->type == GYROBOT )
+								Stat *tempStats = (Stat *)node->element;
+								if (tempStats && tempStats->type == GYROBOT)
 								{
 									gyrobotNode = node;
 									break;
 								}
 							}
-							for ( node = tempFollowers->first; node != NULL; node = node->next )
+							for (node = tempFollowers->first; node != NULL; node = node->next)
 							{
-								Stat* tempStats = (Stat*)node->element;
-								if ( tempStats && (tempStats->type == DUMMYBOT
-									|| tempStats->type == SENTRYBOT
-									|| tempStats->type == SPELLBOT) )
+								Stat *tempStats = (Stat *)node->element;
+								if (tempStats && (tempStats->type == DUMMYBOT || tempStats->type == SENTRYBOT || tempStats->type == SPELLBOT))
 								{
 									// gyrobot will pick up these guys into it's inventory, otherwise leave them behind.
-									if ( gyrobotNode )
+									if (gyrobotNode)
 									{
 										allyRobotNodes.push_back(node);
 									}
 									continue;
 								}
-								Entity* monster = summonMonster(tempStats->type, players[c]->entity->x, players[c]->entity->y);
-								if ( monster )
+								Entity *monster = summonMonster(tempStats->type, players[c]->entity->x, players[c]->entity->y);
+								if (monster)
 								{
-									if ( node == gyrobotNode )
+									if (node == gyrobotNode)
 									{
 										gyrobotEntity = monster;
 									}
 									monster->skill[3] = 1; // to mark this monster partially initialized
 									list_RemoveNode(monster->children.last);
 
-									node_t* newNode = list_AddNodeLast(&monster->children);
+									node_t *newNode = list_AddNodeLast(&monster->children);
 									newNode->element = tempStats->copyStats();
 									newNode->deconstructor = &statDeconstructor;
 									newNode->size = sizeof(tempStats);
 
-									Stat* monsterStats = (Stat*)newNode->element;
+									Stat *monsterStats = (Stat *)newNode->element;
 									monsterStats->leader_uid = players[c]->entity->getUID();
 									monster->flags[USERFLAG2] = true;
 									monster->monsterAllyIndex = c;
-									if ( multiplayer == SERVER )
+									if (multiplayer == SERVER)
 									{
 										serverUpdateEntitySkill(monster, 42); // update monsterAllyIndex for clients.
 									}
 
-									if ( multiplayer != CLIENT )
+									if (multiplayer != CLIENT)
 									{
 										monster->monsterAllyClass = monsterStats->allyClass;
 										monster->monsterAllyPickupItems = monsterStats->allyItemPickup;
-										if ( stats[c]->playerSummonPERCHR != 0 && MonsterData_t::nameMatchesSpecialNPCName(*monsterStats, "skeleton knight") )
+										if (stats[c]->playerSummonPERCHR != 0 && MonsterData_t::nameMatchesSpecialNPCName(*monsterStats, "skeleton knight"))
 										{
 											monster->monsterAllySummonRank = (stats[c]->playerSummonPERCHR & 0x0000FF00) >> 8;
 										}
-										else if ( stats[c]->playerSummon2PERCHR != 0 && MonsterData_t::nameMatchesSpecialNPCName(*monsterStats, "skeleton sentinel") )
+										else if (stats[c]->playerSummon2PERCHR != 0 && MonsterData_t::nameMatchesSpecialNPCName(*monsterStats, "skeleton sentinel"))
 										{
 											monster->monsterAllySummonRank = (stats[c]->playerSummon2PERCHR & 0x0000FF00) >> 8;
 										}
@@ -9859,22 +9869,22 @@ void doNewGame(bool makeHighscore) {
 
 									newNode = list_AddNodeLast(&stats[c]->FOLLOWERS);
 									newNode->deconstructor = &defaultDeconstructor;
-									Uint32* myuid = (Uint32*) malloc(sizeof(Uint32));
+									Uint32 *myuid = (Uint32 *)malloc(sizeof(Uint32));
 									newNode->element = myuid;
 									*myuid = monster->getUID();
 
-									if ( c > 0 && multiplayer == SERVER && !players[c]->isLocalPlayer() )
+									if (c > 0 && multiplayer == SERVER && !players[c]->isLocalPlayer())
 									{
-										strcpy((char*)net_packet->data, "LEAD");
+										strcpy((char *)net_packet->data, "LEAD");
 										SDLNet_Write32((Uint32)monster->getUID(), &net_packet->data[4]);
 										std::string name = monsterStats->name;
-										if ( name != "" && name == MonsterData_t::getSpecialNPCName(*monsterStats) )
+										if (name != "" && name == MonsterData_t::getSpecialNPCName(*monsterStats))
 										{
 											name = monsterStats->getAttribute("special_npc");
 											name.insert(0, "$");
 										}
-                                        SDLNet_Write32(monsterStats->type, &net_packet->data[8]);
-										strcpy((char*)(&net_packet->data[12]), name.c_str());
+										SDLNet_Write32(monsterStats->type, &net_packet->data[8]);
+										strcpy((char *)(&net_packet->data[12]), name.c_str());
 										net_packet->data[12 + strlen(name.c_str())] = 0;
 										net_packet->address.host = net_clients[c - 1].host;
 										net_packet->address.port = net_clients[c - 1].port;
@@ -9883,65 +9893,66 @@ void doNewGame(bool makeHighscore) {
 
 										serverUpdateAllyStat(c, monster->getUID(), monsterStats->LVL, monsterStats->HP, monsterStats->MAXHP, monsterStats->type);
 									}
-                                    else if (multiplayer != CLIENT && players[c]->isLocalPlayer())
-                                    {
-                                        if (monsterStats->name[0] && !monsterNameIsGeneric(*monsterStats)) {
-                                            Entity* nametag = newEntity(-1, 1, map.entities, nullptr);
-                                            nametag->x = monster->x;
-                                            nametag->y = monster->y;
-                                            nametag->z = monster->z - 6;
-                                            nametag->sizex = 1;
-                                            nametag->sizey = 1;
-                                            nametag->flags[NOUPDATE] = true;
-                                            nametag->flags[PASSABLE] = true;
-                                            nametag->flags[SPRITE] = true;
-                                            nametag->flags[UNCLICKABLE] = true;
-                                            nametag->flags[BRIGHT] = true;
-                                            nametag->behavior = &actSpriteNametag;
-                                            nametag->parent = monster->getUID();
-                                            nametag->scalex = 0.2;
-                                            nametag->scaley = 0.2;
-                                            nametag->scalez = 0.2;
-                                            nametag->skill[0] = c;
-                                            nametag->skill[1] = playerColor(c, colorblind_lobby, true);
-                                        }
-                                    }
+									else if (multiplayer != CLIENT && players[c]->isLocalPlayer())
+									{
+										if (monsterStats->name[0] && !monsterNameIsGeneric(*monsterStats))
+										{
+											Entity *nametag = newEntity(-1, 1, map.entities, nullptr);
+											nametag->x = monster->x;
+											nametag->y = monster->y;
+											nametag->z = monster->z - 6;
+											nametag->sizex = 1;
+											nametag->sizey = 1;
+											nametag->flags[NOUPDATE] = true;
+											nametag->flags[PASSABLE] = true;
+											nametag->flags[SPRITE] = true;
+											nametag->flags[UNCLICKABLE] = true;
+											nametag->flags[BRIGHT] = true;
+											nametag->behavior = &actSpriteNametag;
+											nametag->parent = monster->getUID();
+											nametag->scalex = 0.2;
+											nametag->scaley = 0.2;
+											nametag->scalez = 0.2;
+											nametag->skill[0] = c;
+											nametag->skill[1] = playerColor(c, colorblind_lobby, true);
+										}
+									}
 
-									if ( !FollowerMenu[c].recentEntity && players[c]->isLocalPlayer() )
+									if (!FollowerMenu[c].recentEntity && players[c]->isLocalPlayer())
 									{
 										FollowerMenu[c].recentEntity = monster;
 									}
 								}
 							}
-							if ( gyrobotEntity && !allyRobotNodes.empty() )
+							if (gyrobotEntity && !allyRobotNodes.empty())
 							{
-								Stat* gyroStats = gyrobotEntity->getStats();
-								for ( auto it = allyRobotNodes.begin(); gyroStats && it != allyRobotNodes.end(); ++it )
+								Stat *gyroStats = gyrobotEntity->getStats();
+								for (auto it = allyRobotNodes.begin(); gyroStats && it != allyRobotNodes.end(); ++it)
 								{
-									node_t* botNode = *it;
-									if ( botNode )
+									node_t *botNode = *it;
+									if (botNode)
 									{
-										Stat* tempStats = (Stat*)botNode->element;
-										if ( tempStats )
+										Stat *tempStats = (Stat *)botNode->element;
+										if (tempStats)
 										{
 											ItemType type = WOODEN_SHIELD;
-											if ( tempStats->type == SENTRYBOT )
+											if (tempStats->type == SENTRYBOT)
 											{
 												type = TOOL_SENTRYBOT;
 											}
-											else if ( tempStats->type == SPELLBOT )
+											else if (tempStats->type == SPELLBOT)
 											{
 												type = TOOL_SPELLBOT;
 											}
-											else if ( tempStats->type == DUMMYBOT )
+											else if (tempStats->type == DUMMYBOT)
 											{
 												type = TOOL_DUMMYBOT;
 											}
 											int appearance = monsterTinkeringConvertHPToAppearance(tempStats);
-											if ( type != WOODEN_SHIELD )
+											if (type != WOODEN_SHIELD)
 											{
-												Item* item = newItem(type, static_cast<Status>(tempStats->monsterTinkeringStatus), 
-													0, 1, appearance, true, &gyroStats->inventory);
+												Item *item = newItem(type, static_cast<Status>(tempStats->monsterTinkeringStatus),
+																	 0, 1, appearance, true, &gyroStats->inventory);
 											}
 										}
 									}
@@ -9955,7 +9966,7 @@ void doNewGame(bool makeHighscore) {
 			}
 		}
 
-		if ( multiplayer == SINGLE )
+		if (multiplayer == SINGLE)
 		{
 			saveGame();
 		}
@@ -9963,7 +9974,7 @@ void doNewGame(bool makeHighscore) {
 	else // if ( multiplayer != CLIENT ) (ergo in the block below, it is)
 	{
 		// hack to fix these things from breaking everything...
-		for ( int i = 0; i < MAXPLAYERS; ++i )
+		for (int i = 0; i < MAXPLAYERS; ++i)
 		{
 			players[i]->hud.arm = nullptr;
 			players[i]->hud.weapon = nullptr;
@@ -9977,9 +9988,10 @@ void doNewGame(bool makeHighscore) {
 		client_disconnected[0] = false;
 
 		// initialize class
-		if ( !loadingsavegame )
+		if (!loadingsavegame)
 		{
-			for (int c = 0; c < MAXPLAYERS; ++c) {
+			for (int c = 0; c < MAXPLAYERS; ++c)
+			{
 				stats[c]->clearStats();
 				initClass(c);
 			}
@@ -9990,7 +10002,7 @@ void doNewGame(bool makeHighscore) {
 			Uint32 oldSvFlags = gameModeManager.currentSession.serverFlags;
 			bool bOldSvFlags = gameModeManager.currentSession.bHasSavedServerFlags;
 			loadGame(clientnum, saveGameInfo);
-			if ( bOldSvFlags )
+			if (bOldSvFlags)
 			{
 				// restore flags as we saved them in the lobby before this game started
 				gameModeManager.currentSession.serverFlags = oldSvFlags;
@@ -9998,39 +10010,39 @@ void doNewGame(bool makeHighscore) {
 		}
 
 		players[clientnum]->hud.resetBars();
-		if ( !loadingsavegame )
+		if (!loadingsavegame)
 		{
 			ClassHotbarConfig_t::assignHotbarSlots(clientnum); // assign custom hotbar configuration
 		}
 
 		// stop all sounds
 #ifdef USE_FMOD
-		if ( sound_group )
+		if (sound_group)
 		{
 			sound_group->stop();
 		}
-		if ( soundAmbient_group )
+		if (soundAmbient_group)
 		{
 			soundAmbient_group->stop();
 		}
-		if ( soundEnvironment_group )
+		if (soundEnvironment_group)
 		{
 			soundEnvironment_group->stop();
 		}
-		if ( soundNotification_group )
+		if (soundNotification_group)
 		{
 			soundNotification_group->stop();
 		}
 #elif defined USE_OPENAL
-		if ( sound_group )
+		if (sound_group)
 		{
 			OPENAL_ChannelGroup_Stop(sound_group);
 		}
-		if ( soundAmbient_group )
+		if (soundAmbient_group)
 		{
 			OPENAL_ChannelGroup_Stop(soundAmbient_group);
 		}
-		if ( soundEnvironment_group )
+		if (soundEnvironment_group)
 		{
 			OPENAL_ChannelGroup_Stop(soundEnvironment_group);
 		}
@@ -10041,7 +10053,7 @@ void doNewGame(bool makeHighscore) {
 		numplayers = 0;
 
 		int checkMapHash = -1;
-		if ( loadingmap == false )
+		if (loadingmap == false)
 		{
 			physfsLoadMapFile(currentlevel, mapseed, false, &checkMapHash);
 			if (!verifyMapHash(map.filename, checkMapHash))
@@ -10052,7 +10064,7 @@ void doNewGame(bool makeHighscore) {
 		}
 		else
 		{
-			if ( genmap == false )
+			if (genmap == false)
 			{
 				std::string fullMapName = physfsFormatMapName(maptoload);
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures, &checkMapHash);
@@ -10069,17 +10081,17 @@ void doNewGame(bool makeHighscore) {
 		}
 		assignActions(&map);
 		generatePathMaps();
-        clearChunks();
-        createChunks();
+		clearChunks();
+		createChunks();
 
-		node_t* nextnode;
-		for ( node_t* node = map.entities->first; node != nullptr; node = nextnode )
+		node_t *nextnode;
+		for (node_t *node = map.entities->first; node != nullptr; node = nextnode)
 		{
 			nextnode = node->next;
-			Entity* entity = (Entity*)node->element;
-			if ( entity->flags[NOUPDATE] )
+			Entity *entity = (Entity *)node->element;
+			if (entity->flags[NOUPDATE])
 			{
-				list_RemoveNode(entity->mynode);    // we're anticipating this entity data from server
+				list_RemoveNode(entity->mynode); // we're anticipating this entity data from server
 			}
 		}
 
@@ -10089,45 +10101,45 @@ void doNewGame(bool makeHighscore) {
 	// spice of life achievement
 	usedClass[client_classes[clientnum]] = true;
 	bool usedAllClasses = true;
-	for ( int c = 0; c <= CLASS_MONK; c++ )
+	for (int c = 0; c <= CLASS_MONK; c++)
 	{
-		if ( !usedClass[c] )
+		if (!usedClass[c])
 		{
 			usedAllClasses = false;
 		}
 	}
-	if ( usedAllClasses )
+	if (usedAllClasses)
 	{
 		steamAchievement("BARONY_ACH_SPICE_OF_LIFE");
 	}
 
-	if ( stats[clientnum]->playerRace >= 0 && stats[clientnum]->playerRace <= RACE_INSECTOID )
+	if (stats[clientnum]->playerRace >= 0 && stats[clientnum]->playerRace <= RACE_INSECTOID)
 	{
 		usedRace[stats[clientnum]->playerRace] = true;
 	}
 	// new achievement
 	usedAllClasses = true;
-	for ( int c = 0; c <= CLASS_HUNTER; ++c )
+	for (int c = 0; c <= CLASS_HUNTER; ++c)
 	{
-		if ( !usedClass[c] )
+		if (!usedClass[c])
 		{
 			usedAllClasses = false;
 		}
 	}
 	bool usedAllRaces = true;
-	for ( int c = RACE_HUMAN; c <= RACE_INSECTOID; ++c )
+	for (int c = RACE_HUMAN; c <= RACE_INSECTOID; ++c)
 	{
-		if ( !usedRace[c] )
+		if (!usedRace[c])
 		{
 			usedAllRaces = false;
 		}
 	}
-	if ( usedAllClasses && usedAllRaces )
+	if (usedAllClasses && usedAllRaces)
 	{
 		steamAchievement("BARONY_ACH_I_WANT_IT_ALL");
 	}
 
-	if ( gameModeManager.getMode() == GameModeManager_t::GAME_MODE_DEFAULT && !loadingsavegame )
+	if (gameModeManager.getMode() == GameModeManager_t::GAME_MODE_DEFAULT && !loadingsavegame)
 	{
 		steamStatisticUpdate(STEAM_STAT_GAMES_STARTED, STEAM_STAT_INT, 1);
 		achievementObserver.updateGlobalStat(STEAM_GSTAT_GAMES_STARTED);
@@ -10137,12 +10149,12 @@ void doNewGame(bool makeHighscore) {
 	list_FreeAll(&messages);
 	list_FreeAll(&command_history);
 	list_FreeAll(&safePacketsSent);
-	for ( int c = 0; c < MAXPLAYERS; c++ )
+	for (int c = 0; c < MAXPLAYERS; c++)
 	{
 		safePacketsReceivedMap[c].clear();
 		players[c]->messageZone.deleteAllNotificationMessages();
 	}
-	if ( !loadingsavegame ) // don't delete the followers we just created!
+	if (!loadingsavegame) // don't delete the followers we just created!
 	{
 		for (int c = 0; c < MAXPLAYERS; c++)
 		{
@@ -10150,23 +10162,24 @@ void doNewGame(bool makeHighscore) {
 		}
 	}
 
-	if ( loadingsavegame && multiplayer != CLIENT )
+	if (loadingsavegame && multiplayer != CLIENT)
 	{
 		loadingsavegame = 0;
 	}
 
-    // shuffle scroll names
-    {
-	    enchantedFeatherScrollsShuffled.clear();
-	    enchantedFeatherScrollsShuffled.reserve(enchantedFeatherScrollsFixedList.size());
-	    auto shuffle = enchantedFeatherScrollsFixedList;
+	// shuffle scroll names
+	{
+		enchantedFeatherScrollsShuffled.clear();
+		enchantedFeatherScrollsShuffled.reserve(enchantedFeatherScrollsFixedList.size());
+		auto shuffle = enchantedFeatherScrollsFixedList;
 		BaronyRNG feather_rng;
 		feather_rng.seedBytes(&uniqueGameKey, sizeof(uniqueGameKey));
-	    while (!shuffle.empty()) {
-	        int index = feather_rng.getU8() % shuffle.size();
-	        enchantedFeatherScrollsShuffled.push_back(shuffle[index]);
-	        shuffle.erase(shuffle.begin() + index);
-	    }
+		while (!shuffle.empty())
+		{
+			int index = feather_rng.getU8() % shuffle.size();
+			enchantedFeatherScrollsShuffled.push_back(shuffle[index]);
+			shuffle.erase(shuffle.begin() + index);
+		}
 	}
 	/*for ( auto it = enchantedFeatherScrollsShuffled.begin(); it != enchantedFeatherScrollsShuffled.end(); ++it )
 	{
@@ -10175,7 +10188,7 @@ void doNewGame(bool makeHighscore) {
 
 	list_FreeAll(&removedEntities);
 
-	for ( int c = 0; c < MAXPLAYERS; c++ )
+	for (int c = 0; c < MAXPLAYERS; c++)
 	{
 		list_FreeAll(&chestInv[c]);
 	}
@@ -10186,9 +10199,9 @@ void doNewGame(bool makeHighscore) {
 	// make some messages
 	Player::MessageZone_t::startMessages();
 
-	for ( auto& pair : Player::Minimap_t::mapDetails )
+	for (auto &pair : Player::Minimap_t::mapDetails)
 	{
-		if ( pair.second != "" )
+		if (pair.second != "")
 		{
 			messagePlayer(clientnum, MESSAGE_HINT, pair.second.c_str());
 		}
@@ -10204,17 +10217,18 @@ void doNewGame(bool makeHighscore) {
 	intro = false;
 }
 
-void doCredits() {
+void doCredits()
+{
 	fadefinished = false;
 	fadeout = false;
-	if ( creditstage == 0 && victory == 3 )
+	if (creditstage == 0 && victory == 3)
 	{
 #ifdef MUSIC
 		playMusic(citadelmusic[0], true, false, false);
 #endif
 	}
 	creditstage++;
-	if ( creditstage >= 15 )
+	if (creditstage >= 15)
 	{
 		introstage = 1;
 		credittime = 0;
@@ -10226,10 +10240,11 @@ void doCredits() {
 	}
 }
 
-void doEndgame(bool saveHighscore) {
+void doEndgame(bool saveHighscore)
+{
 	int c, x;
 	bool endTutorial = false;
-	if ( gameModeManager.getMode() != GameModeManager_t::GAME_MODE_DEFAULT )
+	if (gameModeManager.getMode() != GameModeManager_t::GAME_MODE_DEFAULT)
 	{
 		victory = 0;
 		gameModeManager.setMode(GameModeManager_t::GAME_MODE_DEFAULT);
@@ -10237,33 +10252,31 @@ void doEndgame(bool saveHighscore) {
 	}
 
 	// in greater numbers achievement
-	if ( victory )
+	if (victory)
 	{
 		int k = 0;
-		for ( c = 0; c < MAXPLAYERS; c++ )
+		for (c = 0; c < MAXPLAYERS; c++)
 		{
 			if (players[c] && players[c]->entity)
 			{
 				k++;
 			}
 		}
-		if ( k >= 2 )
+		if (k >= 2)
 		{
 			steamAchievement("BARONY_ACH_IN_GREATER_NUMBERS");
 		}
 
-		if ( (victory == 1 && currentlevel >= 20)
-			|| (victory == 2 && currentlevel >= 24)
-			|| ((victory == 3 || victory == 4 || victory == 5) && currentlevel >= 35) )
+		if ((victory == 1 && currentlevel >= 20) || (victory == 2 && currentlevel >= 24) || ((victory == 3 || victory == 4 || victory == 5) && currentlevel >= 35))
 		{
-			if ( client_classes[clientnum] == CLASS_ACCURSED )
+			if (client_classes[clientnum] == CLASS_ACCURSED)
 			{
-				if ( stats[clientnum]->EFFECTS[EFF_VAMPIRICAURA] && stats[clientnum]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2 )
+				if (stats[clientnum]->EFFECTS[EFF_VAMPIRICAURA] && stats[clientnum]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2)
 				{
 					conductGameChallenges[CONDUCT_ACCURSED] = 1;
 				}
 			}
-			if ( completionTime < 20 * 60 * TICKS_PER_SECOND )
+			if (completionTime < 20 * 60 * TICKS_PER_SECOND)
 			{
 				conductGameChallenges[CONDUCT_BOOTS_SPEED] = 1;
 			}
@@ -10273,30 +10286,30 @@ void doEndgame(bool saveHighscore) {
 
 	// figure out the victory crawl texts...
 	int movieCrawlType = -1;
-	if ( victory )
+	if (victory)
 	{
-		if ( stats[0] )
+		if (stats[0])
 		{
 			strcpy(epilogueHostName, stats[0]->name);
 			epilogueHostRace = RACE_HUMAN;
-			if ( stats[0]->playerRace > 0 && stats[0]->appearance == 0 )
+			if (stats[0]->playerRace > 0 && stats[0]->appearance == 0)
 			{
 				epilogueHostRace = stats[0]->playerRace;
 			}
 			epilogueMultiplayerType = multiplayer;
-			if ( victory == 1 && epilogueHostRace > 0 && epilogueHostRace != RACE_AUTOMATON )
+			if (victory == 1 && epilogueHostRace > 0 && epilogueHostRace != RACE_AUTOMATON)
 			{
 				// herx defeat by monsters.
 				movieCrawlType = MOVIE_CLASSIC_WIN_MONSTERS;
 			}
-			else if ( victory == 2 && epilogueHostRace > 0 && epilogueHostRace != RACE_AUTOMATON )
+			else if (victory == 2 && epilogueHostRace > 0 && epilogueHostRace != RACE_AUTOMATON)
 			{
 				// baphomet defeat by monsters.
 				movieCrawlType = MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS;
 			}
-			else if ( victory == 3 || victory == 4 || victory == 5 )
+			else if (victory == 3 || victory == 4 || victory == 5)
 			{
-				switch ( epilogueHostRace )
+				switch (epilogueHostRace)
 				{
 				case RACE_AUTOMATON:
 					movieCrawlType = MOVIE_WIN_AUTOMATON;
@@ -10322,58 +10335,63 @@ void doEndgame(bool saveHighscore) {
 	}
 
 	// make a highscore!
-	if ( !endTutorial && saveHighscore )
+	if (!endTutorial && saveHighscore)
 	{
-        if (splitscreen) {
-            for (int c = 0; c < MAXPLAYERS; ++c) {
-                if (!client_disconnected[c]) {
-                    saveScore(c);
-                }
-            }
-        } else {
-            saveScore(clientnum);
-        }
-        saveAllScores(SCORESFILE);
-        saveAllScores(SCORESFILE_MULTIPLAYER);
+		if (splitscreen)
+		{
+			for (int c = 0; c < MAXPLAYERS; ++c)
+			{
+				if (!client_disconnected[c])
+				{
+					saveScore(c);
+				}
+			}
+		}
+		else
+		{
+			saveScore(clientnum);
+		}
+		saveAllScores(SCORESFILE);
+		saveAllScores(SCORESFILE_MULTIPLAYER);
 	}
 
 	// pick a new subtitle :)
 	subtitleCurrent = local_rng.rand() % NUMSUBTITLES;
 	subtitleVisible = true;
 
-	for ( c = 0; c < NUMMONSTERS; c++ )
+	for (c = 0; c < NUMMONSTERS; c++)
 	{
 		kills[c] = 0;
 	}
 
 	// stop all sounds
 #ifdef USE_FMOD
-	if ( sound_group )
+	if (sound_group)
 	{
 		sound_group->stop();
 	}
-	if ( soundAmbient_group )
+	if (soundAmbient_group)
 	{
 		soundAmbient_group->stop();
 	}
-	if ( soundEnvironment_group )
+	if (soundEnvironment_group)
 	{
 		soundEnvironment_group->stop();
 	}
-	if ( soundNotification_group )
+	if (soundNotification_group)
 	{
 		soundNotification_group->stop();
 	}
 #elif defined USE_OPENAL
-	if ( sound_group )
+	if (sound_group)
 	{
 		OPENAL_ChannelGroup_Stop(sound_group);
 	}
-	if ( soundAmbient_group )
+	if (soundAmbient_group)
 	{
 		OPENAL_ChannelGroup_Stop(soundAmbient_group);
 	}
-	if ( soundEnvironment_group )
+	if (soundEnvironment_group)
 	{
 		OPENAL_ChannelGroup_Stop(soundEnvironment_group);
 	}
@@ -10382,7 +10400,7 @@ void doEndgame(bool saveHighscore) {
 	// send disconnect messages
 	if (multiplayer == CLIENT)
 	{
-		strcpy((char*)net_packet->data, "DISC");
+		strcpy((char *)net_packet->data, "DISC");
 		net_packet->data[4] = clientnum;
 		net_packet->address.host = net_server.host;
 		net_packet->address.port = net_server.port;
@@ -10394,11 +10412,11 @@ void doEndgame(bool saveHighscore) {
 	{
 		for (x = 1; x < MAXPLAYERS; x++)
 		{
-			if ( client_disconnected[x] == true )
+			if (client_disconnected[x] == true)
 			{
 				continue;
 			}
-			strcpy((char*)net_packet->data, "DISC");
+			strcpy((char *)net_packet->data, "DISC");
 			net_packet->data[4] = clientnum;
 			net_packet->address.host = net_clients[x - 1].host;
 			net_packet->address.port = net_clients[x - 1].port;
@@ -10409,11 +10427,11 @@ void doEndgame(bool saveHighscore) {
 	}
 
 	// clean up shopInv
-	if ( multiplayer == CLIENT )
+	if (multiplayer == CLIENT)
 	{
-		for ( x = 0; x < MAXPLAYERS; x++ )
+		for (x = 0; x < MAXPLAYERS; x++)
 		{
-			if ( shopInv[x] )
+			if (shopInv[x])
 			{
 				list_FreeAll(shopInv[x]);
 				free(shopInv[x]);
@@ -10422,120 +10440,118 @@ void doEndgame(bool saveHighscore) {
 		}
 	}
 
-	if ( victory )
+	if (victory)
 	{
 		// conduct achievements
-		if ( (victory == 1 && currentlevel >= 20)
-			|| (victory == 2 && currentlevel >= 24)
-			|| ((victory == 3 || victory == 4 || victory == 5) && currentlevel >= 35) )
+		if ((victory == 1 && currentlevel >= 20) || (victory == 2 && currentlevel >= 24) || ((victory == 3 || victory == 4 || victory == 5) && currentlevel >= 35))
 		{
-			if ( conductPenniless )
+			if (conductPenniless)
 			{
 				steamAchievement("BARONY_ACH_PENNILESS_CONDUCT");
 			}
-			if ( conductFoodless )
+			if (conductFoodless)
 			{
 				steamAchievement("BARONY_ACH_FOODLESS_CONDUCT");
 			}
-			if ( conductVegetarian )
+			if (conductVegetarian)
 			{
 				steamAchievement("BARONY_ACH_VEGETARIAN_CONDUCT");
 			}
-			if ( conductIlliterate )
+			if (conductIlliterate)
 			{
 				steamAchievement("BARONY_ACH_ILLITERATE_CONDUCT");
 			}
 
-			if ( completionTime < 20 * 60 * TICKS_PER_SECOND )
+			if (completionTime < 20 * 60 * TICKS_PER_SECOND)
 			{
 				steamAchievement("BARONY_ACH_BOOTS_OF_SPEED");
 			}
 		}
 
-		if ( victory == 1 )
+		if (victory == 1)
 		{
-			if ( currentlevel >= 20 )
+			if (currentlevel >= 20)
 			{
-				if ( conductGameChallenges[CONDUCT_HARDCORE] )
+				if (conductGameChallenges[CONDUCT_HARDCORE])
 				{
 					steamAchievement("BARONY_ACH_HARDCORE");
 				}
 			}
 		}
-		else if ( victory == 2 )
+		else if (victory == 2)
 		{
-			if ( currentlevel >= 24 )
+			if (currentlevel >= 24)
 			{
-				if ( conductGameChallenges[CONDUCT_HARDCORE] )
+				if (conductGameChallenges[CONDUCT_HARDCORE])
 				{
 					steamAchievement("BARONY_ACH_HARDCORE");
 				}
 			}
 		}
-		else if ( victory == 3 || victory == 4 || victory == 5 )
+		else if (victory == 3 || victory == 4 || victory == 5)
 		{
-			if ( currentlevel >= 35 )
+			if (currentlevel >= 35)
 			{
-				if ( conductGameChallenges[CONDUCT_BRAWLER] )
+				if (conductGameChallenges[CONDUCT_BRAWLER])
 				{
 					steamAchievement("BARONY_ACH_BRAWLER");
 				}
-				if ( conductGameChallenges[CONDUCT_BLESSED_BOOTS_SPEED] )
+				if (conductGameChallenges[CONDUCT_BLESSED_BOOTS_SPEED])
 				{
 					steamAchievement("BARONY_ACH_PLUS_BOOTS_OF_SPEED");
 				}
-				if ( conductGameChallenges[CONDUCT_HARDCORE] )
+				if (conductGameChallenges[CONDUCT_HARDCORE])
 				{
 					steamAchievement("BARONY_ACH_POST_HARDCORE");
 				}
 
-				if ( client_classes[clientnum] == CLASS_MESMER )
+				if (client_classes[clientnum] == CLASS_MESMER)
 				{
 					steamAchievement("BARONY_ACH_COMMANDER_CHIEF");
 				}
-				else if ( client_classes[clientnum] == CLASS_BREWER )
+				else if (client_classes[clientnum] == CLASS_BREWER)
 				{
 					steamAchievement("BARONY_ACH_DRUNK_POWER");
 				}
-				else if ( client_classes[clientnum] == CLASS_ACCURSED )
+				else if (client_classes[clientnum] == CLASS_ACCURSED)
 				{
 					steamAchievement("BARONY_ACH_POWER_HUNGRY");
-					if ( stats[clientnum]->EFFECTS[EFF_VAMPIRICAURA] && stats[clientnum]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2 )
+					if (stats[clientnum]->EFFECTS[EFF_VAMPIRICAURA] && stats[clientnum]->EFFECTS_TIMERS[EFF_VAMPIRICAURA] == -2)
 					{
-						if ( stats[clientnum] && (svFlags & SV_FLAG_HUNGER) )
+						if (stats[clientnum] && (svFlags & SV_FLAG_HUNGER))
 						{
 							steamAchievement("BARONY_ACH_BLOOD_IS_THE_LIFE");
 						}
 					}
 				}
-				else if ( client_classes[clientnum] == CLASS_HUNTER )
+				else if (client_classes[clientnum] == CLASS_HUNTER)
 				{
 					steamAchievement("BARONY_ACH_RANGER_DANGER");
-					if ( conductGameChallenges[CONDUCT_RANGED_ONLY] )
+					if (conductGameChallenges[CONDUCT_RANGED_ONLY])
 					{
 						steamAchievement("BARONY_ACH_GUDIPARIAN_BAZI");
 					}
 				}
-				else if ( client_classes[clientnum] == CLASS_CONJURER )
+				else if (client_classes[clientnum] == CLASS_CONJURER)
 				{
 					steamAchievement("BARONY_ACH_TURN_UNDEAD");
 				}
-				else if ( client_classes[clientnum] == CLASS_SHAMAN )
+				else if (client_classes[clientnum] == CLASS_SHAMAN)
 				{
 					steamAchievement("BARONY_ACH_MY_FINAL_FORM");
 				}
-				else if ( client_classes[clientnum] == CLASS_PUNISHER )
+				else if (client_classes[clientnum] == CLASS_PUNISHER)
 				{
 					steamAchievement("BARONY_ACH_TIME_TO_SUFFER");
 				}
-				else if ( client_classes[clientnum] == CLASS_MACHINIST )
+				else if (client_classes[clientnum] == CLASS_MACHINIST)
 				{
 					steamAchievement("BARONY_ACH_LIKE_CLOCKWORK");
 				}
 
-				if ( stats[clientnum] && stats[clientnum]->appearance == 0 )
+				if (stats[clientnum] && stats[clientnum]->appearance == 0)
 				{
-					switch ( stats[clientnum]->playerRace )
+					switch (stats[clientnum]->playerRace)
 					{
 					case RACE_SKELETON:
 						steamAchievement("BARONY_ACH_BONY_BARON");
@@ -10569,7 +10585,7 @@ void doEndgame(bool saveHighscore) {
 		}
 	}
 
-	if ( !endTutorial && victory > 0 )
+	if (!endTutorial && victory > 0)
 	{
 		deleteSaveGame(multiplayer);
 	}
@@ -10597,19 +10613,22 @@ void doEndgame(bool saveHighscore) {
 	fpsLimit = 60; // revert to 60 for the main menu
 	nxEnableAutoSleep();
 	nxEndParentalControls();
-	if (directConnect) {
+	if (directConnect)
+	{
 		// cleanse wireless connection state
 		nxShutdownWireless();
-	} else {
+	}
+	else
+	{
 		MainMenu::logoutOfEpic();
 	}
 #endif
 
-    // this is done so that save game screenshots get
-    // reloaded after the game is done.
-	//Image::dumpCache();
+	// this is done so that save game screenshots get
+	// reloaded after the game is done.
+	// Image::dumpCache();
 
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
 		players[i]->inventoryUI.appraisal.timer = 0;
 		players[i]->inventoryUI.appraisal.current_item = 0;
@@ -10617,7 +10636,7 @@ void doEndgame(bool saveHighscore) {
 		players[i]->hud.followerBars.clear();
 		players[i]->hud.playerBars.clear();
 		deinitShapeshiftHotbar(i);
-		for ( c = 0; c < NUM_HOTBAR_ALTERNATES; ++c )
+		for (c = 0; c < NUM_HOTBAR_ALTERNATES; ++c)
 		{
 			players[i]->hotbar.hotbarShapeshiftInit[c] = false;
 		}
@@ -10631,7 +10650,7 @@ void doEndgame(bool saveHighscore) {
 	PingNetworkStatus_t::reset();
 	gameModeManager.currentSession.restoreSavedServerFlags();
 	client_classes[0] = 0;
-	for ( c = 0; c < MAXPLAYERS; c++ )
+	for (c = 0; c < MAXPLAYERS; c++)
 	{
 		spellcastingAnimationManager_deactivate(&cast_animation[c]);
 	}
@@ -10641,7 +10660,7 @@ void doEndgame(bool saveHighscore) {
 	list_FreeAll(&messages);
 	list_FreeAll(&command_history);
 	list_FreeAll(&safePacketsSent);
-	for ( c = 0; c < MAXPLAYERS; c++ )
+	for (c = 0; c < MAXPLAYERS; c++)
 	{
 		safePacketsReceivedMap[c].clear();
 		players[c]->messageZone.deleteAllNotificationMessages();
@@ -10653,15 +10672,15 @@ void doEndgame(bool saveHighscore) {
 		list_FreeAll(&stats[c]->FOLLOWERS);
 	}
 	list_FreeAll(&removedEntities);
-	for ( c = 0; c < MAXPLAYERS; c++ )
+	for (c = 0; c < MAXPLAYERS; c++)
 	{
 		list_FreeAll(&chestInv[c]);
 	}
 
 	// default player stats
-	for ( c = 0; c < MAXPLAYERS; c++ )
+	for (c = 0; c < MAXPLAYERS; c++)
 	{
-		if ( c > 0 )
+		if (c > 0)
 		{
 			client_disconnected[c] = true;
 		}
@@ -10669,7 +10688,7 @@ void doEndgame(bool saveHighscore) {
 		{
 			client_disconnected[c] = false;
 		}
-		players[c]->entity = nullptr; //TODO: PLAYERSWAP VERIFY. Need to do anything else?
+		players[c]->entity = nullptr; // TODO: PLAYERSWAP VERIFY. Need to do anything else?
 		players[c]->cleanUpOnEntityRemoval();
 		stats[c]->sex = static_cast<sex_t>(0);
 		stats[c]->appearance = 0;
@@ -10679,14 +10698,14 @@ void doEndgame(bool saveHighscore) {
 		stats[c]->clearStats();
 		entitiesToDelete[c].first = NULL;
 		entitiesToDelete[c].last = NULL;
-		if ( c == 0 )
+		if (c == 0)
 		{
 			initClass(c);
 		}
 	}
 
 	// hack to fix these things from breaking everything...
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
 		players[i]->hud.arm = nullptr;
 		players[i]->hud.weapon = nullptr;
@@ -10699,13 +10718,13 @@ void doEndgame(bool saveHighscore) {
 
 	// load menu level
 	int menuMapType = 0;
-	if ( victory == 3 || victory == 4 || victory == 5 )
+	if (victory == 3 || victory == 4 || victory == 5)
 	{
 		menuMapType = loadMainMenuMap(true, true);
 	}
 	else
 	{
-		switch ( local_rng.rand() % 2 )
+		switch (local_rng.rand() % 2)
 		{
 		case 0:
 			menuMapType = loadMainMenuMap(true, false);
@@ -10717,43 +10736,44 @@ void doEndgame(bool saveHighscore) {
 			break;
 		}
 	}
-	for (int c = 0; c < MAXPLAYERS; ++c) {
+	for (int c = 0; c < MAXPLAYERS; ++c)
+	{
 		cameras[c].vang = 0;
 	}
 	numplayers = 0;
 	assignActions(&map);
 	generatePathMaps();
 	gamePaused = false;
-	if ( !victory )
+	if (!victory)
 	{
 		fadefinished = false;
 		fadeout = false;
 	}
 	else
 	{
-		if ( victory == 1 )
+		if (victory == 1)
 		{
 			introstage = 7;
 		}
-		else if ( victory == 2 )
+		else if (victory == 2)
 		{
 			introstage = 8;
 		}
-		else if ( victory == 3 || victory == 4 || victory == 5 )
+		else if (victory == 3 || victory == 4 || victory == 5)
 		{
 			introstage = 10;
 		}
 
-		if ( movieCrawlType >= 0 ) // overrides the introstage 7,8,10 sequences for DLC monsters.
+		if (movieCrawlType >= 0) // overrides the introstage 7,8,10 sequences for DLC monsters.
 		{
 			introstage = 11 + movieCrawlType;
 		}
 	}
 
 #if defined USE_EOS
-	if ( !directConnect )
+	if (!directConnect)
 	{
-		if ( EOS.CurrentLobbyData.currentLobbyIsValid() )
+		if (EOS.CurrentLobbyData.currentLobbyIsValid())
 		{
 			EOS.leaveLobby();
 		}
@@ -10765,17 +10785,18 @@ void doEndgame(bool saveHighscore) {
 #endif
 }
 
-void doIntro() {
+void doIntro()
+{
 	fadefinished = false;
 	fadeout = false;
 	intromoviestage++;
-	if ( intromoviestage >= 9 )
+	if (intromoviestage >= 9)
 	{
 		introstage = 1;
 		intromovietime = 0;
 		intromoviestage = 0;
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			intromoviealpha[c] = 0;
 		}
@@ -10784,24 +10805,24 @@ void doIntro() {
 	{
 		intromovietime = 0;
 	}
-
 }
 
-void doEndgameHerx() {
+void doEndgameHerx()
+{
 #ifdef MUSIC
-	if ( firstendmoviestage == 0 )
+	if (firstendmoviestage == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	firstendmoviestage++;
-	if ( firstendmoviestage >= 5 )
+	if (firstendmoviestage >= 5)
 	{
 		introstage = 4;
 		firstendmovietime = 0;
 		firstendmoviestage = 0;
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			firstendmoviealpha[c] = 0;
 		}
@@ -10815,21 +10836,22 @@ void doEndgameHerx() {
 	}
 }
 
-void doEndgameDevil() {
+void doEndgameDevil()
+{
 #ifdef MUSIC
-	if ( secondendmoviestage == 0 )
+	if (secondendmoviestage == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	secondendmoviestage++;
-	if ( secondendmoviestage >= 5 )
+	if (secondendmoviestage >= 5)
 	{
 		introstage = 4;
 		secondendmovietime = 0;
 		secondendmoviestage = 0;
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			secondendmoviealpha[c] = 0;
 		}
@@ -10843,31 +10865,32 @@ void doEndgameDevil() {
 	}
 }
 
-void doMidgame() {
+void doMidgame()
+{
 #ifdef MUSIC
-	if ( thirdendmoviestage == 0 )
+	if (thirdendmoviestage == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	thirdendmoviestage++;
-	if ( thirdendmoviestage >= thirdEndNumLines )
+	if (thirdendmoviestage >= thirdEndNumLines)
 	{
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			thirdendmoviealpha[c] = 0;
 		}
 		fadefinished = false;
 		fadeout = false;
-		if ( multiplayer != CLIENT )
+		if (multiplayer != CLIENT)
 		{
 			thirdendmoviestage = 0;
 			thirdendmovietime = 0;
 			introstage = 1; // return to normal game functionality
 			skipLevelsOnLoad = 5;
 			loadnextlevel = true; // load the next level.
-			pauseGame(1, false); // unpause game
+			pauseGame(1, false);  // unpause game
 		}
 	}
 	else
@@ -10878,18 +10901,19 @@ void doMidgame() {
 	}
 }
 
-void doEndgameCitadel() {
+void doEndgameCitadel()
+{
 #ifdef MUSIC
-	if ( fourthendmoviestage == 0 )
+	if (fourthendmoviestage == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	fourthendmoviestage++;
-	if ( fourthendmoviestage >= fourthEndNumLines )
+	if (fourthendmoviestage >= fourthEndNumLines)
 	{
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			fourthendmoviealpha[c] = 0;
 		}
@@ -10906,11 +10930,12 @@ void doEndgameCitadel() {
 	}
 }
 
-void doEndgameClassicAndExtraMidGame() {
+void doEndgameClassicAndExtraMidGame()
+{
 	int movieType = introstage - 11;
-	for ( int i = 0; i < 8; ++i )
+	for (int i = 0; i < 8; ++i)
 	{
-		if ( i != movieType )
+		if (i != movieType)
 		{
 			// clean the other end stage credits.
 			DLCendmovieStageAndTime[i][MOVIE_STAGE] = 0;
@@ -10918,22 +10943,22 @@ void doEndgameClassicAndExtraMidGame() {
 		}
 	}
 #ifdef MUSIC
-	if ( DLCendmovieStageAndTime[movieType][MOVIE_STAGE] == 0 )
+	if (DLCendmovieStageAndTime[movieType][MOVIE_STAGE] == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	DLCendmovieStageAndTime[movieType][MOVIE_STAGE]++;
-	if ( movieType == MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS || movieType == MOVIE_CLASSIC_WIN_MONSTERS )
+	if (movieType == MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS || movieType == MOVIE_CLASSIC_WIN_MONSTERS)
 	{
 		// win crawls.
-		if ( DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType] )
+		if (DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType])
 		{
 			introstage = 4;
 			DLCendmovieStageAndTime[movieType][MOVIE_TIME] = 0;
 			DLCendmovieStageAndTime[movieType][MOVIE_STAGE] = 0;
 			int c;
-			for ( c = 0; c < 30; c++ )
+			for (c = 0; c < 30; c++)
 			{
 				DLCendmoviealpha[movieType][c] = 0;
 			}
@@ -10949,21 +10974,21 @@ void doEndgameClassicAndExtraMidGame() {
 	else
 	{
 		// mid-game sequences
-		if ( DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType] )
+		if (DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType])
 		{
 			int c;
-			for ( c = 0; c < 30; c++ )
+			for (c = 0; c < 30; c++)
 			{
 				DLCendmoviealpha[movieType][c] = 0;
 			}
 			fadefinished = false;
 			fadeout = false;
-			if ( multiplayer != CLIENT )
+			if (multiplayer != CLIENT)
 			{
 				DLCendmovieStageAndTime[movieType][MOVIE_STAGE] = 0;
 				DLCendmovieStageAndTime[movieType][MOVIE_TIME] = 0;
 				introstage = 1; // return to normal game functionality
-				if ( movieType == MOVIE_MIDGAME_HERX_MONSTERS )
+				if (movieType == MOVIE_MIDGAME_HERX_MONSTERS)
 				{
 					skipLevelsOnLoad = 5;
 				}
@@ -10972,7 +10997,7 @@ void doEndgameClassicAndExtraMidGame() {
 					skipLevelsOnLoad = 0;
 				}
 				loadnextlevel = true; // load the next level.
-				pauseGame(1, false); // unpause game
+				pauseGame(1, false);  // unpause game
 			}
 		}
 		else
@@ -10984,11 +11009,12 @@ void doEndgameClassicAndExtraMidGame() {
 	}
 }
 
-void doEndgameExpansion() {
+void doEndgameExpansion()
+{
 	int movieType = introstage - 11;
-	for ( int i = 0; i < 8; ++i )
+	for (int i = 0; i < 8; ++i)
 	{
-		if ( i != movieType )
+		if (i != movieType)
 		{
 			// clean the other end stage credits.
 			DLCendmovieStageAndTime[i][MOVIE_STAGE] = 0;
@@ -10996,16 +11022,16 @@ void doEndgameExpansion() {
 		}
 	}
 #ifdef MUSIC
-	if ( DLCendmovieStageAndTime[movieType][MOVIE_STAGE] == 0 )
+	if (DLCendmovieStageAndTime[movieType][MOVIE_STAGE] == 0)
 	{
 		playMusic(endgamemusic, true, true, false);
 	}
 #endif
 	DLCendmovieStageAndTime[movieType][MOVIE_STAGE]++;
-	if ( DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType] )
+	if (DLCendmovieStageAndTime[movieType][MOVIE_STAGE] >= DLCendmovieNumLines[movieType])
 	{
 		int c;
-		for ( c = 0; c < 30; c++ )
+		for (c = 0; c < 30; c++)
 		{
 			DLCendmoviealpha[movieType][c] = 0;
 		}
@@ -11034,9 +11060,9 @@ void doEndgameExpansion() {
 void openGameoverWindow()
 {
 	// deprecated
-    return;
+	return;
 
-	node_t* node;
+	node_t *node;
 	buttonCloseSubwindow(nullptr);
 	list_FreeAll(&button_l);
 	deleteallbuttons = true;
@@ -11046,41 +11072,41 @@ void openGameoverWindow()
 	subx2 = xres / 2 + 288;
 	suby1 = yres / 2 - 160;
 	suby2 = yres / 2 + 160;
-	button_t* button;
+	button_t *button;
 
 	// calculate player score
 	char scorenum[16];
-	score_t* score = scoreConstructor(clientnum);
+	score_t *score = scoreConstructor(clientnum);
 	Uint32 total = totalScore(score);
 	snprintf(scorenum, 16, "%d\n\n", total);
 
 	bool madetop = false;
-	list_t* scoresPtr = &topscores;
-	if ( score->conductGameChallenges[CONDUCT_MULTIPLAYER] )
+	list_t *scoresPtr = &topscores;
+	if (score->conductGameChallenges[CONDUCT_MULTIPLAYER])
 	{
 		scoresPtr = &topscoresMultiplayer;
 	}
-	if ( !list_Size(scoresPtr) )
+	if (!list_Size(scoresPtr))
 	{
 		madetop = true;
 	}
-	else if ( list_Size(scoresPtr) < MAXTOPSCORES )
+	else if (list_Size(scoresPtr) < MAXTOPSCORES)
 	{
 		madetop = true;
 	}
-	else if ( totalScore((score_t*)scoresPtr->last->element) < total )
+	else if (totalScore((score_t *)scoresPtr->last->element) < total)
 	{
 		madetop = true;
 	}
 
-	scoreDeconstructor((void*)score);
+	scoreDeconstructor((void *)score);
 
-	for ( int i = 0; i < MAXPLAYERS; ++i )
+	for (int i = 0; i < MAXPLAYERS; ++i)
 	{
 		players[i]->shootmode = false;
 	}
 
-	if ( multiplayer == SINGLE )
+	if (multiplayer == SINGLE)
 	{
 		strcpy(subtext, Language::get(1133));
 
@@ -11089,7 +11115,7 @@ void openGameoverWindow()
 		strcat(subtext, Language::get(1135));
 		strcat(subtext, scorenum);
 
-		if ( madetop )
+		if (madetop)
 		{
 			strcat(subtext, Language::get(1136));
 		}
@@ -11099,15 +11125,15 @@ void openGameoverWindow()
 		}
 
 		// identify all inventory items
-		for ( int i = 0; i < MAXPLAYERS; ++i )
+		for (int i = 0; i < MAXPLAYERS; ++i)
 		{
-			if ( !players[i]->isLocalPlayer() )
+			if (!players[i]->isLocalPlayer())
 			{
 				continue;
 			}
-			for ( node = stats[i]->inventory.first; node != NULL; node = node->next )
+			for (node = stats[i]->inventory.first; node != NULL; node = node->next)
 			{
-				Item* item = (Item*)node->element;
+				Item *item = (Item *)node->element;
 				item->identified = true;
 			}
 		}
@@ -11150,7 +11176,7 @@ void openGameoverWindow()
 				break;
 			}
 		}
-		if ( survivingPlayer )
+		if (survivingPlayer)
 		{
 			strcat(subtext, Language::get(1141));
 		}
@@ -11178,7 +11204,7 @@ void openGameoverWindow()
 	}
 
 	// death hints
-	if ( currentlevel / LENGTH_OF_LEVEL_REGION < 1 )
+	if (currentlevel / LENGTH_OF_LEVEL_REGION < 1)
 	{
 		strcat(subtext, Language::get(1145 + local_rng.rand() % 15));
 	}
@@ -11204,7 +11230,7 @@ int getNumDisplays()
 	return numdisplays;
 }
 
-void getResolutionList(int device_id, std::list<resolution>& resolutions)
+void getResolutionList(int device_id, std::list<resolution> &resolutions)
 {
 	int nummodes = SDL_GetNumDisplayModes(device_id);
 	printlog("display mode count: %d.\n", nummodes);
@@ -11215,9 +11241,9 @@ void getResolutionList(int device_id, std::list<resolution>& resolutions)
 		SDL_GetDisplayMode(device_id, i, &mode);
 
 		// resolutions below 1024x768 are not supported
-		if ( mode.w < 1024 || mode.h < 720 || mode.refresh_rate == 0 )
+		if (mode.w < 1024 || mode.h < 720 || mode.refresh_rate == 0)
 		{
-		    continue;
+			continue;
 		}
 
 		resolution res{mode.w, mode.h, mode.refresh_rate};
@@ -11225,7 +11251,8 @@ void getResolutionList(int device_id, std::list<resolution>& resolutions)
 	}
 
 	// sort first by hz, then xres, and then by yres
-	resolutions.sort([](const resolution& a, const resolution& b) {
+	resolutions.sort([](const resolution &a, const resolution &b)
+					 {
 		if (a.hz == b.hz) {
 			if (a.x == b.x) {
 				return a.y > b.y;
@@ -11234,8 +11261,7 @@ void getResolutionList(int device_id, std::list<resolution>& resolutions)
 			}
 		} else {
 			return a.hz > b.hz;
-		}
-	});
+		} });
 
 	// remove identical modes
 	resolutions.unique();
@@ -11244,16 +11270,16 @@ void getResolutionList(int device_id, std::list<resolution>& resolutions)
 bool achievements_window = false;
 int achievements_window_page = 1;
 
-void buttonAchievementsUp(button_t* my)
+void buttonAchievementsUp(button_t *my)
 {
 	achievements_window_page =
 		std::max(1, achievements_window_page - 1);
 }
 
-void buttonAchievementsDown(button_t* my)
+void buttonAchievementsDown(button_t *my)
 {
 	int num_achievements = achievementNames.size();
-	if ( num_achievements == 0 )
+	if (num_achievements == 0)
 	{
 		return;
 	}
@@ -11277,7 +11303,7 @@ void openAchievementsWindow()
 #endif
 	// close button
 	{
-		button_t* button = newButton();
+		button_t *button = newButton();
 		strcpy(button->label, "x");
 		button->x = subx2 - 20;
 		button->y = suby1;
@@ -11292,8 +11318,8 @@ void openAchievementsWindow()
 
 	// up / prev page button
 	{
-		button_t* button = newButton();
-		//strcpy(button->label, u8"\u25B2");
+		button_t *button = newButton();
+		// strcpy(button->label, u8"\u25B2");
 		button->x = subx2 - 33;
 		button->y = suby1 + 84;
 		button->sizex = 30;
@@ -11307,8 +11333,8 @@ void openAchievementsWindow()
 
 	// down / next page button
 	{
-		button_t* button = newButton();
-		//strcpy(button->label, u8"\u25BC");
+		button_t *button = newButton();
+		// strcpy(button->label, u8"\u25BC");
 		button->x = subx2 - 33;
 		button->y = suby2 - 34;
 		button->sizex = 30;
@@ -11321,7 +11347,7 @@ void openAchievementsWindow()
 	}
 }
 
-void closeAchievementsWindow(button_t* my)
+void closeAchievementsWindow(button_t *my)
 {
 	buttonCloseSubwindow(my);
 }
@@ -11329,12 +11355,11 @@ void closeAchievementsWindow(button_t* my)
 // sets up the settings window
 void openSettingsWindow()
 {
-    // deprecated
+	// deprecated
 }
 
-
 // opens the wait window for steam lobby (getting lobby list, etc.)
-void openSteamLobbyWaitWindow(button_t* my)
+void openSteamLobbyWaitWindow(button_t *my)
 {
 	// deprecated
 }
@@ -11346,58 +11371,58 @@ void openFailedConnectionWindow(int mode)
 }
 
 // opens the lobby browser window (steam client only)
-void openSteamLobbyBrowserWindow(button_t* my)
+void openSteamLobbyBrowserWindow(button_t *my)
 {
 	// deprecated
 }
 
 // steam lobby browser join game
-void buttonSteamLobbyBrowserJoinGame(button_t* my)
+void buttonSteamLobbyBrowserJoinGame(button_t *my)
 {
 	// deprecated
 }
 
 // steam lobby browser refresh
-void buttonSteamLobbyBrowserRefresh(button_t* my)
+void buttonSteamLobbyBrowserRefresh(button_t *my)
 {
 	// deprecated
 }
 
 // quit game button
-void buttonQuitConfirm(button_t* my)
+void buttonQuitConfirm(button_t *my)
 {
 	// deprecated
 }
 
 // quit game button (no save)
-void buttonQuitNoSaveConfirm(button_t* my)
+void buttonQuitNoSaveConfirm(button_t *my)
 {
 	// deprecated
 }
 
 // end game button
-void buttonEndGameConfirm(button_t* my)
+void buttonEndGameConfirm(button_t *my)
 {
 	// deprecated
 }
 
-void buttonEndGameConfirmSave(button_t* my)
+void buttonEndGameConfirmSave(button_t *my)
 {
 	// deprecated
 }
 
 // generic close window button
-void buttonCloseSubwindow(button_t* my)
+void buttonCloseSubwindow(button_t *my)
 {
-    return; // deprecated
+	return; // deprecated
 }
 
-void buttonCloseSettingsSubwindow(button_t* my)
+void buttonCloseSettingsSubwindow(button_t *my)
 {
 	// deprecated
 }
 
-void buttonCloseAndEndGameConfirm(button_t* my)
+void buttonCloseAndEndGameConfirm(button_t *my)
 {
 	// deprecated
 }
@@ -11405,37 +11430,37 @@ void buttonCloseAndEndGameConfirm(button_t* my)
 Uint32 charcreation_ticks = 0;
 
 // move player forward through creation dialogue
-void buttonContinue(button_t* my)
+void buttonContinue(button_t *my)
 {
 	return; // deprecated
 }
 
 // move player backward through creation dialogue
-void buttonBack(button_t* my)
+void buttonBack(button_t *my)
 {
 	// deprecated
 }
 
 // start a singleplayer game
-void buttonStartSingleplayer(button_t* my)
+void buttonStartSingleplayer(button_t *my)
 {
 	// deprecated
 }
 
 // host a multiplayer game
-void buttonHostMultiplayer(button_t* my)
+void buttonHostMultiplayer(button_t *my)
 {
 	return; // deprecated
 }
 
 // join a multiplayer game
-void buttonJoinMultiplayer(button_t* my)
+void buttonJoinMultiplayer(button_t *my)
 {
 	// deprecated
 }
 
 // starts a lobby as host
-void buttonHostLobby(button_t* my)
+void buttonHostLobby(button_t *my)
 {
 	return; // deprecated
 }
@@ -11443,26 +11468,26 @@ void buttonHostLobby(button_t* my)
 // joins a lobby as client
 // if direct-ip, this is called directly after pressing join
 // otherwise for matchmaking, this is called asynchronously after a matchmaking lobby has been joined
-void buttonJoinLobby(button_t* my)
+void buttonJoinLobby(button_t *my)
 {
-    // deprecated
-    return;
+	// deprecated
+	return;
 }
 
 // starts the game as server
-void buttonStartServer(button_t* my)
+void buttonStartServer(button_t *my)
 {
-    // deprecated
+	// deprecated
 	return;
 }
 
 // opens the steam dialog to invite friends
-void buttonInviteFriends(button_t* my)
+void buttonInviteFriends(button_t *my)
 {
 #ifdef STEAMWORKS
 	if (SteamUser()->BLoggedOn() && currentLobby)
 	{
-		SteamFriends()->ActivateGameOverlayInviteDialog(*static_cast<CSteamID*>(currentLobby));
+		SteamFriends()->ActivateGameOverlayInviteDialog(*static_cast<CSteamID *>(currentLobby));
 	}
 #else
 #ifdef USE_EOS
@@ -11472,49 +11497,49 @@ void buttonInviteFriends(button_t* my)
 }
 
 // disconnects from whatever lobby the game is connected to
-void buttonDisconnect(button_t* my)
+void buttonDisconnect(button_t *my)
 {
 	// deprecated
 }
 
 // open the video tab in the settings window
-void buttonVideoTab(button_t* my)
+void buttonVideoTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_VIDEO_TAB);
 }
 
 // open the audio tab in the settings window
-void buttonAudioTab(button_t* my)
+void buttonAudioTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_AUDIO_TAB);
 }
 
 // open the keyboard tab in the settings window
-void buttonKeyboardTab(button_t* my)
+void buttonKeyboardTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_KEYBOARD_TAB);
 }
 
 // open the mouse tab in the settings window
-void buttonMouseTab(button_t* my)
+void buttonMouseTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_MOUSE_TAB);
 }
 
-//Open the gamepad bindings tab in the settings window
-void buttonGamepadBindingsTab(button_t* my)
+// Open the gamepad bindings tab in the settings window
+void buttonGamepadBindingsTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_GAMEPAD_BINDINGS_TAB);
 }
 
-//Open the general gamepad settings tab in the settings window
-void buttonGamepadSettingsTab(button_t* my)
+// Open the general gamepad settings tab in the settings window
+void buttonGamepadSettingsTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_GAMEPAD_SETTINGS_TAB);
 }
 
 // open the misc tab in the settings window
-void buttonMiscTab(button_t* my)
+void buttonMiscTab(button_t *my)
 {
 	changeSettingsTab(SETTINGS_MISC_TAB);
 }
@@ -11531,7 +11556,7 @@ void openConfirmResolutionWindow()
 	inputs.controllerClearInput(clientnum, INJOY_MENU_NEXT);
 	playSound(139, 64);
 
-	//Create confirmation window
+	// Create confirmation window
 	subwindow = 1;
 	subx1 = xres / 2 - 128;
 	subx2 = xres / 2 + 128;
@@ -11539,8 +11564,8 @@ void openConfirmResolutionWindow()
 	suby2 = yres / 2 + 40;
 	strcpy(subtext, "Testing resolution.\nWill revert in 10 seconds.");
 
-	//Accept button
-	button_t* button = newButton();
+	// Accept button
+	button_t *button = newButton();
 	strcpy(button->label, "Accept");
 	button->x = subx1 + 8;
 	button->y = suby2 - 28;
@@ -11552,7 +11577,7 @@ void openConfirmResolutionWindow()
 	button->key = SDLK_RETURN;
 	button->joykey = joyimpulses[INJOY_MENU_NEXT];
 
-	//Revert button
+	// Revert button
 	button = newButton();
 	strcpy(button->label, "Revert");
 	button->x = subx2 - strlen("Revert") * 12 - 16;
@@ -11570,7 +11595,7 @@ void openConfirmResolutionWindow()
 	confirmResolutionWindow = true;
 }
 
-void buttonAcceptResolution(button_t* my)
+void buttonAcceptResolution(button_t *my)
 {
 	confirmResolutionWindow = false;
 	buttonCloseSubwindow(my);
@@ -11581,7 +11606,7 @@ void buttonAcceptResolution(button_t* my)
 	applySettings();
 }
 
-void buttonRevertResolution(button_t* my)
+void buttonRevertResolution(button_t *my)
 {
 	revertResolution();
 
@@ -11601,11 +11626,11 @@ void revertResolution()
 }
 
 // settings accept button
-void buttonSettingsAccept(button_t* my)
+void buttonSettingsAccept(button_t *my)
 {
 	applySettings();
 
-	if ( resolutionChanged )
+	if (resolutionChanged)
 	{
 		buttonCloseSettingsSubwindow(my);
 		resolutionChanged = false;
@@ -11624,19 +11649,19 @@ void buttonSettingsAccept(button_t* my)
 }
 
 // settings okay button
-void buttonSettingsOK(button_t* my)
+void buttonSettingsOK(button_t *my)
 {
 	buttonSettingsAccept(my);
-	if ( !confirmResolutionWindow )
+	if (!confirmResolutionWindow)
 	{
 		buttonCloseSubwindow(my);
 	}
 }
 
 // next score button (statistics window)
-void buttonScoreNext(button_t* my)
+void buttonScoreNext(button_t *my)
 {
-	if ( scoreDisplayMultiplayer )
+	if (scoreDisplayMultiplayer)
 	{
 		score_window = std::min<int>(score_window + 1, std::max<Uint32>(1, list_Size(&topscoresMultiplayer)));
 	}
@@ -11649,14 +11674,14 @@ void buttonScoreNext(button_t* my)
 }
 
 // previous score button (statistics window)
-void buttonScorePrev(button_t* my)
+void buttonScorePrev(button_t *my)
 {
 	score_window = std::max(score_window - 1, 1);
 	loadScore(score_window - 1);
 	camera_charsheet_offsetyaw = (330) * PI / 180;
 }
 
-void buttonScoreToggle(button_t* my)
+void buttonScoreToggle(button_t *my)
 {
 	score_window = 1;
 	camera_charsheet_offsetyaw = (330) * PI / 180;
@@ -11666,21 +11691,21 @@ void buttonScoreToggle(button_t* my)
 
 #ifdef STEAMWORKS
 
-void buttonLeaderboardFetch(button_t* my)
+void buttonLeaderboardFetch(button_t *my)
 {
-	if ( g_SteamLeaderboards )
+	if (g_SteamLeaderboards)
 	{
 		g_SteamLeaderboards->DownloadScores(g_SteamLeaderboards->LeaderboardView.requestType,
-			g_SteamLeaderboards->LeaderboardView.rangeStart, g_SteamLeaderboards->LeaderboardView.rangeEnd);
+											g_SteamLeaderboards->LeaderboardView.rangeStart, g_SteamLeaderboards->LeaderboardView.rangeEnd);
 	}
 }
 
-void buttonLeaderboardNextCategory(button_t* my)
+void buttonLeaderboardNextCategory(button_t *my)
 {
-	if ( g_SteamLeaderboards )
+	if (g_SteamLeaderboards)
 	{
 		int offset = (g_SteamLeaderboards->b_ShowDLCScores ? 16 : 0);
-		g_SteamLeaderboards->LeaderboardView.boardToDownload = 
+		g_SteamLeaderboards->LeaderboardView.boardToDownload =
 			std::min(g_SteamLeaderboards->LeaderboardView.boardToDownload + 1, (int)LEADERBOARD_MULTIPLAYER_HELL_SCORE + offset);
 		g_SteamLeaderboards->b_ScoresDownloaded = false;
 		score_leaderboard_window = 1;
@@ -11688,12 +11713,12 @@ void buttonLeaderboardNextCategory(button_t* my)
 	}
 }
 
-void buttonLeaderboardPrevCategory(button_t* my)
+void buttonLeaderboardPrevCategory(button_t *my)
 {
-	if ( g_SteamLeaderboards )
+	if (g_SteamLeaderboards)
 	{
 		int offset = (g_SteamLeaderboards->b_ShowDLCScores ? 16 : 0);
-		g_SteamLeaderboards->LeaderboardView.boardToDownload = 
+		g_SteamLeaderboards->LeaderboardView.boardToDownload =
 			std::max(g_SteamLeaderboards->LeaderboardView.boardToDownload - 1, (int)LEADERBOARD_NORMAL_TIME + offset);
 		g_SteamLeaderboards->b_ScoresDownloaded = false;
 		score_leaderboard_window = 1;
@@ -11701,20 +11726,20 @@ void buttonLeaderboardPrevCategory(button_t* my)
 	}
 }
 
-void buttonDLCLeaderboardFetch(button_t* my)
+void buttonDLCLeaderboardFetch(button_t *my)
 {
-	if ( g_SteamLeaderboards )
+	if (g_SteamLeaderboards)
 	{
-		if ( g_SteamLeaderboards->b_ShowDLCScores )
+		if (g_SteamLeaderboards->b_ShowDLCScores)
 		{
-			if ( g_SteamLeaderboards->LeaderboardView.boardToDownload > LEADERBOARD_MULTIPLAYER_HELL_SCORE )
+			if (g_SteamLeaderboards->LeaderboardView.boardToDownload > LEADERBOARD_MULTIPLAYER_HELL_SCORE)
 			{
 				g_SteamLeaderboards->LeaderboardView.boardToDownload -= 16;
 			}
 		}
 		else
 		{
-			if ( g_SteamLeaderboards->LeaderboardView.boardToDownload <= LEADERBOARD_MULTIPLAYER_HELL_SCORE )
+			if (g_SteamLeaderboards->LeaderboardView.boardToDownload <= LEADERBOARD_MULTIPLAYER_HELL_SCORE)
 			{
 				g_SteamLeaderboards->LeaderboardView.boardToDownload += 16;
 			}
@@ -11724,12 +11749,11 @@ void buttonDLCLeaderboardFetch(button_t* my)
 		score_leaderboard_window = 1;
 		g_SteamLeaderboards->FindLeaderboard(g_SteamLeaderboards->leaderboardNames[g_SteamLeaderboards->LeaderboardView.boardToDownload].c_str());
 	}
-
 }
 
-void buttonOpenSteamLeaderboards(button_t* my)
+void buttonOpenSteamLeaderboards(button_t *my)
 {
-	if ( g_SteamLeaderboards )
+	if (g_SteamLeaderboards)
 	{
 		// close current window
 		buttonCloseSubwindow(nullptr);
@@ -11750,7 +11774,7 @@ void buttonOpenSteamLeaderboards(button_t* my)
 		strcpy(subtext, "Steam Leaderboards");
 
 		// close button
-		button_t* button = newButton();
+		button_t *button = newButton();
 		strcpy(button->label, "x");
 		button->x = subx2 - 20;
 		button->y = suby1 + 4;
@@ -11800,7 +11824,7 @@ void buttonOpenSteamLeaderboards(button_t* my)
 		button->focused = 1;
 
 		// fetch DLC leaderboards
-		button_t* dlcScoreButton = newButton();
+		button_t *dlcScoreButton = newButton();
 		strcpy(dlcScoreButton->label, "Toggle DLC Scores");
 		dlcScoreButton->y = suby1 + 3 * TTF12_HEIGHT + 8;
 		dlcScoreButton->sizex = 25 * TTF12_WIDTH + 8;
@@ -11813,19 +11837,19 @@ void buttonOpenSteamLeaderboards(button_t* my)
 }
 #endif
 
-void buttonOpenScoresWindow(button_t* my)
+void buttonOpenScoresWindow(button_t *my)
 {
-    // deprecated
-    return;
+	// deprecated
+	return;
 }
 
-void buttonDeleteCurrentScore(button_t* my)
+void buttonDeleteCurrentScore(button_t *my)
 {
-	node_t* node = nullptr;
-	if ( score_window_delete_multiplayer )
+	node_t *node = nullptr;
+	if (score_window_delete_multiplayer)
 	{
 		node = list_Node(&topscoresMultiplayer, score_window_to_delete - 1);
-		if ( node )
+		if (node)
 		{
 			list_RemoveNode(node);
 			score_window_to_delete = std::max(score_window_to_delete - 1, 1);
@@ -11834,7 +11858,7 @@ void buttonDeleteCurrentScore(button_t* my)
 	else
 	{
 		node = list_Node(&topscores, score_window_to_delete - 1);
-		if ( node )
+		if (node)
 		{
 			list_RemoveNode(node);
 			score_window_to_delete = std::max(score_window_to_delete - 1, 1);
@@ -11843,7 +11867,7 @@ void buttonDeleteCurrentScore(button_t* my)
 }
 
 // handles slider
-void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment, int* var, SDL_Surface* slider_font, int slider_font_char_width)
+void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment, int *var, SDL_Surface *slider_font, int slider_font_char_width)
 {
 	int c;
 	Sint32 mousex = inputs.getMouse(clientnum, Inputs::MouseInputs::X);
@@ -11853,7 +11877,7 @@ void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment,
 
 	// build bar
 	strcpy(tempstr, "| ");
-	for ( c = 0; c < dots; c++ )
+	for (c = 0; c < dots; c++)
 	{
 		strcat(tempstr, ". ");
 	}
@@ -11863,14 +11887,14 @@ void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment,
 	// control
 	int range = maxvalue - minvalue;
 	int sliderLength = ((strlen(tempstr) - 4) * (slider_font->w / slider_font_char_width));
-	if ( inputs.bMouseLeft(clientnum) )
+	if (inputs.bMouseLeft(clientnum))
 	{
-		if ( omousex >= x && omousex < x + sliderLength + (slider_font->w / slider_font_char_width) )
+		if (omousex >= x && omousex < x + sliderLength + (slider_font->w / slider_font_char_width))
 		{
-			if ( omousey >= y - (slider_font->h / slider_font_char_width) / 2 && omousey < y + ((slider_font->h / slider_font_char_width) / 2) * 3 )
+			if (omousey >= y - (slider_font->h / slider_font_char_width) / 2 && omousey < y + ((slider_font->h / slider_font_char_width) / 2) * 3)
 			{
 				*var = ((real_t)(mousex - x - (slider_font->w / slider_font_char_width) / 2) / sliderLength) * range + minvalue;
-				if ( increment )
+				if (increment)
 				{
 					*var += increment / 2;
 					*var /= increment;
@@ -11884,11 +11908,11 @@ void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment,
 	// draw slider
 	int sliderx = x + (slider_font->w / slider_font_char_width) / 2;
 	sliderx += (((real_t)(*var) - minvalue) / range) * sliderLength;
-	drawWindowFancy( sliderx - (slider_font->w / slider_font_char_width) / 2, y - (slider_font->h / slider_font_char_width) / 2, sliderx + (slider_font->w / slider_font_char_width) / 2, y + ((slider_font->h / slider_font_char_width) / 2) * 3);
+	drawWindowFancy(sliderx - (slider_font->w / slider_font_char_width) / 2, y - (slider_font->h / slider_font_char_width) / 2, sliderx + (slider_font->w / slider_font_char_width) / 2, y + ((slider_font->h / slider_font_char_width) / 2) * 3);
 }
 
 // handles slider (float)
-void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t increment, real_t* var)
+void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t increment, real_t *var)
 {
 	int c;
 	Sint32 mousex = inputs.getMouse(clientnum, Inputs::MouseInputs::X);
@@ -11898,7 +11922,7 @@ void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t 
 
 	// build bar
 	strcpy(tempstr, "| ");
-	for ( c = 0; c < dots; c++ )
+	for (c = 0; c < dots; c++)
 	{
 		strcat(tempstr, ". ");
 	}
@@ -11908,14 +11932,14 @@ void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t 
 	// control
 	real_t range = maxvalue - minvalue;
 	int sliderLength = ((strlen(tempstr) - 6) * (SLIDERFONT->w / 16));
-	if ( inputs.bMouseLeft(clientnum) )
+	if (inputs.bMouseLeft(clientnum))
 	{
-		if ( omousex >= x && omousex < x + sliderLength + (SLIDERFONT->w / 16) )
+		if (omousex >= x && omousex < x + sliderLength + (SLIDERFONT->w / 16))
 		{
-			if ( omousey >= y - (SLIDERFONT->h / 16) / 2 && omousey < y + ((SLIDERFONT->h / 16) / 2) * 3 )
+			if (omousey >= y - (SLIDERFONT->h / 16) / 2 && omousey < y + ((SLIDERFONT->h / 16) / 2) * 3)
 			{
 				*var = ((real_t)(mousex - x - (SLIDERFONT->w / 16) / 2) / sliderLength) * range + minvalue;
-				if ( increment )
+				if (increment)
 				{
 					*var += increment / 2;
 					*var /= increment;
@@ -11930,30 +11954,30 @@ void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t 
 	// draw slider
 	int sliderx = x + (SLIDERFONT->w / 16) / 2;
 	sliderx += (((*var) - minvalue) / range) * sliderLength;
-	drawWindowFancy( sliderx - (SLIDERFONT->w / 16) / 2, y - (SLIDERFONT->h / 16) / 2, sliderx + (SLIDERFONT->w / 16) / 2, y + ((SLIDERFONT->h / 16) / 2) * 3);
+	drawWindowFancy(sliderx - (SLIDERFONT->w / 16) / 2, y - (SLIDERFONT->h / 16) / 2, sliderx + (SLIDERFONT->w / 16) / 2, y + ((SLIDERFONT->h / 16) / 2) * 3);
 }
 
-void openLoadGameWindow(button_t* my)
+void openLoadGameWindow(button_t *my)
 {
 	// deprecated
 }
 
-void openNewLoadGameWindow(button_t* my)
+void openNewLoadGameWindow(button_t *my)
 {
 	// deprecated
 }
 
-void buttonDeleteSavedSoloGame(button_t* my)
+void buttonDeleteSavedSoloGame(button_t *my)
 {
 	// deprecated
 }
 
-void buttonDeleteSavedMultiplayerGame(button_t* my)
+void buttonDeleteSavedMultiplayerGame(button_t *my)
 {
 	// deprecated
 }
 
-void buttonConfirmDeleteSoloFile(button_t* my)
+void buttonConfirmDeleteSoloFile(button_t *my)
 {
 	// close current window
 	buttonCloseSubwindow(nullptr);
@@ -11961,14 +11985,14 @@ void buttonConfirmDeleteSoloFile(button_t* my)
 	deleteallbuttons = true;
 	loadGameSaveShowRectangle = 0;
 	deleteSaveGame(SINGLE);
-	if ( anySaveFileExists() ) // check for saved game to load up
+	if (anySaveFileExists()) // check for saved game to load up
 	{
 		openNewLoadGameWindow(nullptr);
 	}
 	playSound(153, 96);
 }
 
-void buttonConfirmDeleteMultiplayerFile(button_t* my)
+void buttonConfirmDeleteMultiplayerFile(button_t *my)
 {
 	// close current window
 	buttonCloseSubwindow(nullptr);
@@ -11976,15 +12000,14 @@ void buttonConfirmDeleteMultiplayerFile(button_t* my)
 	deleteallbuttons = true;
 	loadGameSaveShowRectangle = 0;
 	deleteSaveGame(CLIENT);
-	if ( anySaveFileExists() ) // check for saved game to load up
+	if (anySaveFileExists()) // check for saved game to load up
 	{
 		openNewLoadGameWindow(nullptr);
 	}
 	playSound(153, 96);
 }
 
-
-void buttonDeleteScoreCancel(button_t* my)
+void buttonDeleteScoreCancel(button_t *my)
 {
 	// close current window
 	buttonCloseSubwindow(nullptr);
@@ -12000,13 +12023,13 @@ void buttonDeleteScoreCancel(button_t* my)
 	loadScore(score_window - 1);
 }
 
-void buttonDeleteScoreConfirm(button_t* my)
+void buttonDeleteScoreConfirm(button_t *my)
 {
 	buttonDeleteCurrentScore(nullptr);
 	buttonDeleteScoreCancel(nullptr);
 }
 
-void buttonDeleteScoreWindow(button_t* my)
+void buttonDeleteScoreWindow(button_t *my)
 {
 	score_window_to_delete = score_window;
 	score_window_delete_multiplayer = scoreDisplayMultiplayer;
@@ -12025,7 +12048,7 @@ void buttonDeleteScoreWindow(button_t* my)
 	strcpy(subtext, Language::get(3002));
 
 	// close button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "x");
 	button->x = subx2 - 20;
 	button->y = suby1;
@@ -12061,9 +12084,9 @@ void buttonDeleteScoreWindow(button_t* my)
 	button->focused = 1;
 }
 
-void buttonOpenCharacterCreationWindow(button_t* my)
+void buttonOpenCharacterCreationWindow(button_t *my)
 {
-	button_t* button;
+	button_t *button;
 
 	playing_random_char = false;
 	loadingsavegame = 0;
@@ -12080,7 +12103,7 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	initClass(0);
 
 	// close current window
-	if ( subwindow )
+	if (subwindow)
 	{
 		buttonCloseSubwindow(NULL);
 		list_FreeAll(&button_l);
@@ -12110,8 +12133,8 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	button->focused = 1;
 	button->joykey = joyimpulses[INJOY_PAUSE_MENU];
 
-	//if ( lastCreatedCharacterClass >= 0
-	//	&& lastCreatedCharacterAppearance >= 0 
+	// if ( lastCreatedCharacterClass >= 0
+	//	&& lastCreatedCharacterAppearance >= 0
 	//	&& lastCreatedCharacterSex >= 0 )
 	//{
 	//	button_t* replayCharacterBtn = newButton();
@@ -12123,7 +12146,7 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	//	replayCharacterBtn->action = &buttonReplayLastCharacter;
 	//	replayCharacterBtn->visible = 1;
 	//	replayCharacterBtn->focused = 1;
-	//}
+	// }
 
 	// Continue ...
 	button = newButton();
@@ -12163,10 +12186,10 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	button->action = &buttonRandomCharacter;
 	button->visible = 1;
 	button->focused = 1;
-	button->key = SDLK_r; //NOTE: This might cause the character to randomly R when you're typing a name. So far, exactly one user has reported something like this happening exactly once in the entirety of existence.
-	button->joykey = joyimpulses[INJOY_MENU_RANDOM_CHAR]; //random character => "y" button
+	button->key = SDLK_r;								  // NOTE: This might cause the character to randomly R when you're typing a name. So far, exactly one user has reported something like this happening exactly once in the entirety of existence.
+	button->joykey = joyimpulses[INJOY_MENU_RANDOM_CHAR]; // random character => "y" button
 
-	//Random Name.
+	// Random Name.
 	button = newButton();
 	strcpy(button->label, Language::get(2498));
 	button->x = button_back_x + button_back_width + 4;
@@ -12179,67 +12202,63 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	button->joykey = joyimpulses[INJOY_MENU_RANDOM_NAME];
 }
 
-void buttonLoadSingleplayerGame(button_t* button)
+void buttonLoadSingleplayerGame(button_t *button)
 {
 	return; // deprecated
 }
 
-void buttonLoadMultiplayerGame(button_t* button)
+void buttonLoadMultiplayerGame(button_t *button)
 {
 	return; // deprecated
 }
 
-void buttonRandomCharacter(button_t* my)
+void buttonRandomCharacter(button_t *my)
 {
 	playing_random_char = true;
 	charcreation_step = 4;
 	camera_charsheet_offsetyaw = (330) * PI / 180;
 	stats[0]->sex = static_cast<sex_t>(local_rng.rand() % 2);
-	client_classes[0] = local_rng.rand() % (CLASS_MONK + 1);//NUMCLASSES;
+	client_classes[0] = local_rng.rand() % (CLASS_MONK + 1); // NUMCLASSES;
 	stats[0]->clearStats();
-	if ( enabledDLCPack1 || enabledDLCPack2 )
+	if (enabledDLCPack1 || enabledDLCPack2)
 	{
 		stats[0]->playerRace = local_rng.rand() % NUMPLAYABLERACES;
-		if ( !enabledDLCPack1 )
+		if (!enabledDLCPack1)
 		{
-			while ( stats[0]->playerRace == RACE_SKELETON || stats[0]->playerRace == RACE_VAMPIRE
-				|| stats[0]->playerRace == RACE_SUCCUBUS || stats[0]->playerRace == RACE_GOATMAN )
+			while (stats[0]->playerRace == RACE_SKELETON || stats[0]->playerRace == RACE_VAMPIRE || stats[0]->playerRace == RACE_SUCCUBUS || stats[0]->playerRace == RACE_GOATMAN)
 			{
 				stats[0]->playerRace = local_rng.rand() % NUMPLAYABLERACES;
 			}
 		}
-		else if ( !enabledDLCPack2 )
+		else if (!enabledDLCPack2)
 		{
-			while ( stats[0]->playerRace == RACE_AUTOMATON || stats[0]->playerRace == RACE_GOBLIN
-				|| stats[0]->playerRace == RACE_INCUBUS || stats[0]->playerRace == RACE_INSECTOID )
+			while (stats[0]->playerRace == RACE_AUTOMATON || stats[0]->playerRace == RACE_GOBLIN || stats[0]->playerRace == RACE_INCUBUS || stats[0]->playerRace == RACE_INSECTOID)
 			{
 				stats[0]->playerRace = local_rng.rand() % NUMPLAYABLERACES;
 			}
 		}
-		if ( stats[0]->playerRace == RACE_INCUBUS )
+		if (stats[0]->playerRace == RACE_INCUBUS)
 		{
 			stats[0]->sex = MALE;
 		}
-		else if ( stats[0]->playerRace == RACE_SUCCUBUS )
+		else if (stats[0]->playerRace == RACE_SUCCUBUS)
 		{
 			stats[0]->sex = FEMALE;
 		}
 
-		if ( stats[0]->playerRace == RACE_HUMAN )
+		if (stats[0]->playerRace == RACE_HUMAN)
 		{
 			client_classes[0] = local_rng.rand() % (NUMCLASSES);
-			if ( !enabledDLCPack1 )
+			if (!enabledDLCPack1)
 			{
-				while ( client_classes[0] == CLASS_CONJURER || client_classes[0] == CLASS_ACCURSED
-					|| client_classes[0] == CLASS_MESMER || client_classes[0] == CLASS_BREWER )
+				while (client_classes[0] == CLASS_CONJURER || client_classes[0] == CLASS_ACCURSED || client_classes[0] == CLASS_MESMER || client_classes[0] == CLASS_BREWER)
 				{
 					client_classes[0] = local_rng.rand() % (NUMCLASSES);
 				}
 			}
-			else if ( !enabledDLCPack2 )
+			else if (!enabledDLCPack2)
 			{
-				while ( client_classes[0] == CLASS_HUNTER || client_classes[0] == CLASS_SHAMAN
-					|| client_classes[0] == CLASS_PUNISHER || client_classes[0] == CLASS_MACHINIST )
+				while (client_classes[0] == CLASS_HUNTER || client_classes[0] == CLASS_SHAMAN || client_classes[0] == CLASS_PUNISHER || client_classes[0] == CLASS_MACHINIST)
 				{
 					client_classes[0] = local_rng.rand() % (NUMCLASSES);
 				}
@@ -12249,7 +12268,7 @@ void buttonRandomCharacter(button_t* my)
 		else
 		{
 			client_classes[0] = local_rng.rand() % (CLASS_MONK + 2);
-			if ( client_classes[0] > CLASS_MONK )
+			if (client_classes[0] > CLASS_MONK)
 			{
 				client_classes[0] = CLASS_MONK + stats[0]->playerRace; // monster specific classes.
 			}
@@ -12266,22 +12285,22 @@ void buttonRandomCharacter(button_t* my)
 
 bool replayLastCharacter(const int index, int multiplayer)
 {
-	if ( multiplayer != SINGLE )
+	if (multiplayer != SINGLE)
 	{
-		if ( index != clientnum )
+		if (index != clientnum)
 		{
 			return false;
 		}
-		if ( client_disconnected[index] )
+		if (client_disconnected[index])
 		{
 			return false;
 		}
 	}
-	
+
 	int savedCharacterIndex = index;
-	if ( multiplayer != SINGLE )
+	if (multiplayer != SINGLE)
 	{
-		if ( multiplayer == DIRECTCLIENT || multiplayer == DIRECTSERVER )
+		if (multiplayer == DIRECTCLIENT || multiplayer == DIRECTSERVER)
 		{
 			savedCharacterIndex = LastCreatedCharacter::LASTCHAR_LAN_PERSONA_INDEX;
 		}
@@ -12291,57 +12310,57 @@ bool replayLastCharacter(const int index, int multiplayer)
 		}
 	}
 
-	if ( savedCharacterIndex < 0 || savedCharacterIndex > LastCreatedCharacter::LASTCHAR_ONLINE_PERSONA_INDEX )
+	if (savedCharacterIndex < 0 || savedCharacterIndex > LastCreatedCharacter::LASTCHAR_ONLINE_PERSONA_INDEX)
 	{
 		return false;
 	}
 
-	auto& lastClass = LastCreatedCharacterSettings.characterClass[savedCharacterIndex];
-	auto& lastSex = LastCreatedCharacterSettings.characterSex[savedCharacterIndex];
-	auto& lastRace = LastCreatedCharacterSettings.characterRace[savedCharacterIndex];
-	auto& lastAppearance = LastCreatedCharacterSettings.characterAppearance[savedCharacterIndex];
-	auto& lastName = LastCreatedCharacterSettings.characterName[savedCharacterIndex];
+	auto &lastClass = LastCreatedCharacterSettings.characterClass[savedCharacterIndex];
+	auto &lastSex = LastCreatedCharacterSettings.characterSex[savedCharacterIndex];
+	auto &lastRace = LastCreatedCharacterSettings.characterRace[savedCharacterIndex];
+	auto &lastAppearance = LastCreatedCharacterSettings.characterAppearance[savedCharacterIndex];
+	auto &lastName = LastCreatedCharacterSettings.characterName[savedCharacterIndex];
 
-	if ( lastClass >= 0 && lastSex >= 0 && lastRace >= 0 && lastAppearance >= 0 && lastName != "" )
+	if (lastClass >= 0 && lastSex >= 0 && lastRace >= 0 && lastAppearance >= 0 && lastName != "")
 	{
 		stats[index]->sex = static_cast<sex_t>(std::min(lastSex, (int)sex_t::FEMALE));
 		stats[index]->playerRace = std::min(std::max(static_cast<int>(RACE_HUMAN), lastRace), static_cast<int>(NUMPLAYABLERACES));
 		stats[index]->appearance = lastAppearance;
 		client_classes[index] = std::min(std::max(0, lastClass), static_cast<int>(CLASS_HUNTER));
 
-		switch ( isCharacterValidFromDLC(*stats[index], lastClass) )
+		switch (isCharacterValidFromDLC(*stats[index], lastClass))
 		{
-			case VALID_OK_CHARACTER:
-				// do nothing.
-				break;
-			case INVALID_REQUIREDLC1:
-			case INVALID_REQUIREDLC2:
-				// class or race invalid.
-				if ( stats[index]->playerRace > RACE_HUMAN )
-				{
-					stats[index]->playerRace = RACE_HUMAN;
-				}
-				if ( client_classes[index] > CLASS_MONK )
-				{
-					client_classes[index] = CLASS_BARBARIAN;
-				}
-				break;
-			case INVALID_CHARACTER:
-				// invalid for whatever reason, reset.
+		case VALID_OK_CHARACTER:
+			// do nothing.
+			break;
+		case INVALID_REQUIREDLC1:
+		case INVALID_REQUIREDLC2:
+			// class or race invalid.
+			if (stats[index]->playerRace > RACE_HUMAN)
+			{
 				stats[index]->playerRace = RACE_HUMAN;
+			}
+			if (client_classes[index] > CLASS_MONK)
+			{
 				client_classes[index] = CLASS_BARBARIAN;
-				break;
-			case INVALID_REQUIRE_ACHIEVEMENT:
-				// required achievement for class mixing among races, so race is valid.
-				client_classes[index] = CLASS_BARBARIAN;
-				break;
-			default:
-				// invalid for whatever reason, reset.
-				stats[index]->playerRace = RACE_HUMAN;
-				client_classes[index] = CLASS_BARBARIAN;
-				break;
+			}
+			break;
+		case INVALID_CHARACTER:
+			// invalid for whatever reason, reset.
+			stats[index]->playerRace = RACE_HUMAN;
+			client_classes[index] = CLASS_BARBARIAN;
+			break;
+		case INVALID_REQUIRE_ACHIEVEMENT:
+			// required achievement for class mixing among races, so race is valid.
+			client_classes[index] = CLASS_BARBARIAN;
+			break;
+		default:
+			// invalid for whatever reason, reset.
+			stats[index]->playerRace = RACE_HUMAN;
+			client_classes[index] = CLASS_BARBARIAN;
+			break;
 		}
-		
+
 		stats[index]->clearStats();
 		initClass(index);
 
@@ -12355,16 +12374,16 @@ bool replayLastCharacter(const int index, int multiplayer)
 	return false;
 }
 
-void buttonRandomName(button_t* my)
+void buttonRandomName(button_t *my)
 {
-	if ( !SDL_IsTextInputActive() || charcreation_step != 4 )
+	if (!SDL_IsTextInputActive() || charcreation_step != 4)
 	{
 		return;
 	}
 
 	std::vector<std::string> *names;
 
-	if ( stats[0]->sex == MALE )
+	if (stats[0]->sex == MALE)
 	{
 		names = &randomPlayerNamesMale;
 	}
@@ -12373,7 +12392,7 @@ void buttonRandomName(button_t* my)
 		names = &randomPlayerNamesFemale;
 	}
 
-	if ( !names->size() )
+	if (!names->size())
 	{
 		printlog("Warning: Random Name: Need names to pick from!");
 		return;
@@ -12384,12 +12403,12 @@ void buttonRandomName(button_t* my)
 	{
 		name = randomEntryFromVector(*names);
 	}
-	catch ( const char* e )
+	catch (const char *e)
 	{
 		printlog("Error: Random Name: \"%s\"", e);
 		return;
 	}
-	catch ( ... )
+	catch (...)
 	{
 		printlog("Error: Failed to choose random name.");
 		return;
@@ -12402,17 +12421,17 @@ void buttonRandomName(button_t* my)
 	inputstr[std::min<size_t>(name.length(), inputlen)] = '\0';
 }
 
-void buttonGamemodsOpenDirectory(button_t* my)
+void buttonGamemodsOpenDirectory(button_t *my)
 {
-	if ( gamemods_window_fileSelect != 0 && !currentDirectoryFiles.empty() )
+	if (gamemods_window_fileSelect != 0 && !currentDirectoryFiles.empty())
 	{
 		std::list<std::string>::const_iterator it = currentDirectoryFiles.begin();
 		std::advance(it, std::max(gamemods_window_scroll + gamemods_window_fileSelect - 1, 0));
 		std::string directoryName = *it;
 
-		if ( directoryName.compare("..") == 0 || directoryName.compare(".") == 0 )
+		if (directoryName.compare("..") == 0 || directoryName.compare(".") == 0)
 		{
-			if ( !strcmp(outputdir, "./") )
+			if (!strcmp(outputdir, "./"))
 			{
 				directoryPath.append(directoryName);
 				directoryPath.append(PHYSFS_getDirSeparator());
@@ -12425,7 +12444,7 @@ void buttonGamemodsOpenDirectory(button_t* my)
 		}
 		else
 		{
-			if ( !strcmp(outputdir, "./") )
+			if (!strcmp(outputdir, "./"))
 			{
 				directoryPath.append(directoryName);
 				directoryPath.append(PHYSFS_getDirSeparator());
@@ -12442,7 +12461,7 @@ void buttonGamemodsOpenDirectory(button_t* my)
 	}
 }
 
-void buttonGamemodsPrevDirectory(button_t* my)
+void buttonGamemodsPrevDirectory(button_t *my)
 {
 	gamemods_window_fileSelect = 0;
 	gamemods_window_scroll = 0;
@@ -12451,8 +12470,7 @@ void buttonGamemodsPrevDirectory(button_t* my)
 	currentDirectoryFiles = directoryContents(directoryPath.c_str(), true, false);
 }
 
-
-//void writeLevelsTxt(std::string modFolder)
+// void writeLevelsTxt(std::string modFolder)
 //{
 //	std::string path = BASE_DATA_DIR;
 //	path.append("mods/").append(modFolder);
@@ -12509,9 +12527,9 @@ void buttonGamemodsPrevDirectory(button_t* my)
 //	{
 //		printlog("[PhysFS]: Failed to write levels.txt in %s", path.c_str());
 //	}
-//}
+// }
 
-void buttonGamemodsCreateNewModTemplate(button_t* my)
+void buttonGamemodsCreateNewModTemplate(button_t *my)
 {
 	buttonCloseSubwindow(nullptr);
 	list_FreeAll(&button_l);
@@ -12528,7 +12546,7 @@ void buttonGamemodsCreateNewModTemplate(button_t* my)
 	strcpy(subtext, "Create new blank mod template");
 
 	// close button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "x");
 	button->x = subx2 - 20;
 	button->y = suby1;
@@ -12547,13 +12565,12 @@ void buttonGamemodsCreateNewModTemplate(button_t* my)
 	button->y = suby2 - TTF12_HEIGHT - 8;
 	button->sizex = strlen(button->label) * TTF12_WIDTH + 8;
 	button->sizey = 20;
-	//button->action = &buttonGamemodsCreateModDirectory;
+	// button->action = &buttonGamemodsCreateModDirectory;
 	button->visible = 1;
 	button->focused = 1;
 }
 
-
-void buttonGamemodsBaseDirectory(button_t* my)
+void buttonGamemodsBaseDirectory(button_t *my)
 {
 	gamemods_window_fileSelect = 0;
 	gamemods_window_scroll = 0;
@@ -12563,15 +12580,15 @@ void buttonGamemodsBaseDirectory(button_t* my)
 }
 
 #ifdef STEAMWORKS
-void buttonGamemodsSelectDirectoryForUpload(button_t* my)
+void buttonGamemodsSelectDirectoryForUpload(button_t *my)
 {
-	if ( !currentDirectoryFiles.empty() )
+	if (!currentDirectoryFiles.empty())
 	{
 		std::list<std::string>::const_iterator it = currentDirectoryFiles.begin();
 		std::advance(it, std::max(gamemods_window_scroll + gamemods_window_fileSelect - 1, 0));
 		std::string directoryName = *it;
 
-		if ( directoryName.compare("..") == 0 || directoryName.compare(".") == 0 )
+		if (directoryName.compare("..") == 0 || directoryName.compare(".") == 0)
 		{
 			directoryToUpload = directoryName;
 			directoryToUpload.append(PHYSFS_getDirSeparator());
@@ -12583,9 +12600,9 @@ void buttonGamemodsSelectDirectoryForUpload(button_t* my)
 			directoryToUpload.append(PHYSFS_getDirSeparator());
 		}
 	}
-	if ( gamemods_window != 5 )
+	if (gamemods_window != 5)
 	{
-		if ( g_SteamWorkshop )
+		if (g_SteamWorkshop)
 		{
 			g_SteamWorkshop->createItemResult = {};
 		}
@@ -12595,42 +12612,42 @@ void buttonGamemodsSelectDirectoryForUpload(button_t* my)
 	directoryFilesListToUpload = directoryContents(directoryToUpload.c_str(), true, true);
 }
 
-void buttonGamemodsPrepareWorkshopItemUpload(button_t* my)
+void buttonGamemodsPrepareWorkshopItemUpload(button_t *my)
 {
-	if ( SteamUser()->BLoggedOn() && g_SteamWorkshop )
+	if (SteamUser()->BLoggedOn() && g_SteamWorkshop)
 	{
 		g_SteamWorkshop->CreateItem();
 		gamemods_uploadStatus = 1;
 	}
 }
 
-void buttonGamemodsCancelModifyFileContents(button_t* my)
+void buttonGamemodsCancelModifyFileContents(button_t *my)
 {
 	directoryFilesListToUpload.clear();
 }
 
-void buttonGamemodsPrepareWorkshopItemUpdate(button_t* my)
+void buttonGamemodsPrepareWorkshopItemUpdate(button_t *my)
 {
-	if ( SteamUser()->BLoggedOn() && g_SteamWorkshop )
+	if (SteamUser()->BLoggedOn() && g_SteamWorkshop)
 	{
 		g_SteamWorkshop->CreateItem();
 		gamemods_uploadStatus = 1;
 	}
 }
 
-void buttonGamemodsSetWorkshopItemFields(button_t* my)
+void buttonGamemodsSetWorkshopItemFields(button_t *my)
 {
-	if ( SteamUser()->BLoggedOn() && g_SteamWorkshop )
+	if (SteamUser()->BLoggedOn() && g_SteamWorkshop)
 	{
 		bool itemTagSetSuccess = false;
-		if ( g_SteamWorkshop->UGCUpdateHandle != 0 )
+		if (g_SteamWorkshop->UGCUpdateHandle != 0)
 		{
-			if ( !strcmp(gamemods_uploadTitle, "") )
+			if (!strcmp(gamemods_uploadTitle, ""))
 			{
 				strcpy(gamemods_uploadTitle, "Title");
 			}
 			gamemods_workshopSetPropertyReturn[0] = SteamUGC()->SetItemTitle(g_SteamWorkshop->UGCUpdateHandle, gamemods_uploadTitle);
-			if ( !strcmp(gamemods_uploadDescription, "") )
+			if (!strcmp(gamemods_uploadDescription, ""))
 			{
 				strcpy(gamemods_uploadDescription, "Description");
 			}
@@ -12657,30 +12674,30 @@ void buttonGamemodsSetWorkshopItemFields(button_t* my)
 			realpath(directoryToUpload.c_str(), pathbuffer);
 			std::string fullpath = pathbuffer;
 #endif
-			if ( access(fullpath.c_str(), F_OK) == 0 )
+			if (access(fullpath.c_str(), F_OK) == 0)
 			{
 				gamemods_workshopSetPropertyReturn[2] = SteamUGC()->SetItemContent(g_SteamWorkshop->UGCUpdateHandle, fullpath.c_str());
 				// set preview image.
 				bool imagePreviewFound = false;
 				std::string imgPath = fullpath;
 				imgPath.append("preview.jpg");
-				if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+				if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 				{
 					imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 				}
 				imgPath = fullpath;
 				imgPath.append("preview.png");
-				if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+				if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 				{
 					imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 				}
 				imgPath = fullpath;
 				imgPath.append("preview.jpg");
-				if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+				if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 				{
 					imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 				}
-				if ( !imagePreviewFound )
+				if (!imagePreviewFound)
 				{
 					printlog("Failed to upload image for workshop item!");
 				}
@@ -12691,9 +12708,9 @@ void buttonGamemodsSetWorkshopItemFields(button_t* my)
 			SteamParamStringArray.m_nNumStrings = g_SteamWorkshop->workshopItemTags.size() + 1;
 
 			// construct new char[][]
-			char **tagArray = new char*[gamemods_maxTags];
+			char **tagArray = new char *[gamemods_maxTags];
 			int i = 0;
-			for ( i = 0; i < gamemods_maxTags; ++i )
+			for (i = 0; i < gamemods_maxTags; ++i)
 			{
 				tagArray[i] = new char[32];
 			}
@@ -12701,7 +12718,7 @@ void buttonGamemodsSetWorkshopItemFields(button_t* my)
 			// copy all the items into this new char[][].
 			std::string line;
 			i = 0;
-			for ( std::list<std::string>::iterator it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it )
+			for (std::list<std::string>::iterator it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it)
 			{
 				line = *it;
 				strcpy(tagArray[i], line.c_str());
@@ -12710,22 +12727,22 @@ void buttonGamemodsSetWorkshopItemFields(button_t* my)
 			strcpy(tagArray[i], VERSION); // copy the version number as a tag.
 
 			// set the tags in the API call.
-			SteamParamStringArray.m_ppStrings = const_cast<const char**>(tagArray);
+			SteamParamStringArray.m_ppStrings = const_cast<const char **>(tagArray);
 			itemTagSetSuccess = SteamUGC()->SetItemTags(g_SteamWorkshop->UGCUpdateHandle, &SteamParamStringArray);
 
 			// delete the allocated char[][]
-			for ( i = 0; i < gamemods_maxTags; ++i )
+			for (i = 0; i < gamemods_maxTags; ++i)
 			{
 				delete[] tagArray[i];
 			}
 			delete[] tagArray;
 		}
 		gamemods_uploadStatus = 4;
-		if ( itemTagSetSuccess && gamemods_workshopSetPropertyReturn[0] && gamemods_workshopSetPropertyReturn[1] && gamemods_workshopSetPropertyReturn[2] )
+		if (itemTagSetSuccess && gamemods_workshopSetPropertyReturn[0] && gamemods_workshopSetPropertyReturn[1] && gamemods_workshopSetPropertyReturn[2])
 		{
 			my->visible = false;
 			// set item fields button
-			button_t* button = newButton();
+			button_t *button = newButton();
 			strcpy(button->label, "upload!");
 			button->x = subx1 + 16;
 			button->y = suby1 + TTF12_HEIGHT * 34;
@@ -12739,16 +12756,16 @@ void buttonGamemodsSetWorkshopItemFields(button_t* my)
 	}
 }
 
-void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
+void buttonGamemodsModifyExistingWorkshopItemFields(button_t *my)
 {
-	if ( SteamUser()->BLoggedOn() && g_SteamWorkshop && g_SteamWorkshop->m_myWorkshopItemToModify.m_nPublishedFileId != 0 )
+	if (SteamUser()->BLoggedOn() && g_SteamWorkshop && g_SteamWorkshop->m_myWorkshopItemToModify.m_nPublishedFileId != 0)
 	{
 		g_SteamWorkshop->StartItemExistingUpdate(g_SteamWorkshop->m_myWorkshopItemToModify.m_nPublishedFileId);
-		if ( g_SteamWorkshop->UGCUpdateHandle != 0 )
+		if (g_SteamWorkshop->UGCUpdateHandle != 0)
 		{
 			bool itemTagSetSuccess = false;
 			bool itemContentSetSuccess = false;
-			if ( !directoryFilesListToUpload.empty() )
+			if (!directoryFilesListToUpload.empty())
 			{
 #ifdef WINDOWS
 #ifdef _UNICODE
@@ -12772,30 +12789,30 @@ void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
 				realpath(directoryToUpload.c_str(), pathbuffer);
 				std::string fullpath = pathbuffer;
 #endif
-				if ( access(fullpath.c_str(), F_OK) == 0 )
+				if (access(fullpath.c_str(), F_OK) == 0)
 				{
 					itemContentSetSuccess = SteamUGC()->SetItemContent(g_SteamWorkshop->UGCUpdateHandle, fullpath.c_str());
 					// set preview image.
 					bool imagePreviewFound = false;
 					std::string imgPath = fullpath;
 					imgPath.append("preview.jpg");
-					if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+					if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 					{
 						imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 					}
 					imgPath = fullpath;
 					imgPath.append("preview.png");
-					if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+					if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 					{
 						imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 					}
 					imgPath = fullpath;
 					imgPath.append("preview.jpg");
-					if ( !imagePreviewFound && access((imgPath).c_str(), F_OK) == 0 )
+					if (!imagePreviewFound && access((imgPath).c_str(), F_OK) == 0)
 					{
 						imagePreviewFound = SteamUGC()->SetItemPreview(g_SteamWorkshop->UGCUpdateHandle, imgPath.c_str());
 					}
-					if ( !imagePreviewFound )
+					if (!imagePreviewFound)
 					{
 						printlog("Failed to upload image for workshop item!");
 					}
@@ -12807,9 +12824,9 @@ void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
 			SteamParamStringArray.m_nNumStrings = g_SteamWorkshop->workshopItemTags.size() + 1;
 
 			// construct new char[][]
-			char **tagArray = new char*[gamemods_maxTags];
+			char **tagArray = new char *[gamemods_maxTags];
 			int i = 0;
-			for ( i = 0; i < gamemods_maxTags; ++i )
+			for (i = 0; i < gamemods_maxTags; ++i)
 			{
 				tagArray[i] = new char[32];
 			}
@@ -12817,7 +12834,7 @@ void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
 			// copy all the items into this new char[][].
 			std::string line;
 			i = 0;
-			for ( std::list<std::string>::iterator it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it )
+			for (std::list<std::string>::iterator it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it)
 			{
 				line = *it;
 				strcpy(tagArray[i], line.c_str());
@@ -12826,21 +12843,21 @@ void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
 			strcpy(tagArray[i], VERSION); // copy the version number as a tag.
 
 			// set the tags in the API call.
-			SteamParamStringArray.m_ppStrings = const_cast<const char**>(tagArray);
+			SteamParamStringArray.m_ppStrings = const_cast<const char **>(tagArray);
 			itemTagSetSuccess = SteamUGC()->SetItemTags(g_SteamWorkshop->UGCUpdateHandle, &SteamParamStringArray);
 
 			// delete the allocated char[][]
-			for ( i = 0; i < gamemods_maxTags; ++i )
+			for (i = 0; i < gamemods_maxTags; ++i)
 			{
 				delete[] tagArray[i];
 			}
 			delete[] tagArray;
 
-			if ( itemTagSetSuccess && (directoryFilesListToUpload.empty() || (!directoryFilesListToUpload.empty() && itemContentSetSuccess)) )
+			if (itemTagSetSuccess && (directoryFilesListToUpload.empty() || (!directoryFilesListToUpload.empty() && itemContentSetSuccess)))
 			{
 				my->visible = false;
 				// set item fields button
-				button_t* button = newButton();
+				button_t *button = newButton();
 				strcpy(button->label, "upload!");
 				button->x = subx1 + 16;
 				button->y = suby1 + TTF12_HEIGHT * 34;
@@ -12855,11 +12872,11 @@ void buttonGamemodsModifyExistingWorkshopItemFields(button_t* my)
 	}
 }
 
-void buttonGamemodsStartUploadItem(button_t* my)
+void buttonGamemodsStartUploadItem(button_t *my)
 {
-	if ( SteamUser()->BLoggedOn() && g_SteamWorkshop && g_SteamWorkshop->UGCUpdateHandle != 0 )
+	if (SteamUser()->BLoggedOn() && g_SteamWorkshop && g_SteamWorkshop->UGCUpdateHandle != 0)
 	{
-		if ( gamemods_window == 5 )
+		if (gamemods_window == 5)
 		{
 			g_SteamWorkshop->SubmitItemUpdate("Item updated.");
 		}
@@ -12887,7 +12904,7 @@ void gamemodsWindowUploadInit(bool creatingNewItem)
 	strcpy(subtext, "Upload to workshop");
 
 	// close button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "x");
 	button->x = subx2 - 20;
 	button->y = suby1;
@@ -12920,7 +12937,6 @@ void gamemodsWindowUploadInit(bool creatingNewItem)
 	button->action = &buttonGamemodsBaseDirectory;
 	button->visible = 1;
 	button->focused = 1;
-
 
 	// open directory button
 	button = newButton();
@@ -12967,8 +12983,8 @@ void gamemodsWindowUploadInit(bool creatingNewItem)
 	button->focused = 1;
 
 	// prepare directory button
-	button_t* button2 = newButton();
-	if ( creatingNewItem )
+	button_t *button2 = newButton();
+	if (creatingNewItem)
 	{
 		strcpy(button2->label, "prepare");
 		button2->action = &buttonGamemodsPrepareWorkshopItemUpload;
@@ -12985,7 +13001,7 @@ void gamemodsWindowUploadInit(bool creatingNewItem)
 	button2->visible = 1;
 	button2->focused = 1;
 
-	if ( !creatingNewItem )
+	if (!creatingNewItem)
 	{
 		// modify item fields button
 		button = newButton();
@@ -13017,7 +13033,7 @@ void gamemodsSubscribedItemsInit()
 	strcpy(subtext, "Workshop items");
 
 	// close button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "x");
 	button->x = subx2 - 20;
 	button->y = suby1;
@@ -13052,7 +13068,7 @@ void gamemodsSubscribedItemsInit()
 	button->focused = 1;
 
 	// fetch my workshop items
-	button_t* button2 = newButton();
+	button_t *button2 = newButton();
 	strcpy(button2->label, "my workshop items");
 	button2->x = button->x + button->sizex + 16;
 	button2->y = suby1 + 2 * TTF12_HEIGHT + 8;
@@ -13074,7 +13090,7 @@ void gamemodsSubscribedItemsInit()
 	button->focused = 1;
 }
 
-void buttonGamemodsOpenUploadWindow(button_t* my)
+void buttonGamemodsOpenUploadWindow(button_t *my)
 {
 	buttonCloseSubwindow(nullptr);
 	list_FreeAll(&button_l);
@@ -13082,7 +13098,7 @@ void buttonGamemodsOpenUploadWindow(button_t* my)
 	gamemodsWindowUploadInit(true);
 }
 
-void buttonGamemodsOpenModifyExistingWindow(button_t* my)
+void buttonGamemodsOpenModifyExistingWindow(button_t *my)
 {
 	buttonCloseSubwindow(nullptr);
 	list_FreeAll(&button_l);
@@ -13090,7 +13106,7 @@ void buttonGamemodsOpenModifyExistingWindow(button_t* my)
 	gamemodsWindowUploadInit(false);
 }
 
-void buttonGamemodsOpenSubscribedWindow(button_t* my)
+void buttonGamemodsOpenSubscribedWindow(button_t *my)
 {
 	buttonCloseSubwindow(nullptr);
 	list_FreeAll(&button_l);
@@ -13098,9 +13114,9 @@ void buttonGamemodsOpenSubscribedWindow(button_t* my)
 	gamemodsSubscribedItemsInit();
 }
 
-void buttonGamemodsGetSubscribedItems(button_t* my)
+void buttonGamemodsGetSubscribedItems(button_t *my)
 {
-	if ( g_SteamWorkshop )
+	if (g_SteamWorkshop)
 	{
 		g_SteamWorkshop->CreateQuerySubscribedItems(k_EUserUGCList_Subscribed, k_EUGCMatchingUGCType_All, k_EUserUGCListSortOrder_LastUpdatedDesc);
 		gamemods_window_scroll = 0;
@@ -13108,9 +13124,9 @@ void buttonGamemodsGetSubscribedItems(button_t* my)
 	}
 }
 
-void buttonGamemodsGetMyWorkshopItems(button_t* my)
+void buttonGamemodsGetMyWorkshopItems(button_t *my)
 {
-	if ( g_SteamWorkshop )
+	if (g_SteamWorkshop)
 	{
 		g_SteamWorkshop->CreateQuerySubscribedItems(k_EUserUGCList_Published, k_EUGCMatchingUGCType_All, k_EUserUGCListSortOrder_LastUpdatedDesc);
 		gamemods_window_scroll = 0;
@@ -13120,7 +13136,7 @@ void buttonGamemodsGetMyWorkshopItems(button_t* my)
 
 void gamemodsDrawWorkshopItemTagToggle(std::string tagname, int x, int y)
 {
-	if ( !g_SteamWorkshop )
+	if (!g_SteamWorkshop)
 	{
 		return;
 	}
@@ -13128,28 +13144,28 @@ void gamemodsDrawWorkshopItemTagToggle(std::string tagname, int x, int y)
 	std::string line;
 	bool foundTag = false;
 	std::list<std::string>::iterator it;
-	if ( !g_SteamWorkshop->workshopItemTags.empty() )
+	if (!g_SteamWorkshop->workshopItemTags.empty())
 	{
-		for ( it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it )
+		for (it = g_SteamWorkshop->workshopItemTags.begin(); it != g_SteamWorkshop->workshopItemTags.end(); ++it)
 		{
 			line = *it;
 			std::size_t found = line.find_first_of(' '); // trim any trailing spaces.
-			if ( found != std::string::npos )
+			if (found != std::string::npos)
 			{
 				line = line.substr(0, found);
 			}
-			if ( line.compare(tagname) == 0 )
+			if (line.compare(tagname) == 0)
 			{
 				foundTag = true;
 				break;
 			}
 		}
 	}
-	while ( printText.length() < 12 )
+	while (printText.length() < 12)
 	{
 		printText.append(" ");
 	}
-	if ( foundTag )
+	if (foundTag)
 	{
 		printText.append(": [x]");
 	}
@@ -13157,13 +13173,13 @@ void gamemodsDrawWorkshopItemTagToggle(std::string tagname, int x, int y)
 	{
 		printText.append(": [ ]");
 	}
-	if ( mouseInBounds(clientnum, x, x + printText.size() * TTF12_WIDTH, y, y + TTF12_HEIGHT) )
+	if (mouseInBounds(clientnum, x, x + printText.size() * TTF12_WIDTH, y, y + TTF12_HEIGHT))
 	{
-		ttfPrintTextColor(ttf12, x, y, makeColor( 128, 128, 128, 255), true, printText.c_str());
-		if ( inputs.bMouseLeft(clientnum) )
+		ttfPrintTextColor(ttf12, x, y, makeColor(128, 128, 128, 255), true, printText.c_str());
+		if (inputs.bMouseLeft(clientnum))
 		{
 			playSound(139, 64);
-			if ( foundTag )
+			if (foundTag)
 			{
 				g_SteamWorkshop->workshopItemTags.erase(it);
 			}
@@ -13182,13 +13198,13 @@ void gamemodsDrawWorkshopItemTagToggle(std::string tagname, int x, int y)
 
 bool gamemodsCheckIfSubscribedAndDownloadedFileID(uint64 fileID)
 {
-	if ( directConnect || !currentLobby )
+	if (directConnect || !currentLobby)
 	{
 		return false;
 	}
 
 	uint64 itemState = SteamUGC()->GetItemState(fileID);
-	if ( (itemState & k_EItemStateSubscribed) && (itemState & k_EItemStateInstalled) )
+	if ((itemState & k_EItemStateSubscribed) && (itemState & k_EItemStateInstalled))
 	{
 		return true; // client has downloaded and subscribed to content.
 	}
@@ -13198,16 +13214,16 @@ bool gamemodsCheckIfSubscribedAndDownloadedFileID(uint64 fileID)
 
 bool gamemodsCheckFileIDInLoadedPaths(uint64 fileID)
 {
-	if ( directConnect || !currentLobby )
+	if (directConnect || !currentLobby)
 	{
 		return false;
 	}
 
 	bool found = false;
-	for ( std::vector<std::pair<std::string, uint64>>::iterator it = gamemods_workshopLoadedFileIDMap.begin();
-		it != gamemods_workshopLoadedFileIDMap.end(); ++it )
+	for (std::vector<std::pair<std::string, uint64>>::iterator it = gamemods_workshopLoadedFileIDMap.begin();
+		 it != gamemods_workshopLoadedFileIDMap.end(); ++it)
 	{
-		if ( it->second == fileID )
+		if (it->second == fileID)
 		{
 			return true; // client has fileID in mod load path.
 		}
@@ -13216,46 +13232,46 @@ bool gamemodsCheckFileIDInLoadedPaths(uint64 fileID)
 	return false; // client does not have fileID in mod load path.
 }
 
-void buttonGamemodsSubscribeToHostsModFiles(button_t* my)
+void buttonGamemodsSubscribeToHostsModFiles(button_t *my)
 {
-	if ( !directConnect && currentLobby && g_SteamWorkshop )
+	if (!directConnect && currentLobby && g_SteamWorkshop)
 	{
-		const char* serverNumModsChar = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID*>(currentLobby), "svNumMods");
+		const char *serverNumModsChar = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID *>(currentLobby), "svNumMods");
 		int serverNumModsLoaded = atoi(serverNumModsChar);
-		if ( serverNumModsLoaded > 0 )
+		if (serverNumModsLoaded > 0)
 		{
 			char tagName[32];
 			std::vector<uint64> fileIdsToDownload;
-			for ( int lines = 0; lines < serverNumModsLoaded; ++lines )
+			for (int lines = 0; lines < serverNumModsLoaded; ++lines)
 			{
 				snprintf(tagName, 32, "svMod%d", lines);
-				const char* serverModFileID = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID*>(currentLobby), tagName);
-				if ( strcmp(serverModFileID, "") )
+				const char *serverModFileID = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID *>(currentLobby), tagName);
+				if (strcmp(serverModFileID, ""))
 				{
-					if ( gamemodsCheckIfSubscribedAndDownloadedFileID(atoi(serverModFileID)) == false )
+					if (gamemodsCheckIfSubscribedAndDownloadedFileID(atoi(serverModFileID)) == false)
 					{
 						SteamUGC()->SubscribeItem(atoi(serverModFileID));
 					}
 					fileIdsToDownload.push_back(atoi(serverModFileID));
 				}
 			}
-			for ( std::vector<uint64>::iterator it = fileIdsToDownload.begin(); it != fileIdsToDownload.end(); ++it )
+			for (std::vector<uint64>::iterator it = fileIdsToDownload.begin(); it != fileIdsToDownload.end(); ++it)
 			{
 				SteamUGC()->DownloadItem(*it, true); // download all the newly subscribed items.
-				// hopefully enough time elapses for this to complete
+													 // hopefully enough time elapses for this to complete
 			}
 			g_SteamWorkshop->CreateQuerySubscribedItems(k_EUserUGCList_Subscribed, k_EUGCMatchingUGCType_All, k_EUserUGCListSortOrder_LastUpdatedDesc);
 		}
 	}
 }
 
-void buttonGamemodsMountHostsModFiles(button_t* my)
+void buttonGamemodsMountHostsModFiles(button_t *my)
 {
-	if ( !directConnect && currentLobby && g_SteamWorkshop )
+	if (!directConnect && currentLobby && g_SteamWorkshop)
 	{
-		const char* serverNumModsChar = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID*>(currentLobby), "svNumMods");
+		const char *serverNumModsChar = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID *>(currentLobby), "svNumMods");
 		int serverNumModsLoaded = atoi(serverNumModsChar);
-		if ( serverNumModsLoaded > 0 )
+		if (serverNumModsLoaded > 0)
 		{
 			char tagName[32];
 			char fullpath[PATH_MAX];
@@ -13263,23 +13279,23 @@ void buttonGamemodsMountHostsModFiles(button_t* my)
 			gamemodsClearAllMountedPaths();
 			gamemods_mountedFilepaths.clear();
 			gamemods_workshopLoadedFileIDMap.clear();
-			for ( int lines = 0; lines < serverNumModsLoaded; ++lines )
+			for (int lines = 0; lines < serverNumModsLoaded; ++lines)
 			{
 				snprintf(tagName, 32, "svMod%d", lines);
-				const char* serverModFileID = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID*>(currentLobby), tagName);
-				if ( strcmp(serverModFileID, "") )
+				const char *serverModFileID = SteamMatchmaking()->GetLobbyData(*static_cast<CSteamID *>(currentLobby), tagName);
+				if (strcmp(serverModFileID, ""))
 				{
-					if ( gamemodsCheckFileIDInLoadedPaths(atoi(serverModFileID)) == false )
+					if (gamemodsCheckFileIDInLoadedPaths(atoi(serverModFileID)) == false)
 					{
-						if ( SteamUGC()->GetItemInstallInfo(atoi(serverModFileID), NULL, fullpath, PATH_MAX, NULL) )
+						if (SteamUGC()->GetItemInstallInfo(atoi(serverModFileID), NULL, fullpath, PATH_MAX, NULL))
 						{
-							for ( int i = 0; i < g_SteamWorkshop->numSubcribedItemResults; ++i )
+							for (int i = 0; i < g_SteamWorkshop->numSubcribedItemResults; ++i)
 							{
-								if ( g_SteamWorkshop->m_subscribedItemListDetails[i].m_nPublishedFileId == atoi(serverModFileID) )
+								if (g_SteamWorkshop->m_subscribedItemListDetails[i].m_nPublishedFileId == atoi(serverModFileID))
 								{
 									gamemods_mountedFilepaths.push_back(std::make_pair(fullpath, g_SteamWorkshop->m_subscribedItemListDetails[i].m_rgchTitle));
-									gamemods_workshopLoadedFileIDMap.push_back(std::make_pair(g_SteamWorkshop->m_subscribedItemListDetails[i].m_rgchTitle, 
-										g_SteamWorkshop->m_subscribedItemListDetails[i].m_nPublishedFileId));
+									gamemods_workshopLoadedFileIDMap.push_back(std::make_pair(g_SteamWorkshop->m_subscribedItemListDetails[i].m_rgchTitle,
+																							  g_SteamWorkshop->m_subscribedItemListDetails[i].m_nPublishedFileId));
 									break;
 								}
 							}
@@ -13298,27 +13314,27 @@ bool gamemodsIsClientLoadOrderMatchingHost(std::vector<std::string> serverModLis
 	std::vector<std::pair<std::string, uint64>>::iterator found = gamemods_workshopLoadedFileIDMap.begin();
 	std::vector<std::pair<std::string, uint64>>::iterator previousFound = gamemods_workshopLoadedFileIDMap.begin();
 	std::vector<std::string>::iterator itServerList;
-	if ( serverModList.empty() || (serverModList.size() > gamemods_mountedFilepaths.size()) )
+	if (serverModList.empty() || (serverModList.size() > gamemods_mountedFilepaths.size()))
 	{
 		return false;
 	}
 
-	for ( itServerList = serverModList.begin(); itServerList != serverModList.end(); ++itServerList )
+	for (itServerList = serverModList.begin(); itServerList != serverModList.end(); ++itServerList)
 	{
-		for ( found = previousFound; found != gamemods_workshopLoadedFileIDMap.end(); ++found )
+		for (found = previousFound; found != gamemods_workshopLoadedFileIDMap.end(); ++found)
 		{
-			if ( std::to_string(found->second) == *itServerList )
+			if (std::to_string(found->second) == *itServerList)
 			{
 				break;
 			}
 		}
-		if ( found != gamemods_workshopLoadedFileIDMap.end() )
+		if (found != gamemods_workshopLoadedFileIDMap.end())
 		{
 			// look for the server's modID in my loaded paths.
 			// check the distance along the vector our found result is.
 			// if the distance is negative, then our mod order is out of sync with the server's mod list
 			// and requires rearranging.
-			if ( std::distance(previousFound, found) < 0 )
+			if (std::distance(previousFound, found) < 0)
 			{
 				return false;
 			}
@@ -13333,15 +13349,15 @@ bool gamemodsIsClientLoadOrderMatchingHost(std::vector<std::string> serverModLis
 	return true;
 }
 
-#endif //STEAMWORKS
+#endif // STEAMWORKS
 
 bool gamemodsDrawClickableButton(int padx, int pady, int padw, int padh, Uint32 btnColor, std::string btnText, int action)
 {
 	bool clicked = false;
-	if ( mouseInBounds(clientnum, padx, padx + padw, pady - 4, pady + padh) )
+	if (mouseInBounds(clientnum, padx, padx + padw, pady - 4, pady + padh))
 	{
 		drawDepressed(padx, pady - 4, padx + padw, pady + padh);
-		if ( inputs.bMouseLeft(clientnum) )
+		if (inputs.bMouseLeft(clientnum))
 		{
 			playSound(139, 64);
 			inputs.mouseClearLeft(clientnum);
@@ -13366,17 +13382,17 @@ bool gamemodsRemovePathFromMountedFiles(std::string findStr)
 {
 	std::vector<std::pair<std::string, std::string>>::iterator it;
 	std::pair<std::string, std::string> line;
-	for ( it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it )
+	for (it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it)
 	{
 		line = *it;
-		if ( line.first.compare(findStr) == 0 )
+		if (line.first.compare(findStr) == 0)
 		{
 			// found entry, remove from list.
 #ifdef STEAMWORKS
-			for ( std::vector<std::pair<std::string, uint64>>::iterator itId = gamemods_workshopLoadedFileIDMap.begin();
-				itId != gamemods_workshopLoadedFileIDMap.end(); ++itId )
+			for (std::vector<std::pair<std::string, uint64>>::iterator itId = gamemods_workshopLoadedFileIDMap.begin();
+				 itId != gamemods_workshopLoadedFileIDMap.end(); ++itId)
 			{
-				if ( itId->first.compare(line.second) == 0 )
+				if (itId->first.compare(line.second) == 0)
 				{
 					gamemods_workshopLoadedFileIDMap.erase(itId);
 					break;
@@ -13394,10 +13410,10 @@ bool gamemodsIsPathInMountedFiles(std::string findStr)
 {
 	std::vector<std::pair<std::string, std::string>>::iterator it;
 	std::pair<std::string, std::string> line;
-	for ( it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it )
+	for (it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it)
 	{
 		line = *it;
-		if ( line.first.compare(findStr) == 0 )
+		if (line.first.compare(findStr) == 0)
 		{
 			// found entry
 			return true;
@@ -13406,7 +13422,7 @@ bool gamemodsIsPathInMountedFiles(std::string findStr)
 	return false;
 }
 
-void buttonGamemodsGetLocalMods(button_t* my)
+void buttonGamemodsGetLocalMods(button_t *my)
 {
 	gamemods_window_scroll = 0;
 	gamemods_window = 7;
@@ -13416,192 +13432,192 @@ void buttonGamemodsGetLocalMods(button_t* my)
 	gamemods_localModFoldernames = directoryContents(path.c_str(), true, false);
 }
 
-void buttonGamemodsStartModdedGame(button_t* my)
+void buttonGamemodsStartModdedGame(button_t *my)
 {
-//	if ( gamemods_modPreload )
-//	{
-//		// look for a save game
-//		if ( anySaveFileExists() )
-//		{
-//			openNewLoadGameWindow(nullptr);
-//		}
-//		else
-//		{
-//			buttonOpenCharacterCreationWindow(NULL);
-//		}
-//		return;
-//	}
-//
-//	gamemods_numCurrentModsLoaded = gamemods_mountedFilepaths.size();
-//	if ( gamemods_numCurrentModsLoaded > 0 )
-//	{
-//		steamAchievement("BARONY_ACH_LOCAL_CUSTOMS");
-//	}
-//
-//	if ( physfsIsMapLevelListModded() )
-//	{
-//		Mods::disableSteamAchievements = true;
-//	}
-//	else
-//	{
-//		Mods::disableSteamAchievements = false;
-//	}
-//
-//	int w, h;
-//
-//	if ( !gamemods_modelsListRequiresReload && gamemods_modelsListLastStartedUnmodded )
-//	{
-//		if ( physfsSearchModelsToUpdate() || !gamemods_modelsListModifiedIndexes.empty() )
-//		{
-//			gamemods_modelsListRequiresReload = true;
-//		}
-//		gamemods_modelsListLastStartedUnmodded = false;
-//	}
-//	if ( !gamemods_soundListRequiresReload && gamemods_soundsListLastStartedUnmodded )
-//	{
-//		if ( physfsSearchSoundsToUpdate() )
-//		{
-//			gamemods_soundListRequiresReload = true;
-//		}
-//		gamemods_soundsListLastStartedUnmodded = false;
-//	}
-//
-//	// process any new model files encountered in the mod load list.
-//	int modelsIndexUpdateStart = 1;
-//	int modelsIndexUpdateEnd = nummodels;
-//	if ( gamemods_modelsListRequiresReload )
-//	{
-//		if ( physfsSearchModelsToUpdate() || !gamemods_modelsListModifiedIndexes.empty() )
-//		{
-//			// print a loading message
-//			drawClearBuffers();
-//			getSizeOfText(ttf16, Language::get(2989), &w, &h);
-//			ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2989));
-//			GO_SwapBuffers(screen);
-//			physfsModelIndexUpdate(modelsIndexUpdateStart, modelsIndexUpdateEnd, true);
-//			generatePolyModels(modelsIndexUpdateStart, modelsIndexUpdateEnd, false);
-//			generateVBOs(modelsIndexUpdateStart, modelsIndexUpdateEnd);
-//		}
-//		gamemods_modelsListRequiresReload = false;
-//	}
-//	if ( gamemods_soundListRequiresReload )
-//	{
-//		if ( physfsSearchSoundsToUpdate() )
-//		{
-//			// print a loading message
-//			drawClearBuffers();
-//			getSizeOfText(ttf16, Language::get(2987), &w, &h);
-//			ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2987));
-//			GO_SwapBuffers(screen);
-//			physfsReloadSounds(true);
-//		}
-//		gamemods_soundListRequiresReload = false;
-//	}
-//
-//	if ( physfsSearchTilesToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(3017), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3017));
-//		GO_SwapBuffers(screen);
-//		physfsReloadTiles(false);
-//		gamemods_tileListRequireReloadUnmodded = true;
-//	}
-//
-//	if ( physfsSearchSpritesToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(3015), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3015));
-//		GO_SwapBuffers(screen);
-//		physfsReloadSprites(false);
-//		gamemods_spriteImagesRequireReloadUnmodded = true;
-//	}
-//
-//	if ( physfsSearchBooksToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(2991), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2991));
-//		GO_SwapBuffers(screen);
-//		physfsReloadBooks();
-//		gamemods_booksRequireReloadUnmodded = true;
-//	}
-//
-//	gamemodsUnloadCustomThemeMusic();
-//
-//	if ( physfsSearchMusicToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(2993), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2993));
-//		GO_SwapBuffers(screen);
-//		bool reloadIntroMusic = false;
-//		physfsReloadMusic(reloadIntroMusic, false);
-//		if ( reloadIntroMusic )
-//		{
-//#ifdef SOUND
-//			playMusic(intromusic[local_rng.rand() % (NUMINTROMUSIC - 1)], false, true, true);
-//#endif			
-//		}
-//		gamemods_musicRequireReloadUnmodded = true;
-//	}
-//
-//	std::string langDirectory = PHYSFS_getRealDir("lang/en.txt");
-//	if ( langDirectory.compare("./") != 0 )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(3004), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3004));
-//		GO_SwapBuffers(screen);
-//		if ( reloadLanguage() != 0 )
-//		{
-//			printlog("[PhysFS]: Error reloading modified language file in lang/ directory!");
-//		}
-//		else
-//		{
-//			printlog("[PhysFS]: Found modified language file in lang/ directory, reloading en.txt...");
-//		}
-//		gamemods_langRequireReloadUnmodded = true;
-//	}
-//
-//	if ( physfsSearchMonsterLimbFilesToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(3013), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3013));
-//		GO_SwapBuffers(screen);
-//		physfsReloadMonsterLimbFiles();
-//		gamemods_monsterLimbsRequireReloadUnmodded = true;
-//	}
-//
-//	if ( physfsSearchSystemImagesToUpdate() )
-//	{
-//		// print a loading message
-//		drawClearBuffers();
-//		getSizeOfText(ttf16, Language::get(3015), &w, &h);
-//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3015));
-//		GO_SwapBuffers(screen);
-//		physfsReloadSystemImages();
-//		gamemods_systemImagesReloadUnmodded = true;
-//	}
-//
-//	// look for a save game
-//	if ( anySaveFileExists() )
-//	{
-//		//openLoadGameWindow(NULL);
-//		openNewLoadGameWindow(nullptr);
-//	}
-//	else
-//	{
-//		buttonOpenCharacterCreationWindow(NULL);
-//	}
+	//	if ( gamemods_modPreload )
+	//	{
+	//		// look for a save game
+	//		if ( anySaveFileExists() )
+	//		{
+	//			openNewLoadGameWindow(nullptr);
+	//		}
+	//		else
+	//		{
+	//			buttonOpenCharacterCreationWindow(NULL);
+	//		}
+	//		return;
+	//	}
+	//
+	//	gamemods_numCurrentModsLoaded = gamemods_mountedFilepaths.size();
+	//	if ( gamemods_numCurrentModsLoaded > 0 )
+	//	{
+	//		steamAchievement("BARONY_ACH_LOCAL_CUSTOMS");
+	//	}
+	//
+	//	if ( physfsIsMapLevelListModded() )
+	//	{
+	//		Mods::disableSteamAchievements = true;
+	//	}
+	//	else
+	//	{
+	//		Mods::disableSteamAchievements = false;
+	//	}
+	//
+	//	int w, h;
+	//
+	//	if ( !gamemods_modelsListRequiresReload && gamemods_modelsListLastStartedUnmodded )
+	//	{
+	//		if ( physfsSearchModelsToUpdate() || !gamemods_modelsListModifiedIndexes.empty() )
+	//		{
+	//			gamemods_modelsListRequiresReload = true;
+	//		}
+	//		gamemods_modelsListLastStartedUnmodded = false;
+	//	}
+	//	if ( !gamemods_soundListRequiresReload && gamemods_soundsListLastStartedUnmodded )
+	//	{
+	//		if ( physfsSearchSoundsToUpdate() )
+	//		{
+	//			gamemods_soundListRequiresReload = true;
+	//		}
+	//		gamemods_soundsListLastStartedUnmodded = false;
+	//	}
+	//
+	//	// process any new model files encountered in the mod load list.
+	//	int modelsIndexUpdateStart = 1;
+	//	int modelsIndexUpdateEnd = nummodels;
+	//	if ( gamemods_modelsListRequiresReload )
+	//	{
+	//		if ( physfsSearchModelsToUpdate() || !gamemods_modelsListModifiedIndexes.empty() )
+	//		{
+	//			// print a loading message
+	//			drawClearBuffers();
+	//			getSizeOfText(ttf16, Language::get(2989), &w, &h);
+	//			ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2989));
+	//			GO_SwapBuffers(screen);
+	//			physfsModelIndexUpdate(modelsIndexUpdateStart, modelsIndexUpdateEnd, true);
+	//			generatePolyModels(modelsIndexUpdateStart, modelsIndexUpdateEnd, false);
+	//			generateVBOs(modelsIndexUpdateStart, modelsIndexUpdateEnd);
+	//		}
+	//		gamemods_modelsListRequiresReload = false;
+	//	}
+	//	if ( gamemods_soundListRequiresReload )
+	//	{
+	//		if ( physfsSearchSoundsToUpdate() )
+	//		{
+	//			// print a loading message
+	//			drawClearBuffers();
+	//			getSizeOfText(ttf16, Language::get(2987), &w, &h);
+	//			ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2987));
+	//			GO_SwapBuffers(screen);
+	//			physfsReloadSounds(true);
+	//		}
+	//		gamemods_soundListRequiresReload = false;
+	//	}
+	//
+	//	if ( physfsSearchTilesToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(3017), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3017));
+	//		GO_SwapBuffers(screen);
+	//		physfsReloadTiles(false);
+	//		gamemods_tileListRequireReloadUnmodded = true;
+	//	}
+	//
+	//	if ( physfsSearchSpritesToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(3015), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3015));
+	//		GO_SwapBuffers(screen);
+	//		physfsReloadSprites(false);
+	//		gamemods_spriteImagesRequireReloadUnmodded = true;
+	//	}
+	//
+	//	if ( physfsSearchBooksToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(2991), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2991));
+	//		GO_SwapBuffers(screen);
+	//		physfsReloadBooks();
+	//		gamemods_booksRequireReloadUnmodded = true;
+	//	}
+	//
+	//	gamemodsUnloadCustomThemeMusic();
+	//
+	//	if ( physfsSearchMusicToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(2993), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(2993));
+	//		GO_SwapBuffers(screen);
+	//		bool reloadIntroMusic = false;
+	//		physfsReloadMusic(reloadIntroMusic, false);
+	//		if ( reloadIntroMusic )
+	//		{
+	// #ifdef SOUND
+	//			playMusic(intromusic[local_rng.rand() % (NUMINTROMUSIC - 1)], false, true, true);
+	// #endif
+	//		}
+	//		gamemods_musicRequireReloadUnmodded = true;
+	//	}
+	//
+	//	std::string langDirectory = PHYSFS_getRealDir("lang/en.txt");
+	//	if ( langDirectory.compare("./") != 0 )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(3004), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3004));
+	//		GO_SwapBuffers(screen);
+	//		if ( reloadLanguage() != 0 )
+	//		{
+	//			printlog("[PhysFS]: Error reloading modified language file in lang/ directory!");
+	//		}
+	//		else
+	//		{
+	//			printlog("[PhysFS]: Found modified language file in lang/ directory, reloading en.txt...");
+	//		}
+	//		gamemods_langRequireReloadUnmodded = true;
+	//	}
+	//
+	//	if ( physfsSearchMonsterLimbFilesToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(3013), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3013));
+	//		GO_SwapBuffers(screen);
+	//		physfsReloadMonsterLimbFiles();
+	//		gamemods_monsterLimbsRequireReloadUnmodded = true;
+	//	}
+	//
+	//	if ( physfsSearchSystemImagesToUpdate() )
+	//	{
+	//		// print a loading message
+	//		drawClearBuffers();
+	//		getSizeOfText(ttf16, Language::get(3015), &w, &h);
+	//		ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, Language::get(3015));
+	//		GO_SwapBuffers(screen);
+	//		physfsReloadSystemImages();
+	//		gamemods_systemImagesReloadUnmodded = true;
+	//	}
+	//
+	//	// look for a save game
+	//	if ( anySaveFileExists() )
+	//	{
+	//		//openLoadGameWindow(NULL);
+	//		openNewLoadGameWindow(nullptr);
+	//	}
+	//	else
+	//	{
+	//		buttonOpenCharacterCreationWindow(NULL);
+	//	}
 }
 
 void gamemodsCustomContentInit()
@@ -13622,7 +13638,7 @@ void gamemodsCustomContentInit()
 	strcpy(subtext, "Custom Content");
 
 	// close button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "x");
 	button->x = subx2 - 20;
 	button->y = suby1;
@@ -13646,7 +13662,7 @@ void gamemodsCustomContentInit()
 	button->focused = 1;
 
 	// fetch my workshop items
-	button_t* button2 = newButton();
+	button_t *button2 = newButton();
 	strcpy(button2->label, "new mod folder");
 	button2->x = button->x + button->sizex + 16;
 	button2->y = suby1 + 2 * TTF12_HEIGHT + 8;
@@ -13671,9 +13687,9 @@ void gamemodsCustomContentInit()
 bool gamemodsClearAllMountedPaths()
 {
 	return true;
-	//bool success = true;
-	//char **i;
-	//for ( i = PHYSFS_getSearchPath(); *i != NULL; i++ )
+	// bool success = true;
+	// char **i;
+	// for ( i = PHYSFS_getSearchPath(); *i != NULL; i++ )
 	//{
 	//	std::string line = *i;
 	//	if ( line.compare(outputdir) != 0 && line.compare(datadir) != 0 && line.compare("./") != 0 ) // don't unmount the base ./ directory
@@ -13688,39 +13704,39 @@ bool gamemodsClearAllMountedPaths()
 	//			printlog("[%s] is removed from the search path.\n", line.c_str());
 	//		}
 	//	}
-	//}
-	//gamemods_numCurrentModsLoaded = -1;
-	//PHYSFS_freeList(*i);
-	//return success;
+	// }
+	// gamemods_numCurrentModsLoaded = -1;
+	// PHYSFS_freeList(*i);
+	// return success;
 }
 
 bool gamemodsMountAllExistingPaths()
 {
 	return true;
-//	bool success = true;
-//	std::vector<std::pair<std::string, std::string>>::iterator it;
-//	for ( it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it )
-//	{
-//		std::pair<std::string, std::string> itpair = *it;
-//		if ( PHYSFS_mount(itpair.first.c_str(), NULL, 0) )
-//		{
-//			printlog("[%s] is in the search path.\n", itpair.first.c_str());
-//		}
-//		else
-//		{
-//			printlog("[%s] unsuccessfully added to search path.\n", itpair.first.c_str());
-//			success = false;
-//		}
-//	}
-//	gamemods_numCurrentModsLoaded = gamemods_mountedFilepaths.size();
-//	gamemods_customContentLoadedFirstTime = true;
-//	return success;
+	//	bool success = true;
+	//	std::vector<std::pair<std::string, std::string>>::iterator it;
+	//	for ( it = gamemods_mountedFilepaths.begin(); it != gamemods_mountedFilepaths.end(); ++it )
+	//	{
+	//		std::pair<std::string, std::string> itpair = *it;
+	//		if ( PHYSFS_mount(itpair.first.c_str(), NULL, 0) )
+	//		{
+	//			printlog("[%s] is in the search path.\n", itpair.first.c_str());
+	//		}
+	//		else
+	//		{
+	//			printlog("[%s] unsuccessfully added to search path.\n", itpair.first.c_str());
+	//			success = false;
+	//		}
+	//	}
+	//	gamemods_numCurrentModsLoaded = gamemods_mountedFilepaths.size();
+	//	gamemods_customContentLoadedFirstTime = true;
+	//	return success;
 }
 
 void gamemodsWindowClearVariables()
 {
 #ifdef STEAMWORKS
-	if ( g_SteamWorkshop )
+	if (g_SteamWorkshop)
 	{
 		g_SteamWorkshop->createItemResult = {};
 		g_SteamWorkshop->UGCUpdateHandle = {};
@@ -13733,7 +13749,7 @@ void gamemodsWindowClearVariables()
 		g_SteamWorkshop->LastActionResult.actionMsg = "";
 		g_SteamWorkshop->LastActionResult.lastResult = static_cast<EResult>(0);
 		g_SteamWorkshop->workshopItemTags.clear();
-		for ( int i = 0; i < 50; ++i )
+		for (int i = 0; i < 50; ++i)
 		{
 			g_SteamWorkshop->m_subscribedItemListDetails[i] = {};
 		}
@@ -13761,10 +13777,10 @@ void gamemodsWindowClearVariables()
 bool drawClickableButton(int padx, int pady, int padw, int padh, Uint32 btnColor)
 {
 	bool clicked = false;
-	if ( mouseInBounds(clientnum, padx, padx + padw, pady - 4, pady + padh) )
+	if (mouseInBounds(clientnum, padx, padx + padw, pady - 4, pady + padh))
 	{
 		drawDepressed(padx, pady - 4, padx + padw, pady + padh);
-		if ( inputs.bMouseLeft(clientnum) )
+		if (inputs.bMouseLeft(clientnum))
 		{
 			playSound(139, 64);
 			inputs.mouseClearLeft(clientnum);
@@ -13780,7 +13796,7 @@ bool drawClickableButton(int padx, int pady, int padw, int padh, Uint32 btnColor
 	pos.y = pady - 4;
 	pos.w = padw;
 	pos.h = padh + 4;
-	if ( btnColor != 0 )
+	if (btnColor != 0)
 	{
 		drawRect(&pos, btnColor, 64);
 	}
@@ -13791,14 +13807,14 @@ void gamemodsWorkshopPreloadMod(int fileID, std::string modTitle)
 {
 	char fullpath[PATH_MAX] = "";
 	useModelCache = false;
-	if ( SteamUGC()->GetItemInstallInfo(fileID, NULL, fullpath, PATH_MAX, NULL) )
+	if (SteamUGC()->GetItemInstallInfo(fileID, NULL, fullpath, PATH_MAX, NULL))
 	{
 		gamemods_modPreload = true;
 		bool addToPath = !gamemodsIsPathInMountedFiles(fullpath);
-		if ( PHYSFS_mount(fullpath, NULL, 0) )
+		if (PHYSFS_mount(fullpath, NULL, 0))
 		{
 			Language::reloadLanguage();
-			if ( addToPath )
+			if (addToPath)
 			{
 				gamemods_mountedFilepaths.push_back(std::make_pair(fullpath, modTitle)); // change string to your mod name here.
 				gamemods_workshopLoadedFileIDMap.push_back(std::make_pair(modTitle, fileID));
@@ -13807,17 +13823,17 @@ void gamemodsWorkshopPreloadMod(int fileID, std::string modTitle)
 	}
 }
 #else
-size_t serialHash(const std::string& input)
+size_t serialHash(const std::string &input)
 {
-	if ( input.empty() || input.size() != 19 )
+	if (input.empty() || input.size() != 19)
 	{
 		return 0;
 	}
 	int i = 0;
 	size_t hash = 0;
-	for ( auto it : input )
+	for (auto it : input)
 	{
-		if ( it == '\0' || it == '\n' )
+		if (it == '\0' || it == '\n')
 		{
 			break;
 		}
@@ -13827,10 +13843,10 @@ size_t serialHash(const std::string& input)
 	return hash;
 }
 
-void buttonConfirmSerial(button_t* my)
+void buttonConfirmSerial(button_t *my)
 {
 	serialVerifyWindow = 1;
-	if ( SDL_IsTextInputActive() )
+	if (SDL_IsTextInputActive())
 	{
 		SDL_StopTextInput();
 	}
@@ -13841,21 +13857,21 @@ void buttonConfirmSerial(button_t* my)
 void windowSerialResult(int success)
 {
 	// close current window
-	if ( success > 0 )
+	if (success > 0)
 	{
 		char path[PATH_MAX] = "";
-		if ( success == 2 )
+		if (success == 2)
 		{
 			completePath(path, "legendsandpariahs.key", outputdir);
 		}
-		else if ( success == 1 )
+		else if (success == 1)
 		{
 			completePath(path, "mythsandoutcasts.key", outputdir);
 		}
 
 		// open the serial file
-		File* fp = nullptr;
-		if ( (fp = FileIO::open(path, "wb")) == NULL )
+		File *fp = nullptr;
+		if ((fp = FileIO::open(path, "wb")) == NULL)
 		{
 			printlog("ERROR: failed to save license file!\n");
 		}
@@ -13876,7 +13892,7 @@ void windowSerialResult(int success)
 	suby2 = yres / 2 + 32;
 
 	// ok button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, Language::get(1317));
 	button->x = subx2 - strlen(Language::get(1317)) * 12 - 16;
 	button->y = suby2 - 28;
@@ -13899,13 +13915,13 @@ void windowSerialResult(int success)
 	button->key = SDLK_ESCAPE;
 	button->joykey = joyimpulses[INJOY_MENU_CANCEL];
 
-	if ( success > 0 )
+	if (success > 0)
 	{
-		if ( success == 2 )
+		if (success == 2)
 		{
 			strcpy(subtext, Language::get(3405));
 		}
-		else if ( success == 1 )
+		else if (success == 1)
 		{
 			strcpy(subtext, Language::get(3404));
 		}
@@ -13931,7 +13947,7 @@ void windowEnterSerialPrompt()
 	serialVerifyWindow = 0;
 
 	// yes button
-	button_t* button = newButton();
+	button_t *button = newButton();
 	strcpy(button->label, "Submit");
 	button->x = subx2 - strlen("Submit") * 12 - 16;
 	button->y = suby2 - 28 * 2;
@@ -13941,7 +13957,7 @@ void windowEnterSerialPrompt()
 	button->visible = 1;
 	button->focused = 1;
 	button->key = SDLK_RETURN;
-	button->joykey = joyimpulses[INJOY_MENU_NEXT]; //TODO: Select which button to activate via dpad.
+	button->joykey = joyimpulses[INJOY_MENU_NEXT]; // TODO: Select which button to activate via dpad.
 
 	// cancel button
 	button = newButton();
