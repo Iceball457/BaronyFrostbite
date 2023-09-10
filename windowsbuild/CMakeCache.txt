@@ -15,10 +15,10 @@
 ########################
 
 //Path to a program.
-CMAKE_ADDR2LINE:FILEPATH=/usr/bin/x86_64-w64-mingw32-addr2line
+CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
 //Path to a program.
-CMAKE_AR:FILEPATH=/usr/bin/x86_64-w64-mingw32-ar
+CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
@@ -27,13 +27,16 @@ CMAKE_BUILD_TYPE:STRING=Release
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
+//CXX compiler
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
+
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/x86_64-w64-mingw32-gcc-ar
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-11
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/x86_64-w64-mingw32-gcc-ranlib
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-11
 
 //Flags used by the CXX compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
@@ -50,16 +53,16 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//Libraries linked by default with all C++ applications.
-CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+//C compiler
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/x86_64-w64-mingw32-gcc-ar
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-11
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/x86_64-w64-mingw32-gcc-ranlib
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-11
 
 //Flags used by the C compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -76,11 +79,8 @@ CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the C compiler during RELWITHDEBINFO builds.
 CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//Libraries linked by default with all C applications.
-CMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-
 //Path to a program.
-CMAKE_DLLTOOL:FILEPATH=/usr/bin/x86_64-w64-mingw32-dlltool
+CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
 
 //Flags used by the linker during all build types.
 CMAKE_EXE_LINKER_FLAGS:STRING=
@@ -100,14 +100,59 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
 
-//Convert GNU import libraries to MS format (requires Visual Studio)
-CMAKE_GNUtoMS:BOOL=OFF
+//User executables (bin)
+CMAKE_INSTALL_BINDIR:PATH=bin
+
+//Read-only architecture-independent data (DATAROOTDIR)
+CMAKE_INSTALL_DATADIR:PATH=
+
+//Read-only architecture-independent data root (share)
+CMAKE_INSTALL_DATAROOTDIR:PATH=share
+
+//Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
+CMAKE_INSTALL_DOCDIR:PATH=
+
+//C header files (include)
+CMAKE_INSTALL_INCLUDEDIR:PATH=include
+
+//Info documentation (DATAROOTDIR/info)
+CMAKE_INSTALL_INFODIR:PATH=
+
+//Object code libraries (lib)
+CMAKE_INSTALL_LIBDIR:PATH=lib
+
+//Program executables (libexec)
+CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
+
+//Locale-dependent data (DATAROOTDIR/locale)
+CMAKE_INSTALL_LOCALEDIR:PATH=
+
+//Modifiable single-machine data (var)
+CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
+
+//Man documentation (DATAROOTDIR/man)
+CMAKE_INSTALL_MANDIR:PATH=
+
+//C header files for non-gcc (/usr/include)
+CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
+//Run-time variable data (LOCALSTATEDIR/run)
+CMAKE_INSTALL_RUNSTATEDIR:PATH=
+
+//System admin executables (sbin)
+CMAKE_INSTALL_SBINDIR:PATH=sbin
+
+//Modifiable architecture-independent data (com)
+CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
+
+//Read-only single-machine data (etc)
+CMAKE_INSTALL_SYSCONFDIR:PATH=etc
+
 //Path to a program.
-CMAKE_LINKER:FILEPATH=/usr/bin/x86_64-w64-mingw32-ld
+CMAKE_LINKER:FILEPATH=/usr/bin/ld
 
 //Path to a program.
 CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
@@ -133,13 +178,13 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_NM:FILEPATH=/usr/bin/x86_64-w64-mingw32-nm
+CMAKE_NM:FILEPATH=/usr/bin/nm
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=/usr/bin/x86_64-w64-mingw32-objcopy
+CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 
 //Path to a program.
-CMAKE_OBJDUMP:FILEPATH=/usr/bin/x86_64-w64-mingw32-objdump
+CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -151,25 +196,10 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 CMAKE_PROJECT_NAME:STATIC=barony
 
 //Path to a program.
-CMAKE_RANLIB:FILEPATH=/usr/bin/x86_64-w64-mingw32-ranlib
-
-//Flags for Windows Resource Compiler during all build types.
-CMAKE_RC_FLAGS:STRING=
-
-//Flags for Windows Resource Compiler during DEBUG builds.
-CMAKE_RC_FLAGS_DEBUG:STRING=
-
-//Flags for Windows Resource Compiler during MINSIZEREL builds.
-CMAKE_RC_FLAGS_MINSIZEREL:STRING=
-
-//Flags for Windows Resource Compiler during RELEASE builds.
-CMAKE_RC_FLAGS_RELEASE:STRING=
-
-//Flags for Windows Resource Compiler during RELWITHDEBINFO builds.
-CMAKE_RC_FLAGS_RELWITHDEBINFO:STRING=
+CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
 
 //Path to a program.
-CMAKE_READELF:FILEPATH=/usr/bin/x86_64-w64-mingw32-readelf
+CMAKE_READELF:FILEPATH=/usr/bin/readelf
 
 //Flags used by the linker during the creation of shared libraries
 // during all build types.
@@ -219,10 +249,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_STRIP:FILEPATH=/usr/bin/x86_64-w64-mingw32-strip
-
-//No help, variable specified on the command line.
-CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=../windows-toolchain.cmake
+CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -240,34 +267,52 @@ EDITOR_EXE_NAME:STRING=editor
 EOS_ENABLED:UNINITIALIZED=0
 
 //Use the FMOD Ex library in the sound engine
-FMOD_ENABLED:BOOL=ON
-
-//mwindows for MinGW
-MINGW32_LIBRARY:STRING=mingw32
+FMOD_ENABLED:BOOL=OFF
 
 //Path to a file.
-NFD_INCLUDE_DIR:PATH=NFD_INCLUDE_DIR-NOTFOUND
+NFD_INCLUDE_DIR:PATH=/home/frosti/repos/depend/nativefiledialog/release/include/nfd
 
 //Path to a library.
-NFD_LIBRARY:FILEPATH=NFD_LIBRARY-NOTFOUND
+NFD_LIBRARY:FILEPATH=/home/frosti/repos/depend/nativefiledialog/release/lib/libnfd.a
 
 //Use the OpenAL library in the sound engine
 OPENAL_ENABLED:BOOL=OFF
 
-//OpenGL library for win32
-OPENGL_gl_LIBRARY:STRING=opengl32
+//Path to a file.
+OPENGL_EGL_INCLUDE_DIR:PATH=/usr/include
 
-//GLU library for win32
-OPENGL_glu_LIBRARY:STRING=glu32
+//Path to a file.
+OPENGL_GLX_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+OPENGL_egl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libEGL.so
+
+//Path to a library.
+OPENGL_gl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGL.so
+
+//Path to a library.
+OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
+
+//Path to a library.
+OPENGL_glx_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLX.so
+
+//Path to a library.
+OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libOpenGL.so
+
+//Path to a file.
+OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 
 //Build for the OpenPandora
 PANDORA_ENABLED:BOOL=OFF
 
 //Path to a file.
-PHYSFS_INCLUDE_DIR:PATH=PHYSFS_INCLUDE_DIR-NOTFOUND
+PHYSFS_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
-PHYSFS_LIBRARY:FILEPATH=PHYSFS_LIBRARY-NOTFOUND
+PHYSFS_LIBRARY:FILEPATH=/usr/local/lib/libphysfs.so
 
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
@@ -275,41 +320,47 @@ PKG_CONFIG_ARGN:STRING=
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
+//Path to a library.
+PNG_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libpng.so
+
+//Path to a file.
+PNG_PNG_INCLUDE_DIR:PATH=/usr/include
+
 //Include path for Rapid JSON
-RAPID_JSON_INCLUDE_DIR:PATH=RAPID_JSON_INCLUDE_DIR-NOTFOUND
-
-//Path to a library.
-SDL2MAIN_LIBRARY:FILEPATH=SDL2MAIN_LIBRARY-NOTFOUND
+RAPID_JSON_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a file.
-SDL2_IMAGE_INCLUDE_DIR:PATH=SDL2_IMAGE_INCLUDE_DIR-NOTFOUND
+SDL2_NET_INCLUDE_DIR:PATH=/usr/include/SDL2
 
 //Path to a library.
-SDL2_IMAGE_LIBRARY:FILEPATH=SDL2_IMAGE_LIBRARY-NOTFOUND
+SDL2_NET_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_net.so
 
 //Path to a file.
-SDL2_INCLUDE_DIR:PATH=SDL2_INCLUDE_DIR-NOTFOUND
+SDL2_TTF_INCLUDE_DIR:PATH=/usr/include/SDL2
 
 //Path to a library.
-SDL2_LIBRARY_TEMP:FILEPATH=SDL2_LIBRARY_TEMP-NOTFOUND
-
-//Path to a file.
-SDL2_NET_INCLUDE_DIR:PATH=SDL2_NET_INCLUDE_DIR-NOTFOUND
-
-//Path to a library.
-SDL2_NET_LIBRARY:FILEPATH=SDL2_NET_LIBRARY-NOTFOUND
-
-//Path to a file.
-SDL2_TTF_INCLUDE_DIR:PATH=SDL2_TTF_INCLUDE_DIR-NOTFOUND
-
-//Path to a library.
-SDL2_TTF_LIBRARY:FILEPATH=SDL2_TTF_LIBRARY-NOTFOUND
+SDL2_TTF_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 
 //No help, variable specified on the command line.
 STEAMWORKS_ENABLED:UNINITIALIZED=1
 
+//Include path for Steamworks
+STEAMWORKS_INCLUDE_DIR:PATH=/home/frosti/repos/depend/steamworkssdk/sdk/public
+
+//Steamworks library name
+STEAMWORKS_LIBRARY:FILEPATH=/home/frosti/repos/depend/steamworkssdk/sdk/redistributable_bin/linux64/libsteam_api.so
+
 //Use Tremor instead of libvorbis for OpenAL
 TREMOR_ENABLED:BOOL=OFF
+
+//Path to a file.
+ZLIB_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
+
+//Path to a library.
+ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
 
 //Value Computed by CMake
 barony_BINARY_DIR:STATIC=/home/frosti/repos/Barony/windowsbuild
@@ -321,16 +372,78 @@ barony_IS_TOP_LEVEL:STATIC=ON
 barony_SOURCE_DIR:STATIC=/home/frosti/repos/Barony
 
 //Path to a library.
-pkgcfg_lib_PC_SDL2_NET_SDL2:FILEPATH=pkgcfg_lib_PC_SDL2_NET_SDL2-NOTFOUND
+pkgcfg_lib_GLIB_glib-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libglib-2.0.so
 
 //Path to a library.
-pkgcfg_lib_PC_SDL2_NET_SDL2_net:FILEPATH=pkgcfg_lib_PC_SDL2_NET_SDL2_net-NOTFOUND
+pkgcfg_lib_GTK3_atk-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libatk-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_cairo:FILEPATH=/usr/lib/x86_64-linux-gnu/libcairo.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_cairo-gobject:FILEPATH=/usr/lib/x86_64-linux-gnu/libcairo-gobject.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_gdk-3:FILEPATH=/usr/lib/x86_64-linux-gnu/libgdk-3.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_gdk_pixbuf-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_gio-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libgio-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_glib-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libglib-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_gobject-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libgobject-2.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_gtk-3:FILEPATH=/usr/lib/x86_64-linux-gnu/libgtk-3.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_harfbuzz:FILEPATH=/usr/lib/x86_64-linux-gnu/libharfbuzz.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_pango-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libpango-1.0.so
+
+//Path to a library.
+pkgcfg_lib_GTK3_pangocairo-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so
+
+//Path to a library.
+pkgcfg_lib_PC_SDL2_NET_SDL2:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2.so
+
+//Path to a library.
+pkgcfg_lib_PC_SDL2_NET_SDL2_net:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_net.so
+
+//Path to a library.
+pkgcfg_lib_SDL2IMAGE_SDL2:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2.so
+
+//Path to a library.
+pkgcfg_lib_SDL2IMAGE_SDL2_image:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_image.so
+
+//Path to a library.
+pkgcfg_lib_SDL2NET_SDL2:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2.so
+
+//Path to a library.
+pkgcfg_lib_SDL2NET_SDL2_net:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_net.so
+
+//Path to a library.
+pkgcfg_lib_SDL2TTF_SDL2:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2.so
+
+//Path to a library.
+pkgcfg_lib_SDL2TTF_SDL2_ttf:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
+
+//Path to a library.
+pkgcfg_lib_SDL2_SDL2:FILEPATH=/usr/lib/x86_64-linux-gnu/libSDL2.so
 
 
 ########################
 # INTERNAL cache entries
 ########################
 
+//Base data dir
+BASE_DATA_DIR:INTERNAL=./
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -351,6 +464,8 @@ CMAKE_COMMAND:INTERNAL=/usr/bin/cmake
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
+//ADVANCED property for variable: CMAKE_CXX_COMPILER
+CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_AR
 CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB
@@ -365,8 +480,8 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_CXX_STANDARD_LIBRARIES
-CMAKE_CXX_STANDARD_LIBRARIES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER
+CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_AR
 CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
@@ -381,12 +496,10 @@ CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
 CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_STANDARD_LIBRARIES
-CMAKE_C_STANDARD_LIBRARIES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_DLLTOOL
 CMAKE_DLLTOOL-ADVANCED:INTERNAL=1
 //Executable file format
-CMAKE_EXECUTABLE_FORMAT:INTERNAL=Unknown
+CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
 CMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG
@@ -418,6 +531,40 @@ CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/frosti/repos/Barony
+//ADVANCED property for variable: CMAKE_INSTALL_BINDIR
+CMAKE_INSTALL_BINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATADIR
+CMAKE_INSTALL_DATADIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATAROOTDIR
+CMAKE_INSTALL_DATAROOTDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DOCDIR
+CMAKE_INSTALL_DOCDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INCLUDEDIR
+CMAKE_INSTALL_INCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INFODIR
+CMAKE_INSTALL_INFODIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBDIR
+CMAKE_INSTALL_LIBDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBEXECDIR
+CMAKE_INSTALL_LIBEXECDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALEDIR
+CMAKE_INSTALL_LOCALEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALSTATEDIR
+CMAKE_INSTALL_LOCALSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_MANDIR
+CMAKE_INSTALL_MANDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_OLDINCLUDEDIR
+CMAKE_INSTALL_OLDINCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_RUNSTATEDIR
+CMAKE_INSTALL_RUNSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SBINDIR
+CMAKE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SHAREDSTATEDIR
+CMAKE_INSTALL_SHAREDSTATEDIR-ADVANCED:INTERNAL=1
+//Install .so files without execute permission.
+CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SYSCONFDIR
+CMAKE_INSTALL_SYSCONFDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -435,7 +582,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -444,17 +591,6 @@ CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RANLIB
 CMAKE_RANLIB-ADVANCED:INTERNAL=1
-CMAKE_RC_COMPILER_WORKS:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RC_FLAGS
-CMAKE_RC_FLAGS-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RC_FLAGS_DEBUG
-CMAKE_RC_FLAGS_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RC_FLAGS_MINSIZEREL
-CMAKE_RC_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RC_FLAGS_RELEASE
-CMAKE_RC_FLAGS_RELEASE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RC_FLAGS_RELWITHDEBINFO
-CMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_READELF
 CMAKE_READELF-ADVANCED:INTERNAL=1
 //Path to CMake installation.
@@ -489,22 +625,118 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding NFD
+FIND_PACKAGE_MESSAGE_DETAILS_NFD:INTERNAL=[/home/frosti/repos/depend/nativefiledialog/release/lib/libnfd.a][/home/frosti/repos/depend/nativefiledialog/release/include/nfd][v()]
 //Details about finding OpenGL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[opengl32][c ][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libOpenGL.so][/usr/lib/x86_64-linux-gnu/libGLX.so][/usr/include][c ][v()]
+//Details about finding PNG
+FIND_PACKAGE_MESSAGE_DETAILS_PNG:INTERNAL=[/usr/lib/x86_64-linux-gnu/libpng.so][/usr/include][v()]
 //Details about finding PhysFS
-FIND_PACKAGE_MESSAGE_DETAILS_PhysFS:INTERNAL=[/home/frosti/repos/depend/physfs-mingw64/lib/][/home/frosti/repos/depend/physfs-mingw64/include/][v()]
-//Details about finding SDL2
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[/home/frosti/repos/depend/SDL2-2.28.3/x86_64-w64-mingw32/lib][/home/frosti/repos/depend/SDL2-2.28.3/x86_64-w64-mingw32/include][v()]
-//Details about finding SDL2_image
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2_image:INTERNAL=[/home/frosti/repos/depend/SDL2_image-2.6.3/x86_64-w64-mingw32/lib/][/home/frosti/repos/depend/SDL2_image-2.6.3/x86_64-w64-mingw32/include/SDL2][v..()]
+FIND_PACKAGE_MESSAGE_DETAILS_PhysFS:INTERNAL=[/usr/local/lib/libphysfs.so][/usr/local/include][v()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
+//Details about finding RAPID_JSON
+FIND_PACKAGE_MESSAGE_DETAILS_RAPID_JSON:INTERNAL=[/usr/include][v()]
 //Details about finding SDL2_net
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2_net:INTERNAL=[/home/frosti/repos/depend/SDL2_net-2.2.0/x86_64-w64-mingw32/include/SDL2][/home/frosti/repos/depend/SDL2_net-2.2.0/x86_64-w64-mingw32/lib/][v2.2.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_SDL2_net:INTERNAL=[/usr/include/SDL2][/usr/lib/x86_64-linux-gnu/libSDL2_net.so][v2.0.1()]
 //Details about finding SDL2_ttf
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2_ttf:INTERNAL=[/home/frosti/repos/depend/SDL2_ttf-2.20.2/x86_64-w64-mingw32/lib/][/home/frosti/repos/depend/SDL2_ttf-2.20.2/x86_64-w64-mingw32/include/SDL2][v2.20.2()]
+FIND_PACKAGE_MESSAGE_DETAILS_SDL2_ttf:INTERNAL=[/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so][/usr/include/SDL2][v2.0.18()]
+//Details about finding STEAMWORKS
+FIND_PACKAGE_MESSAGE_DETAILS_STEAMWORKS:INTERNAL=[/home/frosti/repos/depend/steamworkssdk/sdk/public][/home/frosti/repos/depend/steamworkssdk/sdk/redistributable_bin/linux64/libsteam_api.so][v()]
+//Details about finding ZLIB
+FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/usr/lib/x86_64-linux-gnu/libz.so][/usr/include][v1.2.11()]
+GLIB_CFLAGS:INTERNAL=-I/usr/include/glib-2.0;-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GLIB_CFLAGS_I:INTERNAL=
+GLIB_CFLAGS_OTHER:INTERNAL=
+GLIB_FOUND:INTERNAL=1
+GLIB_INCLUDEDIR:INTERNAL=/usr/include
+GLIB_INCLUDE_DIRS:INTERNAL=/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GLIB_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lglib-2.0
+GLIB_LDFLAGS_OTHER:INTERNAL=
+GLIB_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+GLIB_LIBRARIES:INTERNAL=glib-2.0
+GLIB_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+GLIB_LIBS:INTERNAL=
+GLIB_LIBS_L:INTERNAL=
+GLIB_LIBS_OTHER:INTERNAL=
+GLIB_LIBS_PATHS:INTERNAL=
+GLIB_MODULE_NAME:INTERNAL=glib-2.0
+GLIB_PREFIX:INTERNAL=/usr
+GLIB_STATIC_CFLAGS:INTERNAL=-I/usr/include/glib-2.0;-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GLIB_STATIC_CFLAGS_I:INTERNAL=
+GLIB_STATIC_CFLAGS_OTHER:INTERNAL=
+GLIB_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GLIB_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lglib-2.0;-pthread;-lm;-lpcre
+GLIB_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+GLIB_STATIC_LIBDIR:INTERNAL=
+GLIB_STATIC_LIBRARIES:INTERNAL=glib-2.0;m;pcre
+GLIB_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+GLIB_STATIC_LIBS:INTERNAL=
+GLIB_STATIC_LIBS_L:INTERNAL=
+GLIB_STATIC_LIBS_OTHER:INTERNAL=
+GLIB_STATIC_LIBS_PATHS:INTERNAL=
+GLIB_VERSION:INTERNAL=2.72.4
+GLIB_glib-2.0_INCLUDEDIR:INTERNAL=
+GLIB_glib-2.0_LIBDIR:INTERNAL=
+GLIB_glib-2.0_PREFIX:INTERNAL=
+GLIB_glib-2.0_VERSION:INTERNAL=
+GTK3_CFLAGS:INTERNAL=-pthread;-I/usr/include/gtk-3.0;-I/usr/include/at-spi2-atk/2.0;-I/usr/include/at-spi-2.0;-I/usr/include/dbus-1.0;-I/usr/lib/x86_64-linux-gnu/dbus-1.0/include;-I/usr/include/gtk-3.0;-I/usr/include/gio-unix-2.0;-I/usr/include/cairo;-I/usr/include/pango-1.0;-I/usr/include/harfbuzz;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include/harfbuzz;-I/usr/include/atk-1.0;-I/usr/include/cairo;-I/usr/include/pixman-1;-I/usr/include/uuid;-I/usr/include/freetype2;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/libpng16;-I/usr/include/x86_64-linux-gnu;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/glib-2.0;-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GTK3_CFLAGS_I:INTERNAL=
+GTK3_CFLAGS_OTHER:INTERNAL=-pthread
+GTK3_FOUND:INTERNAL=1
+GTK3_INCLUDEDIR:INTERNAL=/usr/include
+GTK3_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-3.0;/usr/include/at-spi2-atk/2.0;/usr/include/at-spi-2.0;/usr/include/dbus-1.0;/usr/lib/x86_64-linux-gnu/dbus-1.0/include;/usr/include/gtk-3.0;/usr/include/gio-unix-2.0;/usr/include/cairo;/usr/include/pango-1.0;/usr/include/harfbuzz;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include/harfbuzz;/usr/include/atk-1.0;/usr/include/cairo;/usr/include/pixman-1;/usr/include/uuid;/usr/include/freetype2;/usr/include/gdk-pixbuf-2.0;/usr/include/libpng16;/usr/include/x86_64-linux-gnu;/usr/include/libmount;/usr/include/blkid;/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GTK3_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lgtk-3;-lgdk-3;-lpangocairo-1.0;-lpango-1.0;-lharfbuzz;-latk-1.0;-lcairo-gobject;-lcairo;-lgdk_pixbuf-2.0;-lgio-2.0;-lgobject-2.0;-lglib-2.0
+GTK3_LDFLAGS_OTHER:INTERNAL=
+GTK3_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+GTK3_LIBRARIES:INTERNAL=gtk-3;gdk-3;pangocairo-1.0;pango-1.0;harfbuzz;atk-1.0;cairo-gobject;cairo;gdk_pixbuf-2.0;gio-2.0;gobject-2.0;glib-2.0
+GTK3_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+GTK3_LIBS:INTERNAL=
+GTK3_LIBS_L:INTERNAL=
+GTK3_LIBS_OTHER:INTERNAL=
+GTK3_LIBS_PATHS:INTERNAL=
+GTK3_MODULE_NAME:INTERNAL=gtk+-3.0
+GTK3_PREFIX:INTERNAL=/usr
+GTK3_STATIC_CFLAGS:INTERNAL=-pthread;-I/usr/include/gtk-3.0;-I/usr/include/at-spi2-atk/2.0;-I/usr/include/at-spi-2.0;-I/usr/include/dbus-1.0;-I/usr/lib/x86_64-linux-gnu/dbus-1.0/include;-I/usr/include/gtk-3.0;-I/usr/include/gio-unix-2.0;-I/usr/include/cairo;-I/usr/include/pango-1.0;-I/usr/include/harfbuzz;-I/usr/include/pango-1.0;-I/usr/include/fribidi;-I/usr/include/harfbuzz;-I/usr/include/atk-1.0;-I/usr/include/cairo;-I/usr/include/pixman-1;-I/usr/include/uuid;-I/usr/include/freetype2;-I/usr/include/gdk-pixbuf-2.0;-I/usr/include/libpng16;-I/usr/include/x86_64-linux-gnu;-I/usr/include/libmount;-I/usr/include/blkid;-I/usr/include/glib-2.0;-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GTK3_STATIC_CFLAGS_I:INTERNAL=
+GTK3_STATIC_CFLAGS_OTHER:INTERNAL=-pthread
+GTK3_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/gtk-3.0;/usr/include/at-spi2-atk/2.0;/usr/include/at-spi-2.0;/usr/include/dbus-1.0;/usr/lib/x86_64-linux-gnu/dbus-1.0/include;/usr/include/gtk-3.0;/usr/include/gio-unix-2.0;/usr/include/cairo;/usr/include/pango-1.0;/usr/include/harfbuzz;/usr/include/pango-1.0;/usr/include/fribidi;/usr/include/harfbuzz;/usr/include/atk-1.0;/usr/include/cairo;/usr/include/pixman-1;/usr/include/uuid;/usr/include/freetype2;/usr/include/gdk-pixbuf-2.0;/usr/include/libpng16;/usr/include/x86_64-linux-gnu;/usr/include/libmount;/usr/include/blkid;/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GTK3_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-L/usr/lib;-L/usr/lib/x86_64-linux-gnu;-lgtk-3;-latk-bridge-2.0;-latspi;-lXtst;-ldbus-1;-lsystemd;-Wl,--export-dynamic;-lgdk-3;-lXinerama;-lXi;-lXrandr;-lXcursor;-lXcomposite;-lXdamage;-lXfixes;-lxkbcommon;-lwayland-cursor;-lwayland-egl;-lwayland-client;-lm;-pthread;-lepoxy;-ldl;-lGL;-lEGL;-lpangocairo-1.0;-lm;-lpangoft2-1.0;-lm;-lharfbuzz-gobject;-lpango-1.0;-lm;-lfribidi;-lthai;-ldatrie;-lXft;-lharfbuzz;-lm;-lgraphite2;-latk-1.0;-lcairo-gobject;-lcairo;-lz;-lpixman-1;-lfontconfig;-luuid;-lexpat;-lm;-lfreetype;-lbrotlidec;-lbrotlicommon;-lxcb-shm;-lxcb-render;-lXrender;-lXext;-lX11;-lpthread;-lxcb;-lXau;-lXdmcp;-lgdk_pixbuf-2.0;-lm;-lpng16;-lm;-lz;-lm;-ljpeg;-ltiff;-lwebp;-lzstd;-llzma;-ljbig;-ljpeg;-ldeflate;-lz;-lm;-lgio-2.0;-lgmodule-2.0;-pthread;-lz;-lmount;-ldl;-lblkid;-lselinux;-lsepol;-lpcre2-8;-lgobject-2.0;-lffi;-lglib-2.0;-pthread;-lm;-lpcre
+GTK3_STATIC_LDFLAGS_OTHER:INTERNAL=-Wl,--export-dynamic;-pthread
+GTK3_STATIC_LIBDIR:INTERNAL=
+GTK3_STATIC_LIBRARIES:INTERNAL=gtk-3;atk-bridge-2.0;atspi;Xtst;dbus-1;systemd;gdk-3;Xinerama;Xi;Xrandr;Xcursor;Xcomposite;Xdamage;Xfixes;xkbcommon;wayland-cursor;wayland-egl;wayland-client;m;epoxy;dl;GL;EGL;pangocairo-1.0;m;pangoft2-1.0;m;harfbuzz-gobject;pango-1.0;m;fribidi;thai;datrie;Xft;harfbuzz;m;graphite2;atk-1.0;cairo-gobject;cairo;z;pixman-1;fontconfig;uuid;expat;m;freetype;brotlidec;brotlicommon;xcb-shm;xcb-render;Xrender;Xext;X11;pthread;xcb;Xau;Xdmcp;gdk_pixbuf-2.0;m;png16;m;z;m;jpeg;tiff;webp;zstd;lzma;jbig;jpeg;deflate;z;m;gio-2.0;gmodule-2.0;z;mount;dl;blkid;selinux;sepol;pcre2-8;gobject-2.0;ffi;glib-2.0;m;pcre
+GTK3_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu;/usr/lib;/usr/lib/x86_64-linux-gnu
+GTK3_STATIC_LIBS:INTERNAL=
+GTK3_STATIC_LIBS_L:INTERNAL=
+GTK3_STATIC_LIBS_OTHER:INTERNAL=
+GTK3_STATIC_LIBS_PATHS:INTERNAL=
+GTK3_VERSION:INTERNAL=3.24.33
+GTK3_gtk+-3.0_INCLUDEDIR:INTERNAL=
+GTK3_gtk+-3.0_LIBDIR:INTERNAL=
+GTK3_gtk+-3.0_PREFIX:INTERNAL=
+GTK3_gtk+-3.0_VERSION:INTERNAL=
+//ADVANCED property for variable: NFD_INCLUDE_DIR
+NFD_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: NFD_LIBRARY
+NFD_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_EGL_INCLUDE_DIR
+OPENGL_EGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_GLX_INCLUDE_DIR
+OPENGL_GLX_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_egl_LIBRARY
+OPENGL_egl_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY
 OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_glu_LIBRARY
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glx_LIBRARY
+OPENGL_glx_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_opengl_LIBRARY
+OPENGL_opengl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
+OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
 PC_SDL2_NET_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
 PC_SDL2_NET_CFLAGS_I:INTERNAL=
 PC_SDL2_NET_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
@@ -544,23 +776,221 @@ PC_SDL2_NET_VERSION:INTERNAL=2.0.1
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: SDL2_IMAGE_INCLUDE_DIR
-SDL2_IMAGE_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: SDL2_IMAGE_LIBRARY
-SDL2_IMAGE_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PNG_LIBRARY
+PNG_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PNG_PNG_INCLUDE_DIR
+PNG_PNG_INCLUDE_DIR-ADVANCED:INTERNAL=1
+SDL2IMAGE_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2IMAGE_CFLAGS_I:INTERNAL=
+SDL2IMAGE_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2IMAGE_FOUND:INTERNAL=1
+SDL2IMAGE_INCLUDEDIR:INTERNAL=/usr/include
+SDL2IMAGE_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2IMAGE_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_image;-lSDL2
+SDL2IMAGE_LDFLAGS_OTHER:INTERNAL=
+SDL2IMAGE_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2IMAGE_LIBRARIES:INTERNAL=SDL2_image;SDL2
+SDL2IMAGE_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2IMAGE_LIBS:INTERNAL=
+SDL2IMAGE_LIBS_L:INTERNAL=
+SDL2IMAGE_LIBS_OTHER:INTERNAL=
+SDL2IMAGE_LIBS_PATHS:INTERNAL=
+SDL2IMAGE_MODULE_NAME:INTERNAL=SDL2_image
+SDL2IMAGE_PREFIX:INTERNAL=/usr
+SDL2IMAGE_SDL2_image_INCLUDEDIR:INTERNAL=
+SDL2IMAGE_SDL2_image_LIBDIR:INTERNAL=
+SDL2IMAGE_SDL2_image_PREFIX:INTERNAL=
+SDL2IMAGE_SDL2_image_VERSION:INTERNAL=
+SDL2IMAGE_STATIC_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2IMAGE_STATIC_CFLAGS_I:INTERNAL=
+SDL2IMAGE_STATIC_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2IMAGE_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2IMAGE_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_image;-lSDL2;-lm;-lasound;-lm;-ldl;-lpthread;-lpulse-simple;-pthread;-lpulse;-pthread;-lX11;-lXext;-lXcursor;-lXinerama;-lXi;-lXfixes;-lXrandr;-lXss;-lXxf86vm;-ldrm;-lgbm;-lwayland-egl;-lwayland-client;-lwayland-cursor;-lxkbcommon;-ldecor-0;-lpthread;-lrt
+SDL2IMAGE_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+SDL2IMAGE_STATIC_LIBDIR:INTERNAL=
+SDL2IMAGE_STATIC_LIBRARIES:INTERNAL=SDL2_image;SDL2;m;asound;m;dl;pthread;pulse-simple;pulse;X11;Xext;Xcursor;Xinerama;Xi;Xfixes;Xrandr;Xss;Xxf86vm;drm;gbm;wayland-egl;wayland-client;wayland-cursor;xkbcommon;decor-0;pthread;rt
+SDL2IMAGE_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2IMAGE_STATIC_LIBS:INTERNAL=
+SDL2IMAGE_STATIC_LIBS_L:INTERNAL=
+SDL2IMAGE_STATIC_LIBS_OTHER:INTERNAL=
+SDL2IMAGE_STATIC_LIBS_PATHS:INTERNAL=
+SDL2IMAGE_VERSION:INTERNAL=2.0.5
+SDL2NET_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2NET_CFLAGS_I:INTERNAL=
+SDL2NET_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2NET_FOUND:INTERNAL=1
+SDL2NET_INCLUDEDIR:INTERNAL=/usr/include
+SDL2NET_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2NET_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_net;-lSDL2
+SDL2NET_LDFLAGS_OTHER:INTERNAL=
+SDL2NET_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2NET_LIBRARIES:INTERNAL=SDL2_net;SDL2
+SDL2NET_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2NET_LIBS:INTERNAL=
+SDL2NET_LIBS_L:INTERNAL=
+SDL2NET_LIBS_OTHER:INTERNAL=
+SDL2NET_LIBS_PATHS:INTERNAL=
+SDL2NET_MODULE_NAME:INTERNAL=SDL2_net
+SDL2NET_PREFIX:INTERNAL=/usr
+SDL2NET_SDL2_net_INCLUDEDIR:INTERNAL=
+SDL2NET_SDL2_net_LIBDIR:INTERNAL=
+SDL2NET_SDL2_net_PREFIX:INTERNAL=
+SDL2NET_SDL2_net_VERSION:INTERNAL=
+SDL2NET_STATIC_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2NET_STATIC_CFLAGS_I:INTERNAL=
+SDL2NET_STATIC_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2NET_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2NET_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_net;-lSDL2;-lm;-lasound;-lm;-ldl;-lpthread;-lpulse-simple;-pthread;-lpulse;-pthread;-lX11;-lXext;-lXcursor;-lXinerama;-lXi;-lXfixes;-lXrandr;-lXss;-lXxf86vm;-ldrm;-lgbm;-lwayland-egl;-lwayland-client;-lwayland-cursor;-lxkbcommon;-ldecor-0;-lpthread;-lrt
+SDL2NET_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+SDL2NET_STATIC_LIBDIR:INTERNAL=
+SDL2NET_STATIC_LIBRARIES:INTERNAL=SDL2_net;SDL2;m;asound;m;dl;pthread;pulse-simple;pulse;X11;Xext;Xcursor;Xinerama;Xi;Xfixes;Xrandr;Xss;Xxf86vm;drm;gbm;wayland-egl;wayland-client;wayland-cursor;xkbcommon;decor-0;pthread;rt
+SDL2NET_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2NET_STATIC_LIBS:INTERNAL=
+SDL2NET_STATIC_LIBS_L:INTERNAL=
+SDL2NET_STATIC_LIBS_OTHER:INTERNAL=
+SDL2NET_STATIC_LIBS_PATHS:INTERNAL=
+SDL2NET_VERSION:INTERNAL=2.0.1
+SDL2TTF_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2TTF_CFLAGS_I:INTERNAL=
+SDL2TTF_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2TTF_FOUND:INTERNAL=1
+SDL2TTF_INCLUDEDIR:INTERNAL=/usr/include
+SDL2TTF_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2TTF_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_ttf;-lSDL2
+SDL2TTF_LDFLAGS_OTHER:INTERNAL=
+SDL2TTF_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2TTF_LIBRARIES:INTERNAL=SDL2_ttf;SDL2
+SDL2TTF_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2TTF_LIBS:INTERNAL=
+SDL2TTF_LIBS_L:INTERNAL=
+SDL2TTF_LIBS_OTHER:INTERNAL=
+SDL2TTF_LIBS_PATHS:INTERNAL=
+SDL2TTF_MODULE_NAME:INTERNAL=SDL2_ttf
+SDL2TTF_PREFIX:INTERNAL=/usr
+SDL2TTF_SDL2_ttf_INCLUDEDIR:INTERNAL=
+SDL2TTF_SDL2_ttf_LIBDIR:INTERNAL=
+SDL2TTF_SDL2_ttf_PREFIX:INTERNAL=
+SDL2TTF_SDL2_ttf_VERSION:INTERNAL=
+SDL2TTF_STATIC_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2TTF_STATIC_CFLAGS_I:INTERNAL=
+SDL2TTF_STATIC_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2TTF_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2TTF_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2_ttf;-lSDL2;-lm;-lasound;-lm;-ldl;-lpthread;-lpulse-simple;-pthread;-lpulse;-pthread;-lX11;-lXext;-lXcursor;-lXinerama;-lXi;-lXfixes;-lXrandr;-lXss;-lXxf86vm;-ldrm;-lgbm;-lwayland-egl;-lwayland-client;-lwayland-cursor;-lxkbcommon;-ldecor-0;-lpthread;-lrt
+SDL2TTF_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+SDL2TTF_STATIC_LIBDIR:INTERNAL=
+SDL2TTF_STATIC_LIBRARIES:INTERNAL=SDL2_ttf;SDL2;m;asound;m;dl;pthread;pulse-simple;pulse;X11;Xext;Xcursor;Xinerama;Xi;Xfixes;Xrandr;Xss;Xxf86vm;drm;gbm;wayland-egl;wayland-client;wayland-cursor;xkbcommon;decor-0;pthread;rt
+SDL2TTF_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2TTF_STATIC_LIBS:INTERNAL=
+SDL2TTF_STATIC_LIBS_L:INTERNAL=
+SDL2TTF_STATIC_LIBS_OTHER:INTERNAL=
+SDL2TTF_STATIC_LIBS_PATHS:INTERNAL=
+SDL2TTF_VERSION:INTERNAL=2.0.18
+SDL2_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2_CFLAGS_I:INTERNAL=
+SDL2_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2_FOUND:INTERNAL=1
+SDL2_INCLUDEDIR:INTERNAL=/usr/include
+SDL2_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2
+SDL2_LDFLAGS_OTHER:INTERNAL=
+SDL2_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2_LIBRARIES:INTERNAL=SDL2
+SDL2_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2_LIBS:INTERNAL=
+SDL2_LIBS_L:INTERNAL=
+SDL2_LIBS_OTHER:INTERNAL=
+SDL2_LIBS_PATHS:INTERNAL=
+SDL2_MODULE_NAME:INTERNAL=sdl2
 //ADVANCED property for variable: SDL2_NET_INCLUDE_DIR
 SDL2_NET_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SDL2_NET_LIBRARY
 SDL2_NET_LIBRARY-ADVANCED:INTERNAL=1
+SDL2_PREFIX:INTERNAL=/usr
+SDL2_STATIC_CFLAGS:INTERNAL=-D_REENTRANT;-I/usr/include/SDL2
+SDL2_STATIC_CFLAGS_I:INTERNAL=
+SDL2_STATIC_CFLAGS_OTHER:INTERNAL=-D_REENTRANT
+SDL2_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/SDL2
+SDL2_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lSDL2;-lm;-lasound;-lm;-ldl;-lpthread;-lpulse-simple;-pthread;-lpulse;-pthread;-lX11;-lXext;-lXcursor;-lXinerama;-lXi;-lXfixes;-lXrandr;-lXss;-lXxf86vm;-ldrm;-lgbm;-lwayland-egl;-lwayland-client;-lwayland-cursor;-lxkbcommon;-ldecor-0;-lpthread;-lrt
+SDL2_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+SDL2_STATIC_LIBDIR:INTERNAL=
+SDL2_STATIC_LIBRARIES:INTERNAL=SDL2;m;asound;m;dl;pthread;pulse-simple;pulse;X11;Xext;Xcursor;Xinerama;Xi;Xfixes;Xrandr;Xss;Xxf86vm;drm;gbm;wayland-egl;wayland-client;wayland-cursor;xkbcommon;decor-0;pthread;rt
+SDL2_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+SDL2_STATIC_LIBS:INTERNAL=
+SDL2_STATIC_LIBS_L:INTERNAL=
+SDL2_STATIC_LIBS_OTHER:INTERNAL=
+SDL2_STATIC_LIBS_PATHS:INTERNAL=
 //ADVANCED property for variable: SDL2_TTF_INCLUDE_DIR
 SDL2_TTF_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SDL2_TTF_LIBRARY
 SDL2_TTF_LIBRARY-ADVANCED:INTERNAL=1
+SDL2_VERSION:INTERNAL=2.0.20
+SDL2_sdl2_INCLUDEDIR:INTERNAL=
+SDL2_sdl2_LIBDIR:INTERNAL=
+SDL2_sdl2_PREFIX:INTERNAL=
+SDL2_sdl2_VERSION:INTERNAL=
+//ADVANCED property for variable: STEAMWORKS_INCLUDE_DIR
+STEAMWORKS_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_INCLUDE_DIR
+ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_DEBUG
+ZLIB_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_RELEASE
+ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//CMAKE_INSTALL_PREFIX during last run
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
+__pkg_config_arguments_GLIB:INTERNAL=REQUIRED;glib-2.0
+__pkg_config_arguments_GTK3:INTERNAL=REQUIRED;gtk+-3.0
 __pkg_config_arguments_PC_SDL2_NET:INTERNAL=QUIET;SDL2_net
+__pkg_config_checked_GLIB:INTERNAL=1
+__pkg_config_checked_GTK3:INTERNAL=1
 __pkg_config_checked_PC_SDL2_NET:INTERNAL=1
+__pkg_config_checked_SDL2:INTERNAL=1
+__pkg_config_checked_SDL2IMAGE:INTERNAL=1
+__pkg_config_checked_SDL2NET:INTERNAL=1
+__pkg_config_checked_SDL2TTF:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GLIB_glib-2.0
+pkgcfg_lib_GLIB_glib-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_atk-1.0
+pkgcfg_lib_GTK3_atk-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_cairo
+pkgcfg_lib_GTK3_cairo-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_cairo-gobject
+pkgcfg_lib_GTK3_cairo-gobject-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_gdk-3
+pkgcfg_lib_GTK3_gdk-3-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_gdk_pixbuf-2.0
+pkgcfg_lib_GTK3_gdk_pixbuf-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_gio-2.0
+pkgcfg_lib_GTK3_gio-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_glib-2.0
+pkgcfg_lib_GTK3_glib-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_gobject-2.0
+pkgcfg_lib_GTK3_gobject-2.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_gtk-3
+pkgcfg_lib_GTK3_gtk-3-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_harfbuzz
+pkgcfg_lib_GTK3_harfbuzz-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_pango-1.0
+pkgcfg_lib_GTK3_pango-1.0-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_GTK3_pangocairo-1.0
+pkgcfg_lib_GTK3_pangocairo-1.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_SDL2_NET_SDL2
 pkgcfg_lib_PC_SDL2_NET_SDL2-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_SDL2_NET_SDL2_net
 pkgcfg_lib_PC_SDL2_NET_SDL2_net-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2IMAGE_SDL2
+pkgcfg_lib_SDL2IMAGE_SDL2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2IMAGE_SDL2_image
+pkgcfg_lib_SDL2IMAGE_SDL2_image-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2NET_SDL2
+pkgcfg_lib_SDL2NET_SDL2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2NET_SDL2_net
+pkgcfg_lib_SDL2NET_SDL2_net-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2TTF_SDL2
+pkgcfg_lib_SDL2TTF_SDL2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2TTF_SDL2_ttf
+pkgcfg_lib_SDL2TTF_SDL2_ttf-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SDL2_SDL2
+pkgcfg_lib_SDL2_SDL2-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 

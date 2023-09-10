@@ -710,62 +710,13 @@ void initClass(const int player)
 
 		if (isLocalPlayer)
 		{
-			//// weapon
-			// item = newItem(IRON_MACE, SERVICABLE, 0, 1, 0, true, NULL);
-			// item2 = itemPickup(player, item);
-			// hotbar[1].item = item2->uid;
-			// free(item);
-
-			// firestorm
-			item = newItem(POTION_FIRESTORM, EXCELLENT, 0, 2, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			hotbar[5].item = item2->uid;
-			free(item);
-
-			// acid
-			item = newItem(POTION_ACID, EXCELLENT, 0, 2, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// booze
-			item = newItem(POTION_BOOZE, EXCELLENT, 0, 3, 2, true, nullptr);
-			item2 = itemPickup(player, item);
-			hotbar[6].item = item2->uid;
-			free(item);
-
-			// juice
-			item = newItem(POTION_JUICE, EXCELLENT, 0, 2, 3, true, nullptr);
-			item2 = itemPickup(player, item);
-			hotbar[7].item = item2->uid;
-			free(item);
-
-			// polymorph
-			item = newItem(POTION_POLYMORPH, EXCELLENT, 0, 1, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// blindness
-			item = newItem(POTION_BLINDNESS, EXCELLENT, 0, 2, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// speed
-			item = newItem(POTION_SPEED, EXCELLENT, 0, 1, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			free(item);
-
 			// bread
 			item = newItem(FOOD_BREAD, SERVICABLE, 0, 1, 0, true, nullptr);
 			item2 = itemPickup(player, item);
 			free(item);
 
-			// alembic
-			item = newItem(TOOL_ALEMBIC, EXCELLENT, 0, 1, 0, true, nullptr);
-			item2 = itemPickup(player, item);
-			hotbar[8].item = item2->uid;
-			free(item);
-
-			item = newItem(READABLE_BOOK, DECREPIT, 0, 1, getBook("Bottle Book"), true, nullptr);
+			// fish
+			item = newItem(FOOD_FISH, SERVICABLE, 0, 1, 0, true, nullptr);
 			item2 = itemPickup(player, item);
 			free(item);
 		}

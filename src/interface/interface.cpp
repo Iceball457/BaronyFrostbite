@@ -6866,13 +6866,16 @@ void GenerateAlchemyTable(uint32 seed)
 	};
 
 	// Generate the basic potion cycle
-	// Juice + RandomFrom(primary) = Booze
-	AssignUniquely(output, std::vector{POTION_JUICE}, primary, POTION_BOOZE);
-	// Booze + RandomFrom(primary) = Acid
-	AssignUniquely(output, std::vector{POTION_BOOZE}, primary, POTION_ACID);
-	// Acid + RandomFrom(primary) = Juice
-	AssignUniquely(output, std::vector{POTION_ACID}, primary, POTION_JUICE);
-
+	const int BASE_POTION_CYCLE_RECIPE_COUNT = 2; // VALID RANGE 0..12. 6 gives a 50% recipe density which doesn't leave a lot of room for other potions
+	for (int i = 0; i < BASE_POTION_CYCLE_RECIPE_COUNT; i++)
+	{
+		// Juice + RandomFrom(primary) = Booze
+		AssignUniquely(output, std::vector{POTION_JUICE}, primary, POTION_BOOZE);
+		// Booze + RandomFrom(primary) = Acid
+		AssignUniquely(output, std::vector{POTION_BOOZE}, primary, POTION_ACID);
+		// Acid + RandomFrom(primary) = Juice
+		AssignUniquely(output, std::vector{POTION_ACID}, primary, POTION_JUICE);
+	}
 	// Generate the basic recipes
 	// foreach (ItemType primary_potion in primary) {
 	//  RandomFrom(basic) + RandomFrom(primary, primary_potion) = primary_potion (once)
@@ -6887,6 +6890,12 @@ void GenerateAlchemyTable(uint32 seed)
 	for (const auto &primaryOutput : primary)
 	{
 		AssignUniquely(output, basic, primary, primaryOutput);
+		if (rng() % 100 < 50)
+		{ // 50% chance
+			AssignUniquely(output, basic, primary, primaryOutput);
+		}
+		AssignUniquely(output, primary, primary, primaryOutput);
+		AssignUniquely(output, primary, primary, primaryOutput);
 		AssignUniquely(output, primary, primary, primaryOutput);
 		AssignUniquely(output, primary, primary, primaryOutput);
 	}
