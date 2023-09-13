@@ -301,6 +301,9 @@ enum GUICurrentType
 	GUI_TYPE_ITEMFX
 };
 
+const std::vector<ItemType> basicPotions;
+const std::vector<ItemType> secondaryPotions;
+const std::vector<ItemType> finalPotions;
 void GenerateAlchemyTable(uint32 seed);
 
 // Generic GUI Stuff (repair/alchemy)

@@ -6802,16 +6802,16 @@ std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> alchemyTable = {
 	{POTION_RESTOREMAGIC, {POTION_INVISIBILITY, POTION_SPEED}},
 };
 
+const std::vector<ItemType> basicPotions = {POTION_JUICE, POTION_BOOZE, POTION_ACID};
+const std::vector<ItemType> secondaryPotions = {POTION_POLYMORPH, POTION_STRENGTH, POTION_SICKNESS, POTION_CONFUSION, POTION_HEALING, POTION_CUREAILMENT, POTION_BLINDNESS, POTION_RESTOREMAGIC, POTION_INVISIBILITY, POTION_LEVITATION, POTION_SPEED, POTION_PARALYSIS};
+const std::vector<ItemType> finalPotions = {POTION_FIRESTORM, POTION_ICESTORM, POTION_THUNDERSTORM, POTION_EXTRAHEALING};
+
 void GenerateAlchemyTable(uint32 seed)
 {
 	alchemyTable = {};
 	std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> output = {};
 
 	std::mt19937 rng(seed);
-
-	const std::vector<ItemType> basic = {POTION_JUICE, POTION_BOOZE, POTION_ACID};
-	const std::vector<ItemType> primary = {POTION_POLYMORPH, POTION_STRENGTH, POTION_SICKNESS, POTION_CONFUSION, POTION_HEALING, POTION_CUREAILMENT, POTION_BLINDNESS, POTION_RESTOREMAGIC, POTION_INVISIBILITY, POTION_LEVITATION, POTION_SPEED, POTION_PARALYSIS};
-	const std::vector<ItemType> secondary = {POTION_FIRESTORM, POTION_ICESTORM, POTION_THUNDERSTORM, POTION_EXTRAHEALING};
 
 	auto RandomFrom = [&](std::vector<ItemType> from, std::optional<ItemType> except = std::nullopt)
 	{
@@ -6866,44 +6866,30 @@ void GenerateAlchemyTable(uint32 seed)
 		}
 	};
 
-	// Generate the basic potion cycle
-	const int BASE_POTION_CYCLE_RECIPE_COUNT = 2; // VALID RANGE 0..12. 6 gives a 50% recipe density which doesn't leave a lot of room for other potions
+	// Generate the acid recipes first, as they are the most restrictive.
+	for (const auto &secondaryOutput : finalPotions)
+	{
+		AssignUniquely(output, std::vector{POTION_ACID}, secondaryPotions, secondaryOutput);
+	}
+
+	// Generate the potion base cycle
+	const int BASE_POTION_CYCLE_RECIPE_COUNT = 1; // VALID RANGE 0..12. 6 gives a 50% recipe density which doesn't leave a lot of room for other potions
 	for (int i = 0; i < BASE_POTION_CYCLE_RECIPE_COUNT; i++)
 	{
 		// Juice + RandomFrom(primary) = Booze
-		AssignUniquely(output, std::vector{POTION_JUICE}, primary, POTION_BOOZE);
+		AssignUniquely(output, std::vector{POTION_JUICE}, secondaryPotions, POTION_BOOZE);
 		// Booze + RandomFrom(primary) = Acid
-		AssignUniquely(output, std::vector{POTION_BOOZE}, primary, POTION_ACID);
+		AssignUniquely(output, std::vector{POTION_BOOZE}, secondaryPotions, POTION_ACID);
 		// Acid + RandomFrom(primary) = Juice
-		AssignUniquely(output, std::vector{POTION_ACID}, primary, POTION_JUICE);
-	}
-	// Generate the basic recipes
-	// foreach (ItemType primary_potion in primary) {
-	//  RandomFrom(basic) + RandomFrom(primary, primary_potion) = primary_potion (once)
-	// }
-
-	// Generate the primary recipes
-	// foreach (ItemType primary_potion in primary) {
-	//  RandomFrom(primary, primary_potion) + RandomFrom(primary, primary_potion) = primary_potion (twice)
-	// }
-
-	// Resultant potion of this recipe
-	for (const auto &primaryOutput : primary)
-	{
-		AssignUniquely(output, basic, primary, primaryOutput);
-		AssignUniquely(output, primary, primary, primaryOutput);
-		AssignUniquely(output, primary, primary, primaryOutput);
+		AssignUniquely(output, std::vector{POTION_ACID}, secondaryPotions, POTION_JUICE);
 	}
 
-	// Generate the secondary recipes
-	// foreach (ItemType secondary_potion in secondary) {
-	//  Acid + RandomFrom(primary) = secondary_potion (once)
-	// }
-
 	// Resultant potion of this recipe
-	for (const auto &secondaryOutput : secondary)
+	for (const auto &primaryOutput : secondaryPotions)
 	{
-		AssignUniquely(output, std::vector{POTION_ACID}, primary, secondaryOutput);
+		AssignUniquely(output, basicPotions, secondaryPotions, primaryOutput);
+		AssignUniquely(output, secondaryPotions, secondaryPotions, primaryOutput);
+		AssignUniquely(output, secondaryPotions, secondaryPotions, primaryOutput);
 	}
 
 	alchemyTable = output;
@@ -6942,8 +6928,6 @@ static ItemType alchemyMixResult(ItemType potion1, ItemType potion2, bool &outRa
 	}
 
 	// If we reach here, no matching recipe was found in the alchemy table
-	// You could potentially set other flags here to indicate a random result or explosion
-	// ...
 	if (potion1 == POTION_ACID || potion2 == POTION_ACID)
 	{
 		outExplodeSelf = true;
@@ -7403,7 +7387,7 @@ void GenericGUIMenu::alchemyCombinePotions()
 		messagePlayerColor(gui_player, MESSAGE_INVENTORY, uint32ColorWhite, Language::get(3335));
 	}
 
-	if (!explodeSelf && result != POTION_SICKNESS && !tryDuplicatePotion && !samePotion)
+	if (!explodeSelf && result != POTION_WATER && !tryDuplicatePotion && !samePotion)
 	{
 		if (!(alchemyLearnRecipe(basePotion->type, true)))
 		{
@@ -7894,40 +7878,12 @@ bool GenericGUIMenu::alchemyLearnRecipe(int type, bool increaseskill, bool notif
 
 bool GenericGUIMenu::isItemBaseIngredient(int type)
 {
-	switch (type)
-	{
-	case POTION_WATER:
-	case POTION_POLYMORPH:
-	case POTION_BOOZE:
-	case POTION_JUICE:
-	case POTION_ACID:
-	case POTION_INVISIBILITY:
-		return true;
-	default:
-		return false;
-		break;
-	}
-	return false;
+	return std::find(basicPotions.begin(), basicPotions.end(), static_cast<ItemType>(type)) != basicPotions.end();
 }
 
 bool GenericGUIMenu::isItemSecondaryIngredient(int type)
 {
-	switch (type)
-	{
-	case POTION_WATER:
-	case POTION_SICKNESS:
-	case POTION_CONFUSION:
-	case POTION_CUREAILMENT:
-	case POTION_BLINDNESS:
-	case POTION_RESTOREMAGIC:
-	case POTION_SPEED:
-	case POTION_POLYMORPH:
-		return true;
-	default:
-		return false;
-		break;
-	}
-	return false;
+	return std::find(secondaryPotions.begin(), secondaryPotions.end(), static_cast<ItemType>(type)) != secondaryPotions.end();
 }
 
 void GenericGUIMenu::alchemyLearnRecipeOnLevelUp(int skill)
