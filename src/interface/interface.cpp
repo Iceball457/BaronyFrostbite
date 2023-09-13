@@ -6804,7 +6804,8 @@ std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> alchemyTable = {
 
 void GenerateAlchemyTable(uint32 seed)
 {
-	std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> output;
+	alchemyTable = {};
+	std::vector<std::pair<ItemType, std::pair<ItemType, ItemType>>> output = {};
 
 	std::mt19937 rng(seed);
 
@@ -6890,12 +6891,6 @@ void GenerateAlchemyTable(uint32 seed)
 	for (const auto &primaryOutput : primary)
 	{
 		AssignUniquely(output, basic, primary, primaryOutput);
-		if (rng() % 100 < 50)
-		{ // 50% chance
-			AssignUniquely(output, basic, primary, primaryOutput);
-		}
-		AssignUniquely(output, primary, primary, primaryOutput);
-		AssignUniquely(output, primary, primary, primaryOutput);
 		AssignUniquely(output, primary, primary, primaryOutput);
 		AssignUniquely(output, primary, primary, primaryOutput);
 	}
