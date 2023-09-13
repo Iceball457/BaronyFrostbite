@@ -6227,7 +6227,7 @@ Combination!#
 4178 Brew#
 4179 New Recipe!#
 4180 Discovered Use!#
-4181 OBTAINED: %d/24#
+4181 OBTAINED: %d/43#
 4182 You discovered a new alchemy recipe
  for a %s.#
 

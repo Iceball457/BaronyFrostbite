@@ -6863,14 +6863,14 @@ void GenerateAlchemyTable(uint32 seed)
 	};
 
 	// Generate the acid recipes first, as they are the most restrictive.
-	for (const auto &secondaryOutput : finalPotions)
+	for (const auto &finalOutput : finalPotions) // 4
 	{
-		AssignUniquely(output, std::vector{POTION_ACID}, secondaryPotions, secondaryOutput);
+		AssignUniquely(output, std::vector{POTION_ACID}, secondaryPotions, finalOutput);
 	}
 
 	// Generate the potion base cycle
-	const int BASE_POTION_CYCLE_RECIPE_COUNT = 1; // VALID RANGE 0..12. 6 gives a 50% recipe density which doesn't leave a lot of room for other potions
-	for (int i = 0; i < BASE_POTION_CYCLE_RECIPE_COUNT; i++)
+	const int BASE_POTION_CYCLE_RECIPE_COUNT = 1;			 // VALID RANGE 0..12. 6 gives a 50% recipe density which doesn't leave a lot of room for other potions
+	for (int i = 0; i < BASE_POTION_CYCLE_RECIPE_COUNT; i++) // 3
 	{
 		// Juice + RandomFrom(primary) = Booze
 		AssignUniquely(output, std::vector{POTION_JUICE}, secondaryPotions, POTION_BOOZE);
@@ -6881,17 +6881,17 @@ void GenerateAlchemyTable(uint32 seed)
 	}
 
 	// Resultant potion of this recipe
-	for (const auto &primaryOutput : secondaryPotions)
+	for (const auto &secondaryOutput : secondaryPotions) // 12
 	{
-		AssignUniquely(output, basicPotions, secondaryPotions, primaryOutput);
-		AssignUniquely(output, secondaryPotions, secondaryPotions, primaryOutput);
-		AssignUniquely(output, secondaryPotions, secondaryPotions, primaryOutput);
+		AssignUniquely(output, basicPotions, secondaryPotions, secondaryOutput);
+		AssignUniquely(output, secondaryPotions, secondaryPotions, secondaryOutput);
+		AssignUniquely(output, secondaryPotions, secondaryPotions, secondaryOutput);
 	}
 
 	alchemyTable = output;
 }
 
-static ItemType alchemyMixResult(ItemType potion1, ItemType potion2, bool &outRandomResult, bool &outTryDuplicatePotion, bool &outSamePotion, bool &outExplodeSelf)
+static ItemType alchemyMixResult(ItemType potion1, ItemType potion2, bool &outRandomResult, bool &outTryDuplicatePotion, bool &outSamePotion, bool &outExplodeSelf, bool &outFailed)
 {
 
 	// Initialize all the output flags to false
@@ -6899,6 +6899,7 @@ static ItemType alchemyMixResult(ItemType potion1, ItemType potion2, bool &outRa
 	outTryDuplicatePotion = false;
 	outSamePotion = false;
 	outExplodeSelf = false;
+	outFailed = false;
 
 	// Initialize the output potion to POTION_WATER
 	ItemType outputPotion = POTION_WATER;
@@ -6937,6 +6938,7 @@ static ItemType alchemyMixResult(ItemType potion1, ItemType potion2, bool &outRa
 		outRandomResult = true;
 	}
 
+	outFailed = true;
 	return outputPotion; // Return the default potion as no matching recipe was found
 }
 
@@ -7015,281 +7017,10 @@ void GenericGUIMenu::alchemyCombinePotions()
 	bool randomResult = false;
 	bool explodeSelf = false;
 	bool samePotion = false;
+	bool recipeFailed = false;
 	const ItemType basePotionType = basePotion->type;
 	const ItemType secondaryPotionType = secondaryPotion->type;
-	ItemType result = alchemyMixResult(basePotion->type, secondaryPotion->type, randomResult, tryDuplicatePotion, samePotion, explodeSelf);
-
-	// switch ( basePotion->type )
-	//{
-	//	case POTION_WATER:
-	//		if ( secondaryPotion->type == POTION_ACID )
-	//		{
-	//			explodeSelf = true;
-	//		}
-	//		else
-	//		{
-	//			tryDuplicatePotion = true;
-	//		}
-	//		break;
-	//	case POTION_BOOZE:
-	//		switch ( secondaryPotion->type )
-	//		{
-	//			case POTION_SICKNESS:
-	//				result = POTION_CONFUSION;
-	//				break;
-	//			case POTION_CONFUSION:
-	//				result = POTION_ACID;
-	//				break;
-	//			case POTION_CUREAILMENT:
-	//				result = POTION_SPEED;
-	//				break;
-	//			case POTION_BLINDNESS:
-	//				result = POTION_STRENGTH;
-	//				break;
-	//			case POTION_RESTOREMAGIC:
-	//				result = POTION_BLINDNESS;
-	//				break;
-	//			case POTION_SPEED:
-	//				result = POTION_PARALYSIS;
-	//				break;
-	//			case POTION_POLYMORPH:
-	//				randomResult = true;
-	//				break;
-	//			default:
-	//				break;
-	//		}
-	//		break;
-	//	case POTION_JUICE:
-	//		switch ( secondaryPotion->type )
-	//		{
-	//			case POTION_SICKNESS:
-	//				result = POTION_BOOZE;
-	//				break;
-	//			case POTION_CONFUSION:
-	//				result = POTION_BOOZE;
-	//				break;
-	//			case POTION_CUREAILMENT:
-	//				result = POTION_RESTOREMAGIC;
-	//				break;
-	//			case POTION_BLINDNESS:
-	//				result = POTION_CUREAILMENT;
-	//				break;
-	//			case POTION_RESTOREMAGIC:
-	//				result = POTION_HEALING;
-	//				break;
-	//			case POTION_SPEED:
-	//				result = POTION_INVISIBILITY;
-	//				break;
-	//			case POTION_POLYMORPH:
-	//				randomResult = true;
-	//				break;
-	//			default:
-	//				break;
-	//		}
-	//		break;
-	//	case POTION_ACID:
-	//		switch ( secondaryPotion->type )
-	//		{
-	//			case POTION_WATER:
-	//				explodeSelf = true; // oh no. don't do that.
-	//				break;
-	//			case POTION_SICKNESS:
-	//				result = POTION_FIRESTORM;
-	//				break;
-	//			case POTION_CONFUSION:
-	//				result = POTION_JUICE;
-	//				break;
-	//			case POTION_CUREAILMENT:
-	//				result = POTION_FIRESTORM;
-	//				break;
-	//			case POTION_BLINDNESS:
-	//				result = POTION_ICESTORM;
-	//				break;
-	//			case POTION_RESTOREMAGIC:
-	//				result = POTION_ICESTORM;
-	//				break;
-	//			case POTION_SPEED:
-	//				result = POTION_THUNDERSTORM;
-	//				break;
-	//			case POTION_POLYMORPH:
-	//				randomResult = true;
-	//				break;
-	//			default:
-	//				explodeSelf = true;
-	//				break;
-	//		}
-	//		break;
-	//	case POTION_INVISIBILITY:
-	//		switch ( secondaryPotion->type )
-	//		{
-	//			case POTION_SICKNESS:
-	//				result = POTION_BLINDNESS;
-	//				break;
-	//			case POTION_CONFUSION:
-	//				result = POTION_PARALYSIS;
-	//				break;
-	//			case POTION_CUREAILMENT:
-	//				result = POTION_LEVITATION;
-	//				break;
-	//			case POTION_BLINDNESS:
-	//				result = POTION_POLYMORPH;
-	//				break;
-	//			case POTION_RESTOREMAGIC:
-	//				result = POTION_EXTRAHEALING;
-	//				break;
-	//			case POTION_SPEED:
-	//				result = POTION_RESTOREMAGIC;
-	//				break;
-	//			case POTION_POLYMORPH:
-	//				randomResult = true;
-	//				break;
-	//			default:
-	//				break;
-	//		}
-	//		break;
-	//	default:
-	//		break;
-	// }
-
-	// if ( result == POTION_SICKNESS ) // didn't get a result, try flip the potion order
-	//{
-	//	switch ( secondaryPotion->type )
-	//	{
-	//		case POTION_WATER:
-	//			if ( basePotion->type == POTION_ACID )
-	//			{
-	//				explodeSelf = true;
-	//			}
-	//			else
-	//			{
-	//				tryDuplicatePotion = true;
-	//			}
-	//			break;
-	//		case POTION_BOOZE:
-	//			switch ( basePotion->type )
-	//			{
-	//				case POTION_SICKNESS:
-	//					result = POTION_CONFUSION;
-	//					break;
-	//				case POTION_CONFUSION:
-	//					result = POTION_ACID;
-	//					break;
-	//				case POTION_CUREAILMENT:
-	//					result = POTION_SPEED;
-	//					break;
-	//				case POTION_BLINDNESS:
-	//					result = POTION_STRENGTH;
-	//					break;
-	//				case POTION_RESTOREMAGIC:
-	//					result = POTION_BLINDNESS;
-	//					break;
-	//				case POTION_SPEED:
-	//					result = POTION_PARALYSIS;
-	//					break;
-	//				case POTION_POLYMORPH:
-	//					randomResult = true;
-	//					break;
-	//				default:
-	//					break;
-	//			}
-	//			break;
-	//		case POTION_JUICE:
-	//			switch ( basePotion->type )
-	//			{
-	//				case POTION_SICKNESS:
-	//					result = POTION_BOOZE;
-	//					break;
-	//				case POTION_CONFUSION:
-	//					result = POTION_BOOZE;
-	//					break;
-	//				case POTION_CUREAILMENT:
-	//					result = POTION_RESTOREMAGIC;
-	//					break;
-	//				case POTION_BLINDNESS:
-	//					result = POTION_CUREAILMENT;
-	//					break;
-	//				case POTION_RESTOREMAGIC:
-	//					result = POTION_HEALING;
-	//					break;
-	//				case POTION_SPEED:
-	//					result = POTION_INVISIBILITY;
-	//					break;
-	//				case POTION_POLYMORPH:
-	//					randomResult = true;
-	//					break;
-	//				default:
-	//					break;
-	//			}
-	//			break;
-	//		case POTION_ACID:
-	//			switch ( basePotion->type )
-	//			{
-	//				case POTION_WATER:
-	//					explodeSelf = true; // oh no. don't do that.
-	//					break;
-	//				case POTION_SICKNESS:
-	//					result = POTION_FIRESTORM;
-	//					break;
-	//				case POTION_CONFUSION:
-	//					result = POTION_JUICE;
-	//					break;
-	//				case POTION_CUREAILMENT:
-	//					result = POTION_FIRESTORM;
-	//					break;
-	//				case POTION_BLINDNESS:
-	//					result = POTION_ICESTORM;
-	//					break;
-	//				case POTION_RESTOREMAGIC:
-	//					result = POTION_ICESTORM;
-	//					break;
-	//				case POTION_SPEED:
-	//					result = POTION_THUNDERSTORM;
-	//					break;
-	//				case POTION_POLYMORPH:
-	//					randomResult = true;
-	//					break;
-	//				default:
-	//					explodeSelf = true;
-	//					break;
-	//			}
-	//			break;
-	//		case POTION_INVISIBILITY:
-	//			switch ( basePotion->type )
-	//			{
-	//				case POTION_SICKNESS:
-	//					result = POTION_BLINDNESS;
-	//					break;
-	//				case POTION_CONFUSION:
-	//					result = POTION_PARALYSIS;
-	//					break;
-	//				case POTION_CUREAILMENT:
-	//					result = POTION_LEVITATION;
-	//					break;
-	//				case POTION_BLINDNESS:
-	//					result = POTION_POLYMORPH;
-	//					break;
-	//				case POTION_RESTOREMAGIC:
-	//					result = POTION_EXTRAHEALING;
-	//					break;
-	//				case POTION_SPEED:
-	//					result = POTION_RESTOREMAGIC;
-	//					break;
-	//				case POTION_POLYMORPH:
-	//					randomResult = true;
-	//					break;
-	//				default:
-	//					break;
-	//			}
-	//			break;
-	//		default:
-	//			break;
-	//	}
-	// }
-
-	// if ( basePotion->type == POTION_POLYMORPH || secondaryPotion->type == POTION_POLYMORPH )
-	//{
-	//	randomResult = true;
-	// }
+	ItemType result = alchemyMixResult(basePotion->type, secondaryPotion->type, randomResult, tryDuplicatePotion, samePotion, explodeSelf, recipeFailed);
 
 	int skillLVL = 0;
 	if (stats[gui_player])
@@ -7383,7 +7114,7 @@ void GenericGUIMenu::alchemyCombinePotions()
 		messagePlayerColor(gui_player, MESSAGE_INVENTORY, uint32ColorWhite, Language::get(3335));
 	}
 
-	if (!explodeSelf && result != POTION_WATER && !tryDuplicatePotion && !samePotion)
+	if (!explodeSelf && !recipeFailed && !tryDuplicatePotion && !samePotion)
 	{
 		if (!(alchemyLearnRecipe(basePotion->type, true)))
 		{
@@ -13492,7 +13223,7 @@ void GenericGUIMenu::TinkerGUI_t::clearItemDisplayed()
 	itemRequirement = -1;
 }
 
-const int GenericGUIMenu::AlchemyGUI_t::MAX_ALCH_X = 4;
+const int GenericGUIMenu::AlchemyGUI_t::MAX_ALCH_X = 8; // 43
 const int GenericGUIMenu::AlchemyGUI_t::MAX_ALCH_Y = 6;
 
 void GenericGUIMenu::AlchemyGUI_t::openAlchemyMenu()
@@ -13616,7 +13347,7 @@ bool GenericGUIMenu::AlchemyGUI_t::alchemyGUIHasBeenCreated() const
 
 bool hideRecipeFromList(int type)
 {
-	if (type == TOOL_BOMB || type == POTION_SICKNESS)
+	if (type == TOOL_BOMB || type == POTION_WATER)
 	{
 		return true;
 	}
@@ -13853,7 +13584,8 @@ void GenericGUIMenu::AlchemyGUI_t::updateAlchemyMenu()
 					bool randomResult = false;
 					bool explodeSelf = false;
 					bool samePotion = false;
-					ItemType res = alchemyMixResult(potion1, potion2, randomResult, tryDuplicatePotion, samePotion, explodeSelf);
+					bool recipeFailed = false;
+					ItemType res = alchemyMixResult(potion1, potion2, randomResult, tryDuplicatePotion, samePotion, explodeSelf, recipeFailed);
 					if (explodeSelf)
 					{
 						alchemyAddRecipe(playernum, potion1, potion2, TOOL_BOMB, true);
@@ -14419,7 +14151,8 @@ void GenericGUIMenu::AlchemyGUI_t::updateAlchemyMenu()
 			bool randomResult = false;
 			bool explodeSelf = false;
 			bool samePotion = false;
-			ItemType res = alchemyMixResult(potion1Item->type, potion2Item->type, randomResult, tryDuplicatePotion, samePotion, explodeSelf);
+			bool recipeFailed = false;
+			ItemType res = alchemyMixResult(potion1Item->type, potion2Item->type, randomResult, tryDuplicatePotion, samePotion, explodeSelf, recipeFailed);
 			Status status = EXCELLENT;
 			alchemyResultPotion.identified = false;
 			alchemyResultPotion.type = POTION_EMPTY;
@@ -15382,7 +15115,7 @@ void GenericGUIMenu::AlchemyGUI_t::createAlchemyMenu()
 
 	SDL_Rect basePos{0, 0, alchemyBaseWidth, 350};
 	alchemySlotFrames.clear();
-	const int recipeWidth = 196;
+	const int recipeWidth = 375; // MAX_ALCH_X * 40 + 36; // 4 * 40 + [36] = 196 :: 52
 	Frame *frame = alchFrame->addFrame("player recipes");
 	recipesFrame = frame;
 	frame->setSize(SDL_Rect{0,
